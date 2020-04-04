@@ -1,0 +1,470 @@
+
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\documentclass[
+        ngerman,
+        paper=a4,
+        numbers=noendperiod,
+]{scrreprt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+% Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Sprachsupport
+\usepackage[ngerman]{babel}
+\usepackage{translator}
+% Tabellen
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage{multirow}
+% Symbole
+\usepackage{eurosym}
+% Formeln
+\usepackage{amsmath, amsthm, amssymb}
+% Formelregeln
+\DeclareNewTOC[% 
+  counterwithin=chapter, 
+  indent=0pt,% kein Einzug im Verzeichnis 
+  hang=2em,% Einzug für den Text im Verzeichnis 
+  name=equation, 
+  type=xequation, 
+  nonfloat, 
+]{loe} 
+
+\AtBeginDocument{% 
+  \newcaptionname{ngerman}\xequationname{Formel}% 
+  \newcaptionname{ngerman}\listxequationname{Formelverzeichnis}% 
+} 
+% Pakete
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage[square,sort]{natbib}
+\usepackage[hyphens]{url}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[
+        pdftex,
+        hyperfigures,
+        hyperindex,
+        bookmarksnumbered,
+        linktoc=all,
+        pdfborder={0.25 0.25 0.25},
+        %pdfborder={0 0 0},
+        pdfpagelayout=TwoColumnRight,
+]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{lmodern}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[printonlyused]{acronym}
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhf{}
+\fancyhead[RE]{\chaptername~\thechapter}
+\fancyhead[LO]{\leftmark}
+\fancyhead[LE,RO]{\thepage}
+
+%Quellcodes
+%Farben
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+%Listing einfaerben
+\usepackage{listings}
+\lstset{numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	frame=l ,
+	xleftmargin=15pt,
+	xrightmargin=15pt,
+	basicstyle=\ttfamily\scriptsize,
+	stepnumber=1,
+	keywordstyle=\color{blue},          % keyword style
+  	commentstyle=\color{dkgreen},       % comment style
+  	stringstyle=\color{mauve}         % string literal style
+}
+%Sprache Festelegen
+\lstset{language=R}
+
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+    \huge \textbf{\textsf{Evaluierung unterschiedlicher Paradigmen des Question Answering}} \\
+    \vspace{1cm}
+    \LARGE\textbf{\textsc{Exposé für die Projektarbeit }}\\
+    \vspace{1cm}
+    \normalsize
+    vorgelegt am: 01.04.2020\\
+    \vspace{2.5cm}
+    \large \textbf{Fakultät IV - 
+Institut für Wissensbasierte
+Systeme und Wissensmanagement, Universität Siegen
+}
+\linebreak
+\linebreak
+\begin{figure}[H]
+    \centering\includegraphics[width=0.4\linewidth]{images/imageuni.pdf}
+    \label{fig:Unilabel}
+\end{figure}
+    \end{center}
+    \vspace{3cm}
+    \begin{center}
+ \normalsize{
+    \begin{tabular}{ll}
+    	Eingereicht von: & {Ugur Tigu} \\
+    	Studiengang: & Wirtschaftsinformatik, Master of Science (M.Sc.)\\
+	Erstprüfer: & Prof. Dr.-Ing. Madjid Fathi \\
+	Betreuer: &   Johannes Zenkert\\
+    \end{tabular}\\
+    }
+\end{center}
+\end{titlepage}
+\setcounter{page}{0}
+\pagenumbering{Roman}
+\tableofcontents
+\clearpage 
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+\clearpage 
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\listoftables
+\clearpage 
+% Kapiteldefinition ohne Nummerierung
+\chapter*{Abkürzungsverzeichnis}
+ % Abkürzungsverzeichnis soll im Inhaltsverzeichnis erscheinen
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} 
+\begin{acronym}
+% Format der Abkürzungsdefinition: \acro{}[]{}
+% {Verweis}[Abkürzung]{ausgeschriebene Abkürzung}
+
+\acro{nlp}[NLP]{Natural Language Processing}
+\acro{qa}[QA]{Question Answering}
+\acro{ir}[IR]{Information Retrieval}
+\acro{pos}[POS]{Part-of-speech}
+
+\end{acronym}
+\clearpage 
+\addcontentsline{toc}{chapter}{Formelverzeichnis} 
+\listofxequations
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+
+
+
+\chapter{Question Answering Systeme}
+Das automatische Beantworten von Fragen mittels Computer heißt Question Answering. Dabei werden die Fragen in natürlicher Sprache gestellt. Durch ein Interface (z.B. Texteingabe) geschieht diese Fragestellung. Durch die Verarbeitung dieser Eingabe geschieht somit ein Dialog zwischen Mensch und Computer.
+\section{Geschichte der \ac{qa} Systeme}
+Die ersten Question Answering Systeme sind in den 60er-Jahren entstanden. Die ersten Systeme des \ac{qa}'s waren rein textbasiert und konnten einfach nur eine Frage parsen und die Antwort aus der passenden Stelle des Dokumentes wiedergeben \citep{phillips1960question}.
+
+Durch wissensbasierte Systeme entstand eine Alternative zu den textbasierten \ac{qa}-Systemen. Die erste bekannte Ausführung solcher Systeme wurde entwickelt, um Fragen über Baseballspiele zu beantworten \citep{green1986baseball}. Es wurden strukturierte Daten einer Datenbank für Baseballspiele abgefragt. 
+
+In der heutigen modernen Ausführung werden \ac{qa}-Systeme auch hybrid, also mit beiden Ansätzen verwendet. IBM hat schließlich 2011 mit Watson an einer Fernsehsendung teilgenommen und dieses gewonnen. In dieser amerikanischen Fernsehsendung hat IBM Watson nicht nur rein textbasierte, sondern auch wissensbasierte Abfragen gemacht und hatte somit mehrere Informationsquellen.
+
+\section{Besonderheiten}
+\ac{qa}-Systeme können eine Frage, die in natürlicher Sprache gestellt wird verarbeiten und eine Antwort in natürlicher Sprache zurückgeben. \ac{qa}-Systeme können viel mehr als eine Keyword basierte Abfrage oder eine strukturierte Abfrage. Die Frage muss dabei nicht in einer Abfragesprache gestellt werden, auch wird die Antwort nicht rein als Lieferung der Ergebnisse angezeigt. Bei \ac{qa} entsteht ein menschlicher Dialog. Durch \textbf{Information Retrieval} oder mittels einer \textbf{Wissensbasis} können Computer dazu verwendet werden, um Fragen zu beantworten.  
+
+\ac{ir}-basierte \ac{qa}-Systeme holen zunächst die passende Passage aus einem passenden Dokument für eine gestellte Frage. Beim \ac{qa} mittels Information Retrieval werden Texte und deren Passagen mit der gestellten Frage verglichen und somit eine Antwort generiert.
+Beim \ac{qa} mittels einer Wissensbasis bekommt die Frage, die gestellt wird, eine Bedeutung. Diese Bedeutung kann nun für eine Abfrage von Datenbanken oder Fakten genutzt werden. Bei wissensbasierten \ac{qa}-Systemen werden Relationen in Datenbanken gespeichert und abgefragt. Das Wissen wird dann hergeleitet aus diesen Relationen. 
+
+Eine weitere Form des \ac{qa} ist \textbf{Natural Language Processing \ac{qa}} (\ac{nlp}  \ac{qa}). Hierbei wird die Verwendung der natürlichen Sprache und Methoden des maschinellen Lernens verwendet, um Antworten aus dem abgerufenen Textausschnitt zu extrahieren.
+
+Es ist auch eine Mischung der beiden Paradigmen möglich. DeepQA und IBM Watson arbeiten \textbf{hybrid}, beide nutzen sowohl Text als auch Wissen, also unstrukturierte und strukturierte Daten, um Fragen noch besser zu beantworten.
+
+
+
+
+
+\section{Wie funktionieren \ac{qa}-Systeme?}
+Die Daten durchlaufen bei \ac{qa} folgende 3 Phasen:
+\begin{itemize}
+\item \textbf{Datenverarbeitung:} Durch \ac{nlp} wird das geschriebene dem Computer verständlich gemacht. Dabei werden aus Daten Informationen, welche dann in Datenbanken abgebildet werden.
+\item \textbf{Fragenverarbeitung:} Die Gestellte Frage wird hier in ihre einzelnen Elemente zerlegt und es wird eine Struktur der Frage erzeugt.
+\item \textbf{Antwortenverarbeitung:} Durch abgleich der Informationen in der Datenbank mit der erfassten Frage wird dann versucht, eine Antwort zur gestellten Frage zu generieren.
+\end{itemize}
+
+
+\chapter{Motivation und Zielsetzung}
+Persönliche Sprachassistenten wie der Google Assistant oder Amazon Alexa werden immer mehr gebraucht. Diese Sprachassistenten werden in Wohnorten platziert oder auch in Autos und Smartphones verwendet. Die Dienste, die diese Assistenten liefern, sind dabei vielfältig. Sie können andere Geräte steuern oder eine Frage zur Umgebung beantworten. Dies geschieht meistens über natürliche Sprache und in der Frage-Antwort-Form. Um unsere Fragen besser zu beantworten und bessere Antworten geben zu können, müssen solche Assistenten und Suchmaschinen unsere Sprache beherrschen. 
+
+\ac{qa} Systeme können auch gewerbliche und industrielle Probleme lösen. Unternehmen können mit ihren Kunden jederzeit einfach kommunizieren oder in kürzester Zeit Informationen über ihren Lagerbestand bekommen. \ac{qa} Systeme erleichtern die Informationssuche.
+
+Mit dieser Arbeit soll erforscht werden, wie in Zukunft bessere Verfahren für die Abfrage- und Antwort Prozesse von \ac{qa} Systemen entwickelt werden können.
+\\
+\\
+Das Ziel der Projektarbeit ist es, folgende Forschungsfragen zu beantworten:
+
+ \begin{enumerate}
+    \item \textbf{F1} Welche unterschiedlichen Paradigmen für das \ac{qa} gibt es?
+    \item \textbf{F2} Was sind die Vor- und Nachteile der \ac{qa} Paradigmen?
+    \item \textbf{F3} Welche Methoden und Algorithmen sind für welches Paradigma geeignet?
+    \item \textbf{F4} Wie können \ac{qa} Paradigmen am besten evaluiert werden?
+  \end{enumerate}
+
+
+
+\chapter{Literaturrecherche}
+
+\section{\ac{nlp} \ac{qa}}
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+Titel                                                                                                                                                                                     & Quelle                                                          \\ \hline
+\begin{tabular}[c]{@{}l@{}}A graph-based multi-level linguistic\\ representation for document understanding\end{tabular}                                                                  & \citep{Pinto2014AUnderstanding}                \\ \hline
+Virtual cardiologist - A conversational system for medical diagnosis                                                                                                                      & \citep{Aarabi2013VirtualDiagnosis}             \\ \hline
+Watson: Beyond jeopardy!                                                                                                                                                                  & \citep{Ferrucci2013Watson:Jeopardy}            \\ \hline
+\begin{tabular}[c]{@{}l@{}}Natural language neural network and its \\ application to question-answering system\end{tabular}                                                               & \citep{Sagara2014NaturalSystem}                \\ \hline
+\begin{tabular}[c]{@{}l@{}}A framework for restricted domain Question Answering System\end{tabular}                                                                                                                            & \citep{Biswas2014ASystem}                      \\ \hline
+Using semantically connected parse trees to answer multi-sentence queries                                                                                                                 & \citep{Ilvovsky2014UsingQueries}               \\ \hline
+\begin{tabular}[c]{@{}l@{}}Improving graph-based random walks for complex \\ question answering using syntactic, \\ shallow semantic and extended string subsequence kernels\end{tabular} & \citep{Chali2011ImprovingKernels}              \\ \hline
+\begin{tabular}[c]{@{}l@{}}Case based Indonesian closed domain question\\ answering system with real world questions\end{tabular}                                                         & \citep{Fikri2012CaseQuestions}                 \\ \hline
+Biomedical question answering using semantic relations                                                                                                                                    & \citep{Hristovski2015BiomedicalRelations}      \\ \hline
+Intelligent question answering system based on artificial neural network                                                                                                                  & \citep{Ansari2016IntelligentNetwork}           \\ \hline
+Question answering system on education acts using NLP techniques                                                                                                                          & \citep{Lende2016QuestionTechniques}            \\ \hline
+A Hindi Question Answering System using Machine Learning approach                                                                                                                         & \citep{Nanda2016AApproach}                     \\ \hline
+\begin{tabular}[c]{@{}l@{}}Developing a Why–How Question Answering system \\ on community web boards\\ with a causality graph including procedural knowledge\end{tabular}                 & \citep{Pechsiri2016DevelopingKnowledge}        \\ \hline
+\begin{tabular}[c]{@{}l@{}}A Rule Based Question Answering System in Malayalam Corpus Using \\ Vibhakthi and POS Tag Analysis\end{tabular}                                                & \citep{Archana2016AAnalysis}                   \\ \hline
+Information Retrieval from a Structured KnowledgeBase                                                                                                                                     & \citep{Chandurkar2017InformationKnowledgeBase} \\ \hline
+Redundancy-based trust in question-answering systems                                                                                                                                      & \citep{Atkinson2017Redundancy-basedSystems}    \\ \hline
+An answer fusion model for web-based question answering                                                                                                                                   & \citep{Xie2005AnAnswering}                     \\ \hline
+Analysis of statistical question classification for fact-based questions                                                                                                                  & \citep{Metzler2005AnalysisQuestions}           \\ \hline
+Information extraction with automatic knowledge expansion                                                                                                                                 & \citep{Jung2005InformationExpansion}           \\ \hline
+A language independent method for question classification                                                                                                                                 & \citep{Solorio2004AClassification}             \\ \hline
+Automatic detection of causal relations for Question Answering                                                                                                                            & \citep{Girju2003AutomaticAnswering}            \\ \hline
+Semantic computation in a Chinese question-answering system                                                                                                                               & \citep{Li2002SemanticSystem}                   \\ \hline
+\begin{tabular}[c]{@{}l@{}}The Use of Dynamic Segment Scoring for Language-Independent \\ Question Answering\end{tabular}                                                                 & \citep{Pack2001TheAnswering}                   \\ \hline
+\end{tabular}%
+}
+\caption{Ergebnisse der Literaturrecherche bezüglich des \ac{nlp} QA}
+    \label{tab:tab1}
+\end{table}
+\section{Information Retrieval QA}
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+Titel                                                                                                                                                                & Quelle                               \\ \hline
+Developing Enterprise Chatbots                                                                                                                                       & \citep{Galitsky2019DevelopingChatbots}       \\ \hline
+Malayalam Question Answering System                                                                                                                                  & \citep{Seena2016MalayalamSystem}             \\ \hline
+\begin{tabular}[c]{@{}l@{}}ScienceDirect AQA-WebCorp: Web-based Factual Questions \\ for Arabic-review under responsibility of KES International\end{tabular}        & \citep{Bakari2016ScienceDirectInternational} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Question answering with a conceptual framework for \\ knowledge-based system development "node of Knowledge"\end{tabular}                 & \citep{Pavlic2015QuestionKnowledge}          \\ \hline
+Enhancing arabic question answering system                                                                                                                           & \citep{Kamal2014EnhancingSystem}             \\ \hline
+\begin{tabular}[c]{@{}l@{}}Question answering system using Q \{\&\} A site corpus \\ Query expansion and answer candidate evaluation\end{tabular}                    & \citep{Komiya2013QuestionEvaluation}         \\ \hline
+\begin{tabular}[c]{@{}l@{}}An approach for extracting exact answers to Question Answering \\ (QA) system for english sentences\end{tabular}                          & \citep{Barskar2012AnSentences}               \\ \hline
+Question answering using statistical language modelling                                                                                                              & \citep{Heie2012QuestionModelling}            \\ \hline
+\begin{tabular}[c]{@{}l@{}}Model-driven adaptation of question answering systems for \\ ambient intelligence by integrating restricted-domain knowledge\end{tabular} & \citep{Vila2011Model-drivenKnowledge}        \\ \hline
+\begin{tabular}[c]{@{}l@{}}AskHERMES: An online question answering \\ system for complex clinical questions\end{tabular}                                             & \citep{Cao2011AskHERMES:Questions}           \\ \hline
+English access to structured data                                                                                                                                    & \citep{Richardson2011EnglishData}            \\ \hline
+\begin{tabular}[c]{@{}l@{}}Going Beyond Traditional QA Systems: \\ Challenges and Keys in Opinion Question Answering\end{tabular}                                    & \citep{Balahur2010GoingAnswering}            \\ \hline
+Data-driven approaches to information access                                                                                                                         & \citep{Dumais2003Data-drivenAccess}          \\ \hline
+\begin{tabular}[c]{@{}l@{}}Performance issues and error analysis in an open-domain \\ question answering system\end{tabular}                                         & \citep{Moldovan2003PerformanceSystem}        \\ \hline
+Probabilistic question answering on the Web                                                                                                                          & \citep{Radev2005ProbabilisticWeb}            \\ \hline
+\end{tabular}%
+}
+\caption{Ergebnisse der Literaturrecherche bezüglich des Information Retrieval QA}
+    \label{tab:tab2}
+\end{table}
+
+
+\section{Wissensbasiertes QA}
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+Titel                                                                                                                                                                      & Quelle                                 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Type-Aware Question Answering over Knowledge \\ Base with Attention-Based Tree-Structured Neural Networks\end{tabular}                          & \citep{Yin2017Type-AwareNetworks}              \\ \hline
+Soft pattern matching models for definitional question answering                                                                                                           & \citep{Cui2007SoftAnswering}                   \\ \hline
+QAPD: An ontology-based question answering system in the physics domain                                                                                                    & \citep{Abdi2018QAPD:Domain}                    \\ \hline
+Semantic Q\{\&\}A System on the Qur’an                                                                                                                                     & \citep{Hakkoum2016SemanticQuran}               \\ \hline
+An intelligent question answering system for ICT                                                                                                                           & \citep{Pudaruth2016AnICT}                      \\ \hline
+\begin{tabular}[c]{@{}l@{}}Playing with knowledge: A virtual player for "who Wants to Be a Millionaire?" \\ that leverages question answering techniques\end{tabular}      & \citep{Molino2015PlayingTechniques}            \\ \hline
+Knowledge-based question answering using the semantic embedding space                                                                                                      & \citep{Yang2015Knowledge-basedSpace}           \\ \hline
+\begin{tabular}[c]{@{}l@{}}Concept relation extraction using Na\{\textbackslash{}"\{i\}\}ve Bayes classifier \\ for ontology-based question answering systems\end{tabular} & \citep{Sureshkumar2015ConceptSystems}          \\ \hline
+\begin{tabular}[c]{@{}l@{}}MEANS: A medical question-answering system combining \\ NLP techniques and semantic Web technologies\end{tabular}                               & \citep{BenAbacha2015MEANS:Technologies}        \\ \hline
+\begin{tabular}[c]{@{}l@{}}SINA: Semantic interpretation of user queries \\ for question answering on interlinked data\end{tabular}                                        & \citep{Shekarpour2015SINA:Data}                \\ \hline
+AQUEOS: A system for question answering over semantic data                                                                                                                 & \citep{Toti2014AQUEOS:Data}                    \\ \hline
+GoWeb: A semantic search engine for the life science web                                                                                                                   & \citep{Dietze2009GoWeb:Web}                    \\ \hline
+Automatic lexicon generator for logic based question answering system                                                                                                      & \citep{Varathan2010AutomaticSystem}            \\ \hline
+Information-demanding question answering system                                                                                                                            & \citep{Montero2004Information-demandingSystem} \\ \hline
+\end{tabular}%
+}
+\caption{Ergebnisse der Literaturrecherche bezüglich des wissensbasierten QA}
+    \label{tab:tab3}
+\end{table}
+
+\section{Hybrides QA}
+
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+Titel                                                                                                                         & Quelle                              \\ \hline
+\begin{tabular}[c]{@{}l@{}}Implementation approaches for various categories \\ of question answering system\end{tabular}      & \citep{Walke2013ImplementationSystem}       \\ \hline
+\begin{tabular}[c]{@{}l@{}}Elementary? Question answering, IBM's Watson, \\ and the Jeopardy! challenge\end{tabular}          & \citep{Chandrasekar2014ElementaryChallenge} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Architecture of a question-answering system \\ for a specific repository of documents\end{tabular} & \citep{Sucunuta2010ArchitectureDocuments}   \\ \hline
+Question answering from structured knowledge sources                                                                          & \citep{Frank2007QuestionSources}            \\ \hline
+\begin{tabular}[c]{@{}l@{}}Hybrid systems for information extraction \\ and question answering\end{tabular}                   & \citep{Delmonte2006HybridAnswering}         \\ \hline
+\end{tabular}%
+}
+\caption{Ergebnisse der Literaturrecherche bezüglich des hybriden QA}
+    \label{tab:tab4}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Grobgliederung}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\begin{enumerate}
+
+\item Einleitung
+    \begin{enumerate}
+    \item Motivation
+    \item Hauptidee der Projektarbeit
+    \item Verwandte Arbeiten
+  \end{enumerate}
+  
+  
+\item Question Answering
+    \begin{enumerate}
+    \item Die Geschichte des QA
+    \item Allgemeine Systemarchitektur des QA
+    \item Fragetypen und Antworttypen
+    \item Evaluationsmethoden des QA
+    \item Stand der Forschung
+  \end{enumerate}
+  
+\item Theoretische Grundlagen für das QA
+    \begin{enumerate}
+    \item Natural Language Processing
+    \item Machine Learning
+  \end{enumerate}
+  
+\item Paradigmen des QA
+    \begin{enumerate}
+    \item \ac{ir}-basiert
+    \item \ac{nlp}-basiert
+    \item Wissensbasiert
+    \item Hybrid
+  \end{enumerate}
+
+\item Analyse der Paradigmen des QA
+    \begin{enumerate}
+    \item Techniken, Algorithmen, Frameworks und Tools 
+    \item Wo werden welche Paradigmen eingesetzt
+    \item Analyse der verwendeten Evaluationsmethoden 
+  \end{enumerate}
+  
+\item Fazit
+  
+  
+  
+\end{enumerate}
+
+\chapter{Methodologie}
+
+
+Im Wesentlichen soll mit der Projektarbeit eine Analyse des Standes der Forschung im Bezug auf \ac{qa} abgebildet werden.
+
+Im Abschnitt \textbf{1. Einleitung} soll erläutert werden, was die Motivation der Arbeit ist, was mit der Arbeit beantwortet werden soll und welche verwandten Arbeiten es schon gibt.
+
+Im Abschnitt \textbf{2. Question Answering} wird erklärt, was Question Answering ist, wie es funktioniert und was der Stand der Forschung ist.
+
+Im Abschnitt \textbf{3. Theoretische Grundlagen} für das \ac{qa} wird von \ac{nlp} und Machine Learning berichtet, da ohne Verständnis dieser keine Analyse der Paradigmen möglich ist. Es wird im Abschnitt 3 erklärt, was z.B. Stemming, Lemmatization, Named Entity Recognition, \ac{pos} Tagging, oder Relation Finding ist. Auch werden Machine Learning Algorithmen wie Support Vector Machine oder Naive Bayes erklärt. 
+
+Nachdem die theoretischen Grundlagen erfasst wurden, werden die Ergebnisse der Literaturrecherche verwendet um die 4 Fragen (F1-F4) zu beantworten. Die Auswahl der Literatur erfolgt dann, wenn sie zu einer Forschungsfrage eine geeignete Antwort geben kann. Der Abschnitt \textbf{4. Paradigmen des \ac{qa}} ist eine Wiedergabe der Paradigmen, die aus der gesichtiten Literatur heraus entstehen. In diesem Abschnitt wird die erste Forschungsfrage F1 beantwortet.
+
+Der Kern der Arbeit befindet sich im Abschnitt \textbf{5. Analyse der Paradigmen des \ac{qa}}. Hier werden die gewonnenen Erkenntnisse miteinander verglichen. Die Forschungsfragen F2-F4 werden hier beantwortet.
+
+
+
+\chapter{Zeitplanung}
+
+
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Geplante Zeit} & \textbf{Thema}                       \\ \hline
+1 Woche       & Forschung Abschnitt 2       \\ \hline
+2 Wochen      & Abschnitt 2        \\ \hline
+2 Wochen      & Forschung Abschnitt 3       \\ \hline
+2 Wochen      & Abschnitt 3                 \\ \hline
+2 Wochen      & Forschung Abschnitt 4       \\ \hline
+4 Wochen      & Abschnitt 4                 \\ \hline
+4 Wochen      & Abschnitt 5                 \\ \hline
+1 Woche       & Fazit, Einleitung, Abstract \\ \hline
+2 Wochen      & Korrektur                   \\ \hline
+2 Wochen       & Puffer                      \\ \hline
+\textbf{22 Wochen}       &                       \\ \hline
+\end{tabular}%
+}
+\caption{Aufteilung der Aufgaben nach Zeit}
+    \label{tab:tab5}
+\end{table}
+
+
+
+
+
+
+\appendix 
+\chapter{Anhang}
+\label{chapter:Anhang}%
+
+
+\clearpage
+        \phantomsection % damit das pdf bookmark an die richtige Stelle zeigt
+        \pdfbookmark{Literaturverzeichnis}{bibliography}
+        
+        % zeigt immer alle definierten Quellen an, auch wenn diese nicht verwendet werden
+        %\nocite{*}
+        \bibliographystyle{apalike}
+        \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+        \bibliography{literatur}
+
+
+
+
+\chapter*{Erklärung}
+Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe, insbesondere keine anderen als die angegebenen Informationen aus dem Internet. Diejenigen Paragraphen der für mich gültigen Prüfungsordnung, welche etwaige Betrugsversuche betreffen, habe ich zur Kenntnis genommen. Der Speicherung meiner Master-Arbeit zum Zweck der Plagiatsprüfung stimme ich zu. Ich versichere, dass die elektronische Version mit der gedruckten Version inhaltlich übereinstimmt.\newline
+\linebreak
+\linebreak
+\linebreak
+Bielefeld, den 01.04.2020\newline
+(Ort) (Datum)\newline
+\linebreak
+\linebreak
+\linebreak
+..................................\newline
+(Unterschrift)
+\end{document}
