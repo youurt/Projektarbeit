@@ -162,8 +162,14 @@ Systeme und Wissensmanagement, Universität Siegen
 
 
 \chapter{Einleitung}
+
+
+
+
 \section{Motivation}
+
 \section{Hauptidee der Projektarbeit}
+
 \section{Verwandte Arbeiten}
 
 
@@ -173,13 +179,46 @@ Systeme und Wissensmanagement, Universität Siegen
 
 
 
+\chapter{Theoretische Grundlagen}
+
+\section{Question Answering}
+
+
+\section{Information Retrieval}
+
+\section{Natural Language Processing}
+
+
+\section{Machine Learning}
+
+\section{Knowledge Graphs}
+
+
+%start from here -------------------------------------------till 03/05----------------
+
 
 \chapter{Question Answering}
-\section{Die Geschihte des QA}
-\section{Allgemeine Systemarchitektur}
-\section{Fragetypen und Antworttypen}
-\section{Evaluationsmethoden des QA}
-\section{Stand der Forschung}
+
+\section{Einleitung} % 1 page
+\section{Die Geschichte des QA} %1 page
+\subsection{Einleitung}
+Erste Adaptionen von QA Systemen konnten nur mit strukturierten Listen oder Teilen von begrenzten Datenbanksystemen umgehen. Datenbanken über eine bestimmte Domain wurden entwickelt speziell eine Aufgabe zu lösen. Im Prinzip wurden Datenbanken textbasiert oder durch logische Inferenzen zu Wissensdatenbanken zusammengefasst. Die Antwort wurde dabei gefunden, indem das System eine Übereinstimmung im Textabschnitt gefunden hatte oder durch Fakten das Problem lösen konnte.
+\subsection{Erste Anwendungen}
+Mit \glqq BASEBALL\glqq{} \citep{Green1961Baseball:Question-answerer} wurden Baseball-Spiele analysiert.  Auf die Frage \glqq Wie haben die Yankees im Juli gespielt?\glqq{} konnte das QA-System eine Antwort geben. Das QA-System hatte also eine beschränkte, geschlossene Domain. Zunächst wurde eine syntaktische Analyse der Frage ausgeführt. Die Frage wurde dabei in seine einzelnen Elemente zerlegt und es entstanden Teile wie \glqq Wie?\glqq{}, \glqq die Yankees\glqq{} und \glqq in Juli\glqq{}. Da es nur Baseball-Spiele ging, konnte das QA-System direkt mit der semantischen Analyse beginnen. Die semantische Analyse verknüpfte dabei, \glqq die Yankees\glqq{} mit der Kondition \glqq Wie?\glqq{}. In diesem Fall ist das "Wie?" die Frage nach dem \glqq Wie gespielt?\glqq{}.
+
+Es folgten weitere Anwendungen, wo Enzyklopädie benutzt wurden um Fragen zu beantworten. Mit \glqq Protosynthex\glqq{} \citep{Simmons1964IndexingQuestions} entstand eines der ersten wirklichen QA-Systeme. Um eine Frage zu beantworten musste diese System zunächst eine Abfrage ausführen. Ähnlich wie bei einer Datenbankabfrage entstand aus den einzelnen Elementen der Frage eine strukturierte Abfrage. Das System gab auf diese strukturierte Abfrage dann bestimmte Antwort Kandidaten. Diese Kandidaten waren die möglichen Antworten auf die Frage wurden dann in eine Reihenfolge gebracht. Je ähnlicher die Frage mit der Antwort war, desto höher war der Rang des Kandidaten. Auf die Frage \glqq Was essen Würmer?\glqq{} gab das System die korrekte Antwort \glqq Würmer essen Gras.\glqq{} , da sowohl die Frage, als auch die Antwort die Abhängigkeit \glqq essen\grqq{} beinhalteten. 
+
+Ein weiterer wichtiger Abschnitt bei den ersten QA-Systemen war \glqq LUNAR\glqq{} \citep{Woods1978SemanticsAnswering}. Dieses QA-System war eine Brücke zwischen Menschen, die mit natürlicher Sprache kommunizieren und der Chemie, die strukturierte Fakten abbildet. LUNAR beantwortete  Fragen wie \glqq Gibt es Proben mit 13 Prozent Aluminium?\glqq{}. 
+
+\subsection{Was kann man aus den Fehlern lernen?}
+Die ersten QA-Systeme waren im Grunde wissensbasierte Systeme. Mit dem Fortschritt des Internets kamen aber immer mehr IR-basierte QA-Systeme in den Vordergrund und erst später kam die Kombination dieser beiden Paradigmen, die hybriden Systeme, welche sich noch in der Beginn ihrer Entwicklung befinden. 
+
+Aus den ersten Implementierungen der QA-Systeme können wir aber lernen, indem wir nicht die selben Fehler begehen wie diese Systeme. In den 70er Jahren gab es noch sehr wenig Daten, und QA-Systeme leben von Daten. Den wirklichen Durchbruch haben QA-Systeme erst Mitte der 2000'er erhalten. Große Mengen an Daten und ML-Algorithmen, welche diese Daten umwandeln und beherrschen sind der Grund. Es ist nicht ausreichend, nur eine Quelle zu haben, um die Komplexität zu beherrschen. Ein Wort kann in der Natürlichen Sprache mehrere Bedeutungen haben. Außerdem ist eine reine Regelbasierte Behandlung der Frage nicht ausreichend.
+
+\section{Allgemeine Systemarchitektur} % 2 pages
+\subsection{Fragetypen}
+\subsection{Antworttypen}
+\section{Aktueller forschungsstand} % 1 page
 
 
 
@@ -210,18 +249,48 @@ Systeme und Wissensmanagement, Universität Siegen
 
 
 
-\chapter{Theoretische Grundlagen des QA}
-\section{Natural Language Processing}
-\section{Machine Learning}
-\chapter{Paradigmen des QA}
-\section{IR-basiert}
-\section{NLP-basiert}
-\section{Wissensbasiert}
-\section{Hybrid}
-\chapter{Analyse der Paradigmen des QA}
-\section{Techniken, Algorithmen, Frameworks und Tools}
-\section{Einsatz der Paradigmen}
-\section{Analyse der Evaluationsmethoden}
+
+
+
+
+
+
+
+\section{Paradigmen des QA}
+\subsection{IR-basiert}
+\subsection{NLP-basiert}
+\subsection{Wissensbasiert}
+\subsection{Hybrid}
+\subsection{BERT}
+\section{Evaluationsmethoden}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%end here -------------------------------------------till 03/05---------------- 
+
+
+
+\chapter{Methodik}
+\section{Analyseverfahren}
+\chapter{Ergebnis}
+\section{Interpretation der Ergebnisse}
 \chapter{Fazit}
 \appendix 
 \chapter{Anhang}
@@ -234,7 +303,7 @@ Systeme und Wissensmanagement, Universität Siegen
         
         % zeigt immer alle definierten Quellen an, auch wenn diese nicht verwendet werden
         %\nocite{*}
-        \bibliographystyle{apalike}
+        \bibliographystyle{alpha}
         \addcontentsline{toc}{chapter}{Literaturverzeichnis}
         \bibliography{literatur}
 
