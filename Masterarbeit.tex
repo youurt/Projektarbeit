@@ -205,21 +205,75 @@ Systeme und Wissensmanagement, Universität Siegen
 \subsection{Einleitung}
 Erste Adaptionen von QA Systemen konnten nur mit strukturierten Listen oder Teilen von begrenzten Datenbanksystemen umgehen. Datenbanken über eine bestimmte Domain wurden entwickelt speziell eine Aufgabe zu lösen. Im Prinzip wurden Datenbanken textbasiert oder durch logische Inferenzen zu Wissensdatenbanken zusammengefasst. Die Antwort wurde dabei gefunden, indem das System eine Übereinstimmung im Textabschnitt gefunden hatte oder durch Fakten das Problem lösen konnte.
 \subsection{Erste Anwendungen}
-Mit \glqq BASEBALL\grqq{}  \citep{Green1961Baseball:Question-answerer} wurden Baseball-Spiele analysiert.  Auf die Frage \glqq Wie haben die Yankees im Juli gespielt?\grqq{} konnte das QA-System eine Antwort geben. Das QA-System hatte also eine beschränkte, geschlossene Domain. Zunächst wurde eine syntaktische Analyse der Frage ausgeführt. Die Frage wurde dabei in seine einzelnen Elemente zerlegt und es entstanden Teile wie \glqq Wie?\grqq{}, \glqq die Yankees\grqq{} und \glqq in Juli\grqq{}. Da es nur Baseball-Spiele ging, konnte das QA-System direkt mit der semantischen Analyse beginnen. Die semantische Analyse verknüpfte dabei, \glqq die Yankees\grqq{} mit der Kondition \glqq Wie?\grqq{}. In diesem Fall ist das \glqq Wie?\grqq{} die Frage nach dem \glqq Wie gespielt?\grqq{}.
+Mit \enquote{BASEBALL}  \citep{Green1961Baseball:Question-answerer} wurden Baseball-Spiele analysiert.  Auf die Frage \enquote{Wie haben die Yankees im Juli gespielt?} konnte das QA-System eine Antwort geben. Das QA-System hatte also eine beschränkte, geschlossene Domain. Zunächst wurde eine syntaktische Analyse der Frage ausgeführt. Die Frage wurde dabei in seine einzelnen Elemente zerlegt und es entstanden Teile wie \enquote{Wie?}, \enquote{die Yankees} und \enquote{in Juli}. Da es nur Baseball-Spiele ging, konnte das QA-System direkt mit der semantischen Analyse beginnen. Die semantische Analyse verknüpfte dabei, \enquote{die Yankees} mit der Kondition \enquote{Wie?}. In diesem Fall ist das \enquote{Wie?} die Frage nach dem \enquote{Wie gespielt?}.
 
-Es folgten weitere Anwendungen, wo Enzyklopädie benutzt wurden um Fragen zu beantworten. Mit \glqq Protosynthex\grqq{} \citep{Simmons1964IndexingQuestions} entstand eines der ersten wirklichen QA-Systeme. Um eine Frage zu beantworten musste diese System zunächst eine Abfrage ausführen. Ähnlich wie bei einer Datenbankabfrage entstand aus den einzelnen Elementen der Frage eine strukturierte Abfrage. Das System gab auf diese strukturierte Abfrage dann bestimmte Antwort Kandidaten. Diese Kandidaten waren die möglichen Antworten auf die Frage wurden dann in eine Reihenfolge gebracht. Je ähnlicher die Frage mit der Antwort war, desto höher war der Rang des Kandidaten. Auf die Frage \glqq Was essen Würmer?\grqq{} gab das System die korrekte Antwort \glqq Würmer essen Gras.\grqq{} , da sowohl die Frage, als auch die Antwort die Abhängigkeit \glqq essen\grqq{} beinhalteten. 
+Es folgten weitere Anwendungen, wo Enzyklopädien benutzt wurden, um Fragen zu beantworten. Mit \enquote{Protosynthex}\citep{Simmons1964IndexingQuestions} entstand eines der ersten wirklichen QA-Systeme. Um eine Frage zu beantworten, musste diese Systeme zunächst eine Abfrage ausführen. Ähnlich wie bei einer Datenbankabfrage entstand aus den einzelnen Elementen der Frage eine strukturierte Abfrage. Das System gab auf diese strukturierte Abfrage dann bestimmte Antwort Kandidaten. Diese Kandidaten waren die möglichen Antworten. Auf die Frage wurden dann in eine Reihenfolge gebracht. Je ähnlicher die Frage mit der Antwort war, desto höher war der Rang des Kandidaten. Auf die Frage \enquote{Was essen Würmer?} gab das System die korrekte Antwort \enquote{Würmer essen Gras.}, da sowohl die Frage, als auch die Antwort die Abhängigkeit \enquote{essen} beinhalteten. 
 
-Ein weiterer wichtiger Abschnitt bei den ersten QA-Systemen war \glqq LUNAR\grqq{} \citep{Woods1978SemanticsAnswering}. Dieses QA-System war eine Brücke zwischen Menschen, die mit natürlicher Sprache kommunizieren und der Chemie, die strukturierte Fakten abbildet. LUNAR beantwortete  Fragen wie \glqq Gibt es Proben mit 13 Prozent Aluminium?\grqq{}. 
+Ein weiterer wichtiger Abschnitt bei den ersten QA-Systemen war \enquote{LUNAR} \citep{Woods1978SemanticsAnswering}. Dieses QA-System war eine Brücke zwischen Menschen, die mit natürlicher Sprache kommunizieren und der Chemie, die strukturierte Fakten abbildet. LUNAR beantwortete  Fragen wie \enquote{Gibt es Proben mit 13 Prozent Aluminium?}. 
 
 \subsection{Was kann man aus den Fehlern lernen?}
-Die ersten QA-Systeme waren im Grunde wissensbasierte Systeme. Mit dem Fortschritt des Internets kamen aber immer mehr IR-basierte QA-Systeme in den Vordergrund und erst später kam die Kombination dieser beiden Paradigmen, die hybriden Systeme, welche sich noch in der Beginn ihrer Entwicklung befinden. 
+Die ersten QA-Systeme waren im Grunde wissensbasierte Systeme. Mit dem Fortschritt des Internets kamen aber immer mehr IR-basierte QA-Systeme in den Vordergrund und erst später kam die Kombination dieser beiden Paradigmen, die hybriden Systeme, welche sich noch in dem Beginn ihrer Entwicklung befinden. 
 
-Aus den ersten Implementierungen der QA-Systeme können wir aber lernen, indem wir nicht die selben Fehler begehen wie diese Systeme. In den 70er Jahren gab es noch sehr wenig Daten, und QA-Systeme leben von Daten. Den wirklichen Durchbruch haben QA-Systeme erst Mitte der 2000'er erhalten. Große Mengen an Daten und ML-Algorithmen, welche diese Daten umwandeln und beherrschen sind der Grund. Es ist nicht ausreichend, nur eine Quelle zu haben, um die Komplexität zu beherrschen. Ein Wort kann in der Natürlichen Sprache mehrere Bedeutungen haben. Außerdem ist eine reine Regelbasierte Behandlung der Frage nicht ausreichend.
+Aus den ersten Implementierungen der QA-Systeme können wir aber lernen, indem wir nicht dieselben Fehler begehen wie diese Systeme. In den 70er Jahren gab es noch sehr wenig Daten, und QA-Systeme leben von Daten. Den wirklichen Durchbruch haben QA-Systeme erst Mitte der 2000'er erhalten. Große Mengen an Daten und ML-Algorithmen, welche diese Daten umwandeln und beherrschen sind der Grund. Es ist nicht ausreichend, nur eine Quelle zu haben, um die Komplexität zu beherrschen. Ein Wort kann in der natürlichen Sprache mehrere Bedeutungen haben. Außerdem ist eine reine Regelbasierte Behandlung der Frage nicht ausreichend.
 
-\section{Allgemeine Systemarchitektur} % 2 pages
+
+
+
+\section{Aktuelle Entwicklungen im Question Answering} % 1 page
+
+\enquote{Wolfram|Alpha is not a search engine.} \citep{WolframAlpha} Weil die Menschen mehr als eine Suchmaschine gebraucht haben und immer mehr dem Computer Fragen stellten entstanden zunächst Projekte wie Wolfram|Alpha entstanden. Herkömmliche Suchmaschinen arbeiten unter der Annahme, dass die bestimmte Webseiten wonach der Nutzer gesucht hat, die gewünschten Informationen enthalten. Anders bei Wolfram|Alpha wo durch die Suche. Wolfram|Alpha bezeichnet sich selbst als \enquote{Wissensmaschine}. Sie generiert die Antwort, indem sie mit der eigenen internen Wissensbasis arbeitet und nicht nur einen Index wiedergibt. Als zunächst Wolfram|Alpha veröffentlicht wurde, war der Hype sehr groß. Es sollte den von Google dominierten Markt für Suchmaschinen revolutionieren, doch Wolfram|Alpha ist kein Ersatz für herkömmliche Suchmaschinen.
+
+2011 gelang es IBM Watson das Jeopardy! Fernsehprgramm zu gewinnen \citep{Markoff2011ComputerNot}. IBM musst mit Watson gegen Menschen antreten und in natürlicher Sprache gestellte Quizfragen beantworten. Der Computer hatte dabei schnell und prezise aus einer sehr großen Anzahl von Antwortmöglichkeiten, die richtige Antwort auszuwählen. Dieses war eine Demonstration von IBM, wie fortgeschritten die Technik angekommen ist.
+
+Die Entwicklung im Bereich QA ging weiter und auch Google hatte in diesem Bereich eine neue Möglichkeit entdeckt, das QA in die herrkömmliche Suche zu integrieren. Im Mai 2012 hat Google das sogenannte \enquote{Knowledge Graph} eingeführt. Ein Wissensgraph, das reale Entitäten und ihre Beziehungen zueinander verknüpft. Zu den Objekten gehören z.B.: Sehenswürdigkeiten, Prominente, Städte, Sportmannschaften, Gebäude, Filme, Himmelsobjekte, Kunstwerke und mehr. Das Diagramm verbessert die Google-Suche auf drei Arten: die Auflösung von Mehrdeutigkeiten bei Suchanfragen, die Zusammenfassung der wichtigsten Fakten und die explorative Suche \citep{SteinerAddingGraph}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Question Answering mit Wissensbasis}
+\chapter{Question Answering mit Web}
 Eine allgemeine Systemarchitektur ist bei der Vielzahl an Paradigmen des QA nicht einfach aufzubauen. Da die ersten QA-Systeme wissensbasierte und IR-basierte Systeme sind, sind diese beiden Systeme auch die Grundlage für die Beschreibung einer allgemeinen Systemarchitektur als geeignete Kandidaten auszuweisen. 
 
-Im folgenden werden IR-basierte QA als Grundlage ausgewählt. Dieses hat den Zweck, um möglichst alle Komponenten der QA-Systeme abzubilden. IR-basierte QA-Systeme demonstrieren die Umwandlung von Informationen und unstrukturierten Texten, besser als wissensbasierte QA-Systeme, wo eine Abfrage einer Wissensdatenbank erfolgt. Die meisten QA-Systeme beinhalten 3 Komponenten. Diese Komponenten sind 
+Im Folgenden werden IR-basierte QA als Grundlage ausgewählt. Dieses hat den Zweck, um möglichst alle Komponenten der QA-Systeme abzubilden. IR-basierte QA-Systeme demonstrieren die Umwandlung von Informationen und unstrukturierten Texten, besser als wissensbasierte QA-Systeme, wo eine Abfrage einer Wissensdatenbank erfolgt. Die meisten QA-Systeme beinhalten 3 Komponenten. Diese Komponenten sind 
 \begin{itemize}
 \item Frage verstehen
 \item Fakten extrahieren 
@@ -239,26 +293,26 @@ Im folgenden werden IR-basierte QA als Grundlage ausgewählt. Dieses hat den Zwe
 
 
 
-\subsection{Fragenbearbeitung}
+\subsection{Fragebearbeitung}
 
-Im ersten Modul eines QA-Systems geht es darum, die gestellte Frage zu verstehen. Zunächst muss die in natürlicher Sprache gestellten Frage in eine Abfrage umgewandelt werden, welches ein Computer versteht. Außerdem wird in diesem Modul der Typ der gestellten Frage festgelegt um die Auswahl der Antwortkanditaten, welches im letzten Modul eines QA-Systems stattfindet, zu begrenzen.
+Im ersten Modul eines QA-Systems geht es darum, die gestellte Frage zu verstehen. Zunächst muss die in natürlicher Sprache gestellten Frage in eine Abfrage umgewandelt werden, welches ein Computer versteht. Außerdem wird in diesem Modul der Typ der gestellten Frage festgelegt um die Auswahl der Antwortkandidaten, welches im letzten Modul eines QA-Systems stattfindet, zu begrenzen.
 
 \subsubsection{Abfrageformulierung}
 Zunächst muss die gestellte Frage in eine Abfrage übersetzt werden, welches der Computer verstehen kann. Bei einer Suchmaschine etwa, wird die Frage in natürlicher Sprache gestellt, jedoch muss der Computer im Hintergrund diese Abfrage in eine Datenbankabfrage umwandeln. 
-\textbf{LIN 2007} zeigt wie man mittels  \glqq Query Reformulation\grqq{} die gestellte Frage reformuliert, also nicht mehr als Frage, sondern als Aussage wiedergibt. Dabei werden vordefinierte Regeln verwendet. Dieses ist nützlich, denn Textausschnitte aus dem Web können unterschiedlich formuliert sein.
+\textbf{LIN 2007} zeigt wie man mittels  \enquote{Query Reformulation} die gestellte Frage reformuliert, also nicht mehr als Frage, sondern als Aussage wiedergibt. Dabei werden vordefinierte Regeln verwendet. Dieses ist nützlich, denn Textausschnitte aus dem Web können unterschiedlich formuliert sein.
 
 \subsubsection{Antworttypen}
 
-Durch Named Entitiy Recognition ist es möglich, die gestellte Frage nach seinem Typ zu kategorisieren. Eine \glqq Wer-Frage\grqq{} wird dabei mit Person verknüpft eine \glqq Wo-Frage\grqq{} mit dem Ort. Diese Klassifizierung ermöglicht dem System eine Vorselektion durchzuführen. 
+Durch Named Entitiy Recognition ist es möglich, die gestellte Frage nach seinem Typ zu kategorisieren. Eine \enquote{Wer-Frage} wird dabei mit Person verknüpft eine \enquote{Wo-Frage} mit dem Ort. Diese Klassifizierung ermöglicht dem System eine Vorselektion durchzuführen. 
 
-Eine \glqq Taxonomie\grqq{} von Antworttypen kann aus dem WordNet, wie in den Beispielen \textbf{HARBAYAIN, PASCA}, gebildet werden.
+Eine \enquote{Taxonomie} von Antworttypen kann aus dem WordNet, wie in den Beispielen \textbf{HARBAYAIN, PASCA}, gebildet werden.
 
 Im Beispiel von \textbf{Li and Roth 2005} sieht man, wie solche Taxonomien selbst gemacht werden können, also ohne WordNet. Die Granularität dieser Taxonomien kann dabei selbst bestimmt werden. Die Entität PERSON kann dabei viel tiefer behandelt werden, also PERSON:GRUPPE. 
 
 
 \subsection{Abrufen von Dokumenten und Passagen}
 Die aus der Fragenbearbeitungsphase erzeugte IR-Abfrage wird an eine IR-Engine gesendet.
-Dies führt zu einer Reihe von Dokumenten, die nach ihrer Relevanz für die Abfrage geordnet sind. Da die meisten Methoden zum Extrahieren von Antworten für kleinere Bereiche wie Absätze ausgelegt sind, unterteilen QA-Systeme als nächstes die obersten n Dokumente in kleinere Passagen wie z.B. Abschnitte, Absätze oder Sätze. 
+Dies führt zu einer Reihe von Dokumenten, die nach ihrer Relevanz für die Abfrage geordnet sind. Da die meisten Methoden zum Extrahieren von Antworten für kleinere Bereiche wie Absätze ausgelegt sind, unterteilen QA-Systeme als Nächstes die obersten n Dokumente in kleinere Passagen wie z.B. Abschnitte, Absätze oder Sätze. 
 
 
 Die einfachste Form des Passagen Retrievals besteht darin, jede Passage zur Stufe der Antwortextraktion weiterzuleiten. Eine komplexere Variante besteht darin, die Passagen zu filtern, indem eine benannte Entität oder eine Antworttypklassifizierung für die abgerufenen Passagen ausgeführt wird, wobei Passagen verworfen werden, die nicht den Antworttyp der Frage enthalten. Es ist auch möglich, überwachtes Lernen zu verwenden, um die verbleibenden Passagen mithilfe von Funktionen wie:
@@ -280,62 +334,21 @@ In den folgenden Beispielen würden die unterstrichenen benannten Entitäten aus
 \newtheorem{example}{Beispiel}
 
 \begin{example}
-\glqq Wer ist der indische Premierminister?\grqq{} - \textbf{Manmohan Singh}, Premierminister von Indien, hatte den linken Führern gesagt, dass das Abkommen nicht neu verhandelt werden würde.
+\enquote{Wer ist der indische Premierminister?} - \textbf{Manmohan Singh}, Premierminister von Indien, hatte den linken Führern gesagt, dass das Abkommen nicht neu verhandelt werden würde.
 
 \end{example}
 \begin{example}
-\glqq Wie hoch ist der Berg Everest?\grqq{} - Die offizielle Höhe des Mount Everest beträgt \textbf{29029 Fuß}.
+\enquote{Wie hoch ist der Berg Everest?} - Die offizielle Höhe des Mount Everest beträgt \textbf{29029 Fuß}.
 \end{example}
 
-Leider sind die Antworten auf viele Fragen, wie z. B. DEFINITION-Fragen, in der Regel nicht von einem bestimmten benannten Entitätstyp. Aus diesem Grund verwendet die moderne Arbeit zur Antwortextraktion komplexere Algorithmen, die im Allgemeinen auf überwachtem Lernen basieren. Im nächsten Abschnitt wird ein einfacher merkmalsbasierter Klassifikator vorgestellt. Anschließend wenden wir uns modernen neuronalen Algorithmen zu.
+Leider sind die Antworten auf viele Fragen, wie z. B. DEFINITION-Fragen, in der Regel nicht von einem bestimmten benannten Entitätentyp. Aus diesem Grund verwendet die moderne Arbeit zur Antwortextraktion komplexere Algorithmen, die im Allgemeinen auf überwachtem Lernen basieren. Im nächsten Abschnitt wird ein einfacher merkmalsbasierter Klassifikator vorgestellt. Anschließend wenden wir uns modernen neuronalen Algorithmen zu.
 
 
 
-\section{Moderne QA-Systeme} % 1 page
+\chapter{Hybrides Question Answering}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Paradigmen des QA}
-\subsection{IR-basiert}
-\subsection{NLP-basiert}
-\subsection{Wissensbasiert}
-\subsection{Hybrid}
-\subsection{BERT}
-\section{Evaluationsmethoden}
+\chapter{Question Answering mit BERT }
+\chapter{Evaluationsmethoden}
 
 
 
