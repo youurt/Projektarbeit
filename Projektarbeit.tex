@@ -1,0 +1,374 @@
+
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\documentclass[
+        ngerman,
+        paper=a4,
+        numbers=noendperiod,
+]{scrreprt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+% Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Sprachsupport
+\usepackage[ngerman]{babel}
+\usepackage{translator}
+% Tabellen
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage{multirow}
+% Symbole
+\usepackage{eurosym}
+% Formeln
+\usepackage{amsmath, amsthm, amssymb}
+% Formelregeln
+\DeclareNewTOC[% 
+  counterwithin=chapter, 
+  indent=0pt,% kein Einzug im Verzeichnis 
+  hang=2em,% Einzug für den Text im Verzeichnis 
+  name=equation, 
+  type=xequation, 
+  nonfloat, 
+]{loe} 
+
+\AtBeginDocument{% 
+  \newcaptionname{ngerman}\xequationname{Formel}% 
+  \newcaptionname{ngerman}\listxequationname{Formelverzeichnis}% 
+} 
+% Pakete
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage[square,sort]{natbib}
+\usepackage[hyphens]{url}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[
+        pdftex,
+        hyperfigures,
+        hyperindex,
+        bookmarksnumbered,
+        linktoc=all,
+        pdfborder={0.25 0.25 0.25},
+        %pdfborder={0 0 0},
+        pdfpagelayout=TwoColumnRight,
+]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{lmodern}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[printonlyused]{acronym}
+\usepackage{subfiles} 
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhf{}
+\fancyhead[RE]{\chaptername~\thechapter}
+\fancyhead[LO]{\leftmark}
+\fancyhead[LE,RO]{\thepage}
+
+%Quellcodes
+%Farben
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+%Listing einfaerben
+\usepackage{listings}
+\lstset{numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	frame=l ,
+	xleftmargin=15pt,
+	xrightmargin=15pt,
+	basicstyle=\ttfamily\scriptsize,
+	stepnumber=1,
+	keywordstyle=\color{blue},          % keyword style
+  	commentstyle=\color{dkgreen},       % comment style
+  	stringstyle=\color{mauve}         % string literal style
+}
+%Sprache Festelegen
+\lstset{language=R}
+
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+    \huge \textbf{\textsf{Evaluierung von Paradigmen des Question Answering}} \\
+    \vspace{1cm}
+    \LARGE\textbf{\textsc{Projektarbeit }}\\
+    \vspace{1cm}
+    \normalsize
+    vorgelegt am: \today \\
+    \vspace{2.5cm}
+    \large \textbf{Fakultät IV - 
+Institut für Wissensbasierte
+Systeme und Wissensmanagement, Universität Siegen
+}
+\linebreak
+\linebreak
+\begin{figure}[H]
+    \centering\includegraphics[width=0.4\linewidth]{images/imageuni.pdf}
+    \label{fig:Unilabel}
+\end{figure}
+    \end{center}
+    \vspace{3cm}
+    \begin{center}
+ \normalsize{
+    \begin{tabular}{ll}
+    	Eingereicht von: & {Ugur Tigu} \\
+    	Studiengang: & Wirtschaftsinformatik, Master of Science (M.Sc.)\\
+	Erstprüfer: & Prof. Dr.-Ing. Madjid Fathi \\
+	Betreuer: &   Johannes Zenkert\\
+    \end{tabular}\\
+    }
+\end{center}
+\end{titlepage}
+\setcounter{page}{0}
+\pagenumbering{Roman}
+\tableofcontents
+\clearpage 
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+\clearpage 
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\listoftables
+\clearpage 
+% Kapiteldefinition ohne Nummerierung
+\chapter*{Abkürzungsverzeichnis}
+ % Abkürzungsverzeichnis soll im Inhaltsverzeichnis erscheinen
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} 
+\begin{acronym}
+% Format der Abkürzungsdefinition: \acro{}[]{}
+% {Verweis}[Abkürzung]{ausgeschriebene Abkürzung}
+
+\acro{nlp}[NLP]{Natural Language Processing}
+\acro{qa}[QA]{Question Answering}
+\acro{ir}[IR]{Information Retrieval}
+\acro{pos}[POS]{Part-of-speech}
+
+\end{acronym}
+\clearpage 
+\addcontentsline{toc}{chapter}{Formelverzeichnis} 
+\listofxequations
+\clearpage
+\lstlistoflistings
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+
+
+
+
+
+
+
+
+
+%3 Seiten
+\chapter{Einleitung}
+\section{Motivation}
+\section{Forschungsfragen}
+\section{Struktur der Arbeit}
+
+
+
+
+%8 Seiten
+\chapter{Theoretische Grundlagen}
+\section{Künstliche Intelligenz}
+\subsection{Arten von Künstlicher Intelligenz}
+\subsection{Geschichte der Künstlichen Intelligenz}
+\subsection{Maschinelles Lernen}
+\subsection{Künstliches neuronales Netz}
+
+%8 Seiten
+\section{Natural Language Processing}
+\subsection{Natural Language Processing und Natural Language Understanding}
+\subsection{Geschichte des Natural Language Processings}
+\subsection{BERT}
+
+
+%8 Seiten
+\section{Question Answering}
+\subsection{Systemarchitektur des Question Answerings}
+\subsection{Geschichte des Question Answerings}
+\subsection{Paradigmen des Question Answerings}
+\subsection{Stand der Forschung im Question Answering}
+\subsection{Zukunft des Question Answerings}
+
+%4 Seiten
+\chapter{Technologien und Werkzeuge}
+Die im folgenden Kapitel beschriebenen Technologien und Tools werden für die Entwicklung des QA-Chatbot-Prototyps verwendet. Die Beschreibung ist nur oberflächlich. Detaillierte Informationen zur verwendeten Software, zur Systemumgebung und zu den einzelnen installierten Paketen finden Sie in den Anhängen 4 und 5. %todo where
+\section{Python}
+Python ist eine von der Python Software Foundation weiterentwickelte und veröffentlichte Programmiersprache, die sowohl als objektorientierte Programmiersprache als auch als Skriptsprache angesehen werden kann. Python benötigt relativ wenige Schlüsselwörter, zeichnet sich durch seine Einfachheit, Klarheit und Erweiterbarkeit aus und verfügt über eine große Anzahl wissenschaftlicher Programmbibliotheken auf dem Gebiet Data-Science und wird daher immer mehr zum zentralen Werkzeug. 
+Durch so genannte virtuelle Umgebungen, lassen sich die Entwicklungen mittels Python gezielt auf eine Python Version begrenzen und nur bestimmte Pakete mit installieren lassen, somit kann man eine Umgebung für die Softwareverteilung verwenden. \citep[S. 2]{GrotzGrundkurs0.1.2d}
+\section{Spacy}
+Spacy ist ein Python-Module für die NLP-Entwicklung. Der Fokus liegt dabei auf Geschwindigkeit und Einfachheit. Dabei liefert Spacy die essentiellen NLP-Aufgaben und für jede Aufgabe ist genau ein Algorithmus implementiert worden. Es werden neben Englisch auch Deutsch, Spanisch und Französisch angeboten. Die Annotationen werden dabei in dem Objekt \enquote{doc} gespeichert. Einzelne Wörter werden dabei zu Tokens gemacht. Die Sätze werden automatisch gesplittet und Spacy liefert daneben die Möglichkeit, Named Entity Recognition, den Sentiment, POS-Tagging und viele andere Lösungen für das NLP \citep{SpaCyDocumentation}.
+
+Im Listing 3.1 wird das Modul Spacy mit einem englischen Sprachmodell geladen und eine Frage in der Zeile 2, in seine Tokens zerlegt. Im Anhang wird dazu ein weiteres detailliertes Beispiel im Sinne der Verwendung für diese Arbeit abgebildet.
+
+\begin{lstlisting}[language=Python, caption=Spacy Beispiel]
+>>> import spacy
+>>> nlp = spacy.load("en_core_web_sm")
+>>> question = "What is the capital of Belgium?"
+>>> doc = nlp(question)
+
+>>> for token in doc:
+>>>   print(token, token.tag_)
+
+# What WP                                    
+# is VBZ                                     
+# the DT                                     
+# capital NN            
+# of IN
+# Belgium NNP
+# ? .
+
+\end{lstlisting}
+
+\section{Transformers}
+Transformers (früher bekannt als Pytorch-Transformers und Pytorch-Pretrained-Bert) bieten Allzweckarchitekturen (BERT, GPT-2, RoBERTa, XLM, DistilBert, XLNet) für das Verständnis der natürlichen Sprache (NLU) und die Erzeugung natürlicher Sprachen (NLG). Es bietet über 32 vorgefertigten Modelle und über 100 Natürlichen Sprachen bietet diese Architektur die Interoperabilität zwischen TensorFlow 2.0 und PyTorch.
+
+Das Tokenizer-Objekt ermöglicht die Konvertierung von Zeichenfolgen in Token, die von den verschiedenen Modellen verstanden werden. Jedes Modell verfügt über einen eigenen Tokenizer, und einige Tokenisierungsmethoden unterscheiden sich je nach Tokenizer.
+
+Das Modellobjekt ist eine Modellinstanz, die von einem bestimmten Modul erbt. Jedes Modell wird von seinen Speicher- oder Lademethoden begleitet, entweder aus einer lokalen Datei oder einem lokalen Verzeichnis oder aus einer vorab trainierten Konfiguration. Jedes Modell funktioniert anders und für es wird für eine bestimmte NLP-Aufgabe, ein bestimmtes Modell verwendet\citep{TransformersDocumentation}\citep{PyTorch-TransformersPyTorch}.
+
+\begin{lstlisting}[language=Python, caption=Transformers Beispiel]
+>>> from transformers import AutoModelForQuestionAnswering
+>>> model = AutoModelForQuestionAnswering.from_pretrained("mrm8488/bert-medium-finetuned-squadv2")
+>>> from transformers import AutoTokenizer
+>>> tokenizer = AutoTokenizer.from_pretrained("mrm8488/bert-medium-finetuned-squadv2")
+\end{lstlisting}
+
+\section{PyTorch}
+In diesem Abschnitt wird PyTorch, ein zunehmend beliebtes Python-basiertes Framework für Computergraphen zur Implementierung von Deep-Learning-Algorithmen, dargestellt. Es gibt einen signifikanten Unterschied zwischen PyTorch und anderen Frameworks wie Theano oder Tensorflow. Theano oder Tensorflow folgen grundsätzlich einem \enquote{Definieren-Kompilieren-Ausführen-Paradigma}. PyTorch dagegen ist ein dynamisch definierbares Framework. Es gibt keinen Kompilierungsschritt, der Benutzer kann mathematische Ausdrücke definieren und einen berechennden Operator direkt aufrufen. PyTorch eignet sich somit sehr gut für Forschungszwecke, da es das Entwickeln und Experimentieren mit Deep-Learning-Architekturen relativ einfach ermöglicht \citep[S. 195]{Ketkar2017}.
+\section{Wikipedia-Wrapper}
+Mit dem Python Modul \enquote{Wikipedia-Wrapper} \citep{Goldsmith/Wikipedia:API} werden  Artikelzusammenfassungen und ganze Wikipedia Artikel erhalten. Der Wikipedia-Wrapper umschließt die MediaWiki-API, sodass Wikipedia Daten verwendet werden können, ohne sie abzurufen.
+
+\begin{quote}
+Wikipedia ist die wohl umfangreichste gemeinschaftlich erstellte
+Sammlung Freien Wissens in annähernd 300 Sprachen. Allein die
+deutschsprachige Ausgabe umfasst weit über zwei Millionen Artikel
+– und täglich kommen Hunderte hinzu \citep{WIKIPEDIAWelt}.
+\end{quote}
+
+Im Listing 3.3 ist zu sehen, wie durch den Wikipedia-Wrapper, der Inhalt bzw. die Artikelzusammenfassung eines Wikipedia-Artikels in Python erreicht werden kann. Dabei wird im Hintergrund die Wikipedia-API \citep{API:HauptseiteMediaWiki} benutzt.
+
+
+\begin{lstlisting}[language=Python, caption=Wikipedia Artikelzusammenfassungen]
+>>> import wikipedia
+>>> print(wikipedia.summary("Question Answering"))
+# Question answering (QA) is a computer science discipline within the fields of information retrieval and natural language processing (NLP), which is concerned with building systems that automatically answer questions posed by humans in a natural language.
+\end{lstlisting}
+
+
+
+
+
+
+
+\section{Python-Telegram-Wrapper}
+Telegram ist eine Messaging-App mit Fokus auf Geschwindigkeit und Sicherheit. Telegram-Bots sind wie kleine Programme, die direkt in Telegram ausgeführt werden. Sie werden von Drittentwicklern mithilfe der Telegram Bot-API erstellt.
+Bots sind einfach Telegram-Konten, die von einer Software betrieben werden - nicht von Personen. Sie haben oft KI-Funktionen. Sie können alles tun - lehren, spielen, suchen, senden, erinnern, verbinden, in andere Dienste integrieren oder sogar Befehle an das Internet der Dinge übergeben. Telegram stellt seine API offen für Entwickler zur Verfügung. Telegramm-Bots sind spezielle Konten, für deren Einrichtung keine zusätzliche Telefonnummer erforderlich ist. Diese Konten dienen als Schnittstelle für Code, der auf einem anderen Server ausgeführt wird. Der Vermittlungsserver von Telegram übernimmt für  die gesamte Verschlüsselung und Kommunikation mit der Telegramm-API. Der Nutzer  kommunizieren mit diesem Server über eine einfache HTTPS-Schnittstelle, die eine vereinfachte Version der Telegramm-API bietet \citep{TelegramFAQ}\citep{TelegramAPIs}.
+
+Zusätzlich zur reinen API-Implementierung bietet diese Bibliothek eine Reihe von Klassen auf hoher Ebene, um die Entwicklung von Bots einfach und unkompliziert zu gestalten \citep{Python-telegram-bot/python-telegram-bot:Refuse}.
+
+
+\section{Flask}
+\section{Heroku}
+
+%6 Seiten
+\chapter{Entwicklung und Implementierung}
+
+
+%3 Seiten
+\chapter{Ergebnisse}
+
+
+
+
+
+
+
+
+
+
+%\subfile{Grundlagen/Einleitung}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\appendix 
+\chapter{Anhang}
+\label{chapter:Anhang}%
+
+
+\clearpage
+        \phantomsection % damit das pdf bookmark an die richtige Stelle zeigt
+        \pdfbookmark{Literaturverzeichnis}{bibliography}
+        
+        % zeigt immer alle definierten Quellen an, auch wenn diese nicht verwendet werden
+        %\nocite{*}
+        \bibliographystyle{abbrv}
+        \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+        \bibliography{literatur}
+
+
+
+
+\chapter*{Erklärung}
+Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe, insbesondere keine anderen als die angegebenen Informationen aus dem Internet. Diejenigen Paragraphen der für mich gültigen Prüfungsordnung, welche etwaige Betrugsversuche betreffen, habe ich zur Kenntnis genommen. Der Speicherung meiner Master-Arbeit zum Zweck der Plagiatsprüfung stimme ich zu. Ich versichere, dass die elektronische Version mit der gedruckten Version inhaltlich übereinstimmt.\newline
+\linebreak
+\linebreak
+\linebreak
+Bielefeld, den \today\newline
+(Ort) (Datum)\newline
+\linebreak
+\linebreak
+\linebreak
+..................................\newline
+(Unterschrift)
+\end{document}
