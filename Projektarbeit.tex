@@ -311,7 +311,11 @@ Die in diesem Kapitel beschriebenen praktischen Tests und Untersuchungen wurden 
 
 Die Verwendung von Python-Befehlen in der Shell für die Ausführung wurde weggelassen. Stattdessen entschied sich der Autor, Python-Skripte zu erstellen und zu verwenden, die die erforderlichen Schritte bündeln und mit einem einzigen Befehl ausführen. Die ausgeführten Befehle werden in den folgenden Unterkapiteln in einem Code-Listing erwähnt. Die verwendeten Skripte befinden sich in den Anhängen 6, 7, 8 und 9. %todo
 
-\section{Installation der Software}
+
+\section{Entwicklung einer prototypischen Systemarchitektur}
+
+
+\section{Installation der Software in die Entwicklungsumgebung}
 Vor der Installation der Bibliotheken ist eine Python-Umgebung erforderlich, weshalb \enquote{virtualenv} heruntergeladen und installiert wurde. Dieses geschieht mit dem Package Installer für Python \enquote{pip3}.
 
 \begin{lstlisting}[language=bash, caption=Einrichten der virtuellen Umgebung]
@@ -322,11 +326,17 @@ $ source qabot/bin/activate
 
 Wenn die Installationen gut verlaufen sind, ist der nächste Schritt die Installation der erforderlichen Python-Pakete.
 Darunter befinden sich auch die  und . Diese Python-Pakete können entweder einzeln per Befehl oder alle zusammen installiert werden, indem sie aus einer Datei gelesen und nacheinander installiert werden. Die Liste der verwendeten Pakete und ihrer Versionen finden Sie in Anhang . Bei der Installation ist darauf zu achten, dass alle Pakete korrekt installiert sind, da viele der Pakete voneinander abhängig sind. Änderungen an Paketversionen können automatisch zu Änderungen an anderen Paketversionen führen, was zu Inkompatibilität führt, da Versionen nicht unterstützt werden. 
+Mit \enquote{pip3} werden nun alle Abhängigkeiten für dieses Projekt in die Umgebung installiert.
 
 
-
-
-
+\begin{lstlisting}[language=bash, caption=Installieren der Abhängigkeiten mit pip3]
+$ pip3 install spacy>=2.2.0
+$ pip3 install Flask==1.1.2
+$ pip3 install python-telegram-bot==12.7
+$ pip3 install torch==1.3.1+cpu
+$ pip3 install transformers==2.9.1
+$ pip3 install wikipedia==1.4.0
+\end{lstlisting}
 
 
 
@@ -336,7 +346,7 @@ Die erforderlichen Python-Pakete können mit einer Datei zusammengefasst und sp�
 $ pip3 freeze > requirements.txt
 \end{lstlisting}
 
-
+Somit ist die Entwicklungsumgebung bereit für die Entwicklung.
 
 
 
