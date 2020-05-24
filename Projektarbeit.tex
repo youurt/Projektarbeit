@@ -98,7 +98,7 @@
 \begin{document}
 \begin{titlepage}
     \begin{center}
-    \huge \textbf{\textsf{Evaluierung von Paradigmen des Question Answering}} \\
+    \huge \textbf{\textsf{Implementierung eines QA-Bot-Prototypen aus Wikipedia Zusammenfassungen}} \\
     \vspace{1cm}
     \LARGE\textbf{\textsc{Projektarbeit }}\\
     \vspace{1cm}
@@ -156,6 +156,7 @@ Systeme und Wissensmanagement, Universität Siegen
 \addcontentsline{toc}{chapter}{Formelverzeichnis} 
 \listofxequations
 \clearpage
+\addcontentsline{toc}{chapter}{Listings} 
 \lstlistoflistings
 \clearpage
 \setcounter{page}{1}
@@ -205,7 +206,7 @@ Systeme und Wissensmanagement, Universität Siegen
 
 %4 Seiten
 \chapter{Technologien und Werkzeuge}
-Die im folgenden Kapitel beschriebenen Technologien und Tools werden für die Entwicklung des QA-Chatbot-Prototyps verwendet. Die Beschreibung ist nur oberflächlich. Detaillierte Informationen zur verwendeten Software, zur Systemumgebung und zu den einzelnen installierten Paketen finden Sie in den Anhängen 4 und 5. %todo where
+Die im folgenden Kapitel beschriebenen Technologien und Tools werden für die Entwicklung des QA-Chatbot-Prototyps verwendet. Die Beschreibung ist nur oberflächlich. Detaillierte Informationen zur verwendeten Software, zur Systemumgebung und zu den einzelnen installierten Paketen befinden sich in den Anhängen 4 und 5. %todo where
 \section{Python}
 Python ist eine von der Python Software Foundation weiterentwickelte und veröffentlichte Programmiersprache, die sowohl als objektorientierte Programmiersprache als auch als Skriptsprache angesehen werden kann. Python benötigt relativ wenige Schlüsselwörter, zeichnet sich durch seine Einfachheit, Klarheit und Erweiterbarkeit aus und verfügt über eine große Anzahl wissenschaftlicher Programmbibliotheken auf dem Gebiet Data-Science und wird daher immer mehr zum zentralen Werkzeug. 
 Durch so genannte virtuelle Umgebungen, lassen sich die Entwicklungen mittels Python gezielt auf eine Python Version begrenzen und nur bestimmte Pakete mit installieren lassen, somit kann man eine Umgebung für die Softwareverteilung verwenden. \citep[S. 2]{GrotzGrundkurs0.1.2d}
@@ -298,8 +299,45 @@ $ env FLASK_APP=hello.py flask run
 # * Serving Flask app "hello.py"
 # * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 \end{lstlisting}
+
+
+
+
 %6 Seiten
 \chapter{Entwicklung und Implementierung}
+In diesem Kapitel werden die wichtigsten Ergebnisse, das Systemverhalten und die Aktionen erläutert, die bei der Entwicklung und Implementierung eines QA-Bots beobachtet wurden. Die in diesem Kapitel erwähnten Beispiele, Verfahren und Szenarien basieren hauptsächlich auf den Beobachtungen, Selbstversuchen und Erfahrungen des Autors, den konkreten Vorschlägen von Expertenkreisen aus Tutorials oder Foren sowie aus der Herstellerdokumentation und den Herstellersoftware-Repositories. Gelegentlich wird auch auf theoretische Ansätze und Grundlagen verwiesen.
+
+Die in diesem Kapitel beschriebenen praktischen Tests und Untersuchungen wurden alle in derselben Systemumgebung durchgeführt. Alle in diesen Unterkapiteln genannten Testergebnisse, Betriebs-, System- und Softwareverhalten sind nur in einer identischen Systemumgebung gültig. Die Hardware-, Betriebssystem- und Softwarespezifikationen der verwendeten Systemumgebung finden Sie in Anhang 4. %todo
+
+Die Verwendung von Python-Befehlen in der Shell für die Ausführung wurde weggelassen. Stattdessen entschied sich der Autor, Python-Skripte zu erstellen und zu verwenden, die die erforderlichen Schritte bündeln und mit einem einzigen Befehl ausführen. Die ausgeführten Befehle werden in den folgenden Unterkapiteln in einem Code-Listing erwähnt. Die verwendeten Skripte befinden sich in den Anhängen 6, 7, 8 und 9. %todo
+
+\section{Installation der Software}
+Vor der Installation der Bibliotheken ist eine Python-Umgebung erforderlich, weshalb \enquote{virtualenv} heruntergeladen und installiert wurde. Dieses geschieht mit dem Package Installer für Python \enquote{pip3}.
+
+\begin{lstlisting}[language=bash, caption=Einrichten der virtuellen Umgebung]
+$ pip3 install virtualenv
+$ virtualenv qabot
+$ source qabot/bin/activate
+\end{lstlisting}
+
+Wenn die Installationen gut verlaufen sind, ist der nächste Schritt die Installation der erforderlichen Python-Pakete.
+Darunter befinden sich auch die  und . Diese Python-Pakete können entweder einzeln per Befehl oder alle zusammen installiert werden, indem sie aus einer Datei gelesen und nacheinander installiert werden. Die Liste der verwendeten Pakete und ihrer Versionen finden Sie in Anhang . Bei der Installation ist darauf zu achten, dass alle Pakete korrekt installiert sind, da viele der Pakete voneinander abhängig sind. Änderungen an Paketversionen können automatisch zu Änderungen an anderen Paketversionen führen, was zu Inkompatibilität führt, da Versionen nicht unterstützt werden. 
+
+
+
+
+
+
+
+
+Die erforderlichen Python-Pakete können mit einer Datei zusammengefasst und später in anderen Umgebungen installiert werden, wenn sie in der Datei \enquote{requirements.txt} aufgeführt sind. Um eine require.txt-Datei zu erstellen muss folgender virtualenv Befehl, aus der aktivierten source Umgebung ausgeführt werden:
+
+\begin{lstlisting}[language=bash, caption=Erstellen der requirements.txt Datei]
+$ pip3 freeze > requirements.txt
+\end{lstlisting}
+
+
+
 
 
 %3 Seiten
