@@ -197,8 +197,42 @@ Systeme und Wissensmanagement, Universität Siegen
 
 
 %8 Seiten
-\section{Question Answering}
-\subsection{Systemarchitektur des Question Answerings}
+\section{Question Answering} %2 Seiten
+Mit Suchmaschinen wird es den Benutzern immer leichter an gewünschte Informationen heranzukommen. Da Benutzer Schwierigkeiten haben, sich in der Fülle an Informationen der jetzt verfügbaren Online-Informationen zurechtzufinden, wird die Notwendigkeit automatisierter Systeme zur Beantwortung von Fragen immer dringlicher. Wir brauchen Systeme, mit denen ein Benutzer eine Frage in der Alltagssprache stellen und schnell und präzise eine Antwort erhalten kann, mit ausreichendem Kontext. Aktuelle Suchmaschinen können Ranglisten von Dokumenten zurückgeben, liefern dem Benutzer jedoch nicht immer die gewünschten Antworten \citep[S. 275]{Hirschman2001NaturalHere}.
+
+In diesem Kapitel wird das Question Answering in seine einzelnen Elemente zerlegt. Zunächst werden grundlegende Verständnisfragen beantwortet. Was ist Question Answering und Warum gibt es Question Answering?
+Es wird eine exemplarische Systemarchitektur vorgestellt, welches alle Elemente des Question Answerings beinhaltet und welche miteinander zusammenarbeiten. 
+In den letzten Abschnitten dieses Kapitels wird über die Geschichte, den verschiedenen Paradigmen des Question Answerings und den aktuellen Stand der Forschung berichtet. Dieser Kapitel wird beendet, indem über die Zukunft des Question Answerings und das weitere Potenzial dokumentiert wird.
+\subsection{Definitionen der Begriffe}
+Um das Question Answering zu verstehen, werden zunächst zunächst
+die zugehörigen Begriffe definiert. 
+
+Um eine Frage zu beantworten, muss ein Question Answering System die Frage analysieren, möglicherweise im Zusammenhang mit einer laufenden Interaktion. Es muss eine oder mehrere Antworten finden, indem es Online-Ressourcen konsultiert und es muss dem Benutzer die Antwort in einer geeigneten Form präsentieren, möglicherweise verbunden mit Begründung oder unterstützendem Material \citep[S. 276]{Hirschman2001NaturalHere}. Question Answering Systeme sind Sytsteme, die duch Informationsabruf automatisch Antworten zur gestellten Frage generieren, die Menschen in ihrer natürlichen Sprache stellen. Entweder mithilfe einer vorstrukturierten Datenbank oder einer Sammlung von Dokumenten in natürlicher Sprache \citep{Chali2011ImprovingKernels}\citep{Dwivedi2013ResearchSystem}\citep{Ansari2016IntelligentNetwork}\citep{Lende2016QuestionTechniques}. Es wird dabei abgegrenzt, zwischen \enquote{Fragensatz}, also der gestellten Frage und dem \enquote{Fragentyp}, welches den Zweck einer Kategorisierung der Frage ausweist. In der Literatur bezieht sich der Begriff \enquote{Antworttyp} auf eine Klasse von Objekten, nach denen die Frage sucht. \enquote{Fragenfokus} ist die Eigenschaft oder Entität, nach der die Frage sucht. \enquote{Fragethema} ist das Objekt oder Ereignis, um das es in der Frage geht \citep[S. 2]{CalijorneSoares2018ASystems}. Eine Textpassage welches ein Kandidat für eine Frage ist, wird \enquote{Kandidatenantwort} genannt und ist der Text, der nach seiner Eignung als Antwort eingestuft wird \citep{RetrievalOpen-DomainQuestion-Answering}.
+
+Fragen können nach Antworttyp unterscheiden werden: sachliche Antworten vs. Meinung vs. Zusammenfassung. Obwohl das Verständnis beispielsweise häufig andere Arten von Fragen enthält (Worum geht es in dieser Geschichte? Oder Wie steht der Autor zur Hauptfigur in dieser Geschichte?) konzentriert sich das Question Answering meistens auf Fragen mit sachlichen Antworten. Als nächstes können Fragen nach ihren verschiedene Arten unterscheiden werden: Ja / Nein-Fragen, \enquote{w-Fragen} (Wer war der erste Präsident? Wie viel wiegt ein Wal?), indirekte Abfragen (Liste alle ... auf!) und Befehle (Nennen Sie alle Präsidenten ...). Einige Arten von Fragen sind schwieriger als andere zu beantworten. Zum Beispiel, Warum- und Wie-Fragen, weil sie das Verständnis von Kausalität oder Beziehungen erfordern und diese typischerweise als separate Nebensätze ausgedrückt werden. Die Antworten können lang oder kurz sein, sie können Listen oder Erzählungen sein. Sie können je nach Verwendungszweck variieren. Wenn ein Benutzer beispielsweise eine Begründung wünscht, erfordert dies eine längere Antwort. Es gibt auch verschiedene Methoden zum Erstellen einer Antwort: durch Extrahieren also das Ausschneiden und Einfügen von Ausschnitten aus den Originaldokumenten, die die Antwort enthalten, oder durch Generieren von neuem Text \citep [S. 277-278]{Hirschman2001NaturalHere}. 
+
+Grundsätzlich wird zwischen Faktoiden-, Listen-, Definitions- und komplexe Fragen unterschieden \citep{Kolomiyets2011APerspective}. Faktoide Fragen sind diejenigen, die nach einer einfachen Tatsache fragen und mit wenigen Worten beantwortet werden können, (zum Beispiel: Wie weit ist es von der Erde zum Mars?). Liste Frage fordert als Antwort eine Reihe von Entitäten, die ein bestimmtes Kriterium erfüllen (zum Beispiel: Wann hat Brasilien Fußball Weltmeisterschaften gewonnen? \citep{Heie2012QuestionModelling}. Definitionsfragen erwarten im Gegenzug eine Zusammenfassung oder eine kurze Passage (zum Beispiel: Wie funktioniert die Mitose einer Zelle?) \citep{Neves2015QuestionBiology}. Im Gegensatz dazu handelt es sich bei der komplexen Frage um Informationen in einem Kontext. Normalerweise ist die Antwort eine Zusammenführung von abgerufenen Passagen. Diese Zusammenführung wird mithilfe von Algorithmen implementiert, wie z. B.: Normalisierte Rohbewertung, logistische Regression, Round-Robin, Raw Scoring und 2-Step RSV \citep{Garcia-CumbrerasArchitectureSystem}.
+
+
+\subsection{Systemarchitektur des Question Answerings} %2 Seiten
+Allgemein lässt sich ein Question Answering System in 3 Module unterteilen:
+\begin{itemize}
+    \item Analyse der Frage
+    \item Auswahl geeigneter Dokumente
+    \item Verarbeitung der Antwort
+\end{itemize}
+
+Der Prozess des Question Answerings geht vom Benutzer aus und das System erhält vom Benutzer eine Eingabe, eine Frage, welches in natürlicher Sprache gestellt wird. Das System soll diese Frage verstehen und dafür findet eine \textit{Analyse der Frage} statt. Die Analyse besteht darin, die Art der Frage herauszufinden, also den Schwerpunkt der Frage oder die Intention zu verstehen \citep{Malik2013DomainSystem}. Die Analyse der vom Nutzer gestellten Fragen wird in zwei Verfahren unterteilt. Das erste Verfahren beschäftigt sich mit der Struktur der Frage, das zweite Verfahren ist es, die Frage so zu transformieren, das Sie mit der QA-Domäne kompatibel ist \citep{Hamed2016AClassification}.
+
+Anders als bei der Analyse der gestellten Frage, wird bei der \textit{Auswahl geeigneter Dokumente} eine Reihe relevanter Dokumente selektiert. Diese dienen als Mögliche Kandidaten für die beantwortung der Frage \cite{Malik2013DomainSystem}. Die abgerufenen Daten können nach ihrer Relevanz für die Frage eingestuft werden \citep{Neves2015QuestionBiology}. 
+
+Die \textit{Verarbeitung der Antwort} ist die schwierigste Aufgabe beim Question Answering. Dieses Modul verwendet Extraktionstechniken. Diese Techniken sollen aus den Dokumenten, die als Kandidaten dienen, eine Antwort presentieren \citep{Bhoir2014QuestionApproach}. Die Antwort muss eine einfache Antwort auf die Frage sein, es kann jedoch erforderlich sein, Informationen aus verschiedenen Quellen zusammenzuführen.
+
+\begin{figure}[H]
+    \centering\includegraphics[width=1\linewidth]{images/arch.png}
+    \caption[Systemarchitektur]{Allgemeine Systemarchitektur mit 3 Hauptmodulen \cite [S. 3]{CalijorneSoares2018ASystems}}
+    \label{fig:architektur}
+\end{figure}
 \subsection{Geschichte des Question Answerings}
 \subsection{Paradigmen des Question Answerings}
 \subsection{Stand der Forschung im Question Answering}
@@ -209,7 +243,7 @@ Systeme und Wissensmanagement, Universität Siegen
 Die im folgenden Kapitel beschriebenen Technologien und Tools werden für die Entwicklung des QA-Chatbot-Prototyps verwendet. Die Beschreibung ist nur oberflächlich. Detaillierte Informationen zur verwendeten Software, zur Systemumgebung und zu den einzelnen installierten Paketen befinden sich in den Anhängen 4 und 5. %todo where
 \section{Python}
 Python ist eine von der Python Software Foundation weiterentwickelte und veröffentlichte Programmiersprache, die sowohl als objektorientierte Programmiersprache als auch als Skriptsprache angesehen werden kann. Python benötigt relativ wenige Schlüsselwörter, zeichnet sich durch seine Einfachheit, Klarheit und Erweiterbarkeit aus und verfügt über eine große Anzahl wissenschaftlicher Programmbibliotheken auf dem Gebiet Data-Science und wird daher immer mehr zum zentralen Werkzeug. 
-Durch so genannte virtuelle Umgebungen, lassen sich die Entwicklungen mittels Python gezielt auf eine Python Version begrenzen und nur bestimmte Pakete mit installieren lassen, somit kann man eine Umgebung für die Softwareverteilung verwenden. \citep[S. 2]{GrotzGrundkurs0.1.2d}
+Durch so genannte virtuelle Umgebungen, lassen sich die Entwicklungen mittels Python gezielt auf eine Python Version begrenzen und nur bestimmte Pakete mit installieren lassen, somit kann man eine Umgebung für die Softwareverteilung verwenden \citep[S. 2]{GrotzGrundkurs0.1.2d}.
 \section{Spacy}
 Spacy ist ein Python-Module für die NLP-Entwicklung. Der Fokus liegt dabei auf Geschwindigkeit und Einfachheit. Dabei liefert Spacy die essentiellen NLP-Aufgaben und für jede Aufgabe ist genau ein Algorithmus implementiert worden. Es werden neben Englisch auch Deutsch, Spanisch und Französisch angeboten. Die Annotationen werden dabei in dem Objekt \enquote{doc} gespeichert. Einzelne Wörter werden dabei zu Tokens gemacht. Die Sätze werden automatisch gesplittet und Spacy liefert daneben die Möglichkeit, Named Entity Recognition, den Sentiment, POS-Tagging und viele andere Lösungen für das NLP \citep{SpaCyDocumentation}.
 
@@ -239,7 +273,7 @@ Transformers (früher bekannt als Pytorch-Transformers und Pytorch-Pretrained-Be
 
 Das Tokenizer-Objekt ermöglicht die Konvertierung von Zeichenfolgen in Token, die von den verschiedenen Modellen verstanden werden. Jedes Modell verfügt über einen eigenen Tokenizer, und einige Tokenisierungsmethoden unterscheiden sich je nach Tokenizer.
 
-Das Modellobjekt ist eine Modellinstanz, die von einem bestimmten Modul erbt. Jedes Modell wird von seinen Speicher- oder Lademethoden begleitet, entweder aus einer lokalen Datei oder einem lokalen Verzeichnis oder aus einer vorab trainierten Konfiguration. Jedes Modell funktioniert anders und für es wird für eine bestimmte NLP-Aufgabe, ein bestimmtes Modell verwendet\citep{TransformersDocumentation}\citep{PyTorch-TransformersPyTorch}.
+Das Modellobjekt ist eine Modellinstanz, die von einem bestimmten Modul erbt. Jedes Modell wird von seinen Speicher- oder Lademethoden begleitet, entweder aus einer lokalen Datei oder einem lokalen Verzeichnis oder aus einer vorab trainierten Konfiguration. Jedes Modell funktioniert anders und für es wird für eine bestimmte NLP-Aufgabe, ein bestimmtes Modell verwendet \citep{TransformersDocumentation}\citep{PyTorch-TransformersPyTorch}.
 
 \begin{lstlisting}[language=Python, caption=Transformers Beispiel]
 >>> from transformers import AutoModelForQuestionAnswering
