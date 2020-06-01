@@ -275,8 +275,8 @@ In den 1980er und 1990er Jahren wurden Wissensbasierte Systeme, die normalerweis
 Die Ära des zeitgenössischen Question Answerings begann 1999 mit der aufnahme des Question Answerings in das Wettbewerbspfad von \textbf{TREC-9} (\enquote{The ninth Text REtrieval Conference}), welches eine  Konferez ist, die die Forschung für das Information Retrieval fördern soll. In dieser Konforenz wurde eine Herausforderung für das Question Answering definiert, welches darin bestand, angesichts einer großen Sammlung von Textdokumenten eine präzise Antwort auf eine Frage in natürlicher Sprache zu geben \citep{VoorheesReportTREC-9}. TREC hatte einen großen Einfluss auf das Interesse am Question Answering und auf die Entwicklung von Bewertungsmaßnahmen, mit denen die Leistung von Systemen verglichen wird \citep{voorhees2005trec}. 
 
 
-
-\subsection{Klassifizierung von QA-Systemen nach ihrer Domäne}
+\subsection{Klassifizierung der QA-Systeme}
+\subsubsection{Klassifizierung nach der Domäne}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 % TODO
 %   % Tabelle mit den Arten
@@ -303,7 +303,8 @@ In \textbf{Closed Domain Question Answering} Systemen gibt es eine Einschränkun
 }
 \end{table}
 
-\subsection{Klassifizierung von QA-Systemen nach dem Fragetyp}
+
+\subsubsection{Klassifizierung nach dem Fragetyp}
 
 Neben der Domäne, werdem Question Answering Systeme nach Fragetypen klassifiziert. Diese Fragentypen sind \citep[S. 20-21]{ChandraASystem}:
 
@@ -312,7 +313,6 @@ Neben der Domäne, werdem Question Answering Systeme nach Fragetypen klassifizie
     Die faktoiden Fragen beginnen gewöhnlich mit einem W-Wort (\enquote{Was?}, \enquote{Wann?}, \enquote{Wer?}, \enquote{Wie?}). Diese Fragen sind einfach zu beantworten und basieren auf Fakten. Sie müssen in einem einzigen Satz oder einer kurzen Phrase beantwortet werden. Zum Beispiel die faktoide Frage \enquote{Was ist die Hauptstadt von Indien?} fragt nach einem Städtenamen und es ist einfach. Die Antworttypen für faktoide Fragen werden im Allgemeinen als Entitäten bezeichnet \citep{khillare2014comparative}. Fragen vom Typ Faktoid ergeben eine zufriedenstellende Antwortleistung. Im Allgemeinen sind Fragen vom Typ Faktoid ein großes Repository von Fragen. Fragen vom Typ Faktoid erfordern keine komplexe Verarbeitung natürlicher Sprache, um Antworten zu erhalten. Die Identifizierung von Fragen vom Typ Faktoid und ihre Unterklassifizierung ist eines der Forschungsprobleme im Fragebeantwortungssystem. Fragen vom Typ Faktoid können mit kurzen Sätzen wie Organisationen, Personen, Daten und Orten beantwortet werden.
     \item \textbf{Listen Fragen}
     Die Fragen nach Listen benötigen eine Liste von Fakten oder Entitäten als Antworten, z.B, listen sie die Namen der Filme im Jahr 2017 auf. Bei diesen Fragen werden die Antworttypen als Entitäten bezeichnet. Daher können die Antworten auf Listenfragen eine gute Genauigkeit ergeben. QA-Systeme die solche Fragen beantworten benötigen keine tiefgreifende Verarbeitung natürlicher Sprache, um Antworten abzurufen. Die Techniken, die bei Fragen vom Typ Faktoid angewendet werden, eignen sich gut für Fragen vom Listentyp \citep{wu2015leveraging}.
-    
     \item \textbf{Bestätigungsfragen} 
     Bestätigungsfragen benötigen Antworten in Form von \enquote{Ja} oder \enquote{Nein}. Zum Beispiel die Bestätigungsfrage "Ist Jesus Christus Gott und Mensch?", fragt nach der Antwort Ja oder Nein. Zur Beantwortung von Bestätigungsfragen sind Weltwissen, Inferenzmechanismen und logisches Denken erforderlich. Einer der Vorteile von Fragen vom Typ Bestätigung, die in QA-Systemen gestellt werden, besteht darin, dass einige erfahrene Benutzer möglicherweise nach Informationen suchen möchten, die für neues Wissen logisches Denken und Weltwissen erfordern \citep{tanwar2014effective}. Die Nachteile von Bestätigungsfragen, die in QA-Systemen gestellt werden, bestehen darin, dass sie ein höheres Maß an Techniken zum Erwerb und Abrufen von Wissen benötigen. Abgesehen von den oben genannten Fragen zum Bestätigungstyp können Meinungsfragen erforderlich sein. QA-Systeme verwenden Social Web- und Opinion Mining-Techniken, um Antworten auf die Fragen vom Typ \enquote{Meinung} zu erhalten. Die Vorteile von Meinungsfragen sind, dass Meinungsdatenquellen öffentliche Meinungen enthalten, die den Benutzern bei der Beurteilung der Produkte helfen können. Die Nachteile von Fragen vom Typ Meinung sind die Erkennung von Spam oder gefälschten Inhalten in Textsystemen, was zu Problemen beim echten Argument-Mining des Textes führt.
     \item \textbf{Kausale Fragen} 
@@ -326,10 +326,48 @@ Neben der Domäne, werdem Question Answering Systeme nach Fragetypen klassifizie
 \end{itemize}
 
 
+\subsubsection{Klassifizierung nach der Datenquelle}
+Neben der Hauptarchitektur können QA-Systeme nach der herkunft Ihrer Daten klassifiziert werden. In \citep{Jurafsky2014SpeechProcessing} wird das QA unterteilt in Information Retrieval QA,  wissensbasiertes QA und hybrides QA \citep{Ojokoh2019ASystems}:
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%n-gram pattern extraction -- NLP!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{itemize}
+    \item \textbf{Information Retrieval QA} basiert auf einer sehr großen Menge von Informationen, die im Web als Text oder in Ontologien vorhanden sind. Diese Art von QA bietet eine Antwort auf die Fragen des Benutzers indem es Textausschnitten aus dem Web oder Korpora abruft. Eine faktoide Abfrage lautet z.B.: \enquote{Wer ist der Präsident von Nigeria?}. Die Antwort lautet \enquote{Präsident Buhari im Urlaub in London}. IR-Methoden extrahieren Passagen direkt aus den passenden Dokumenten, welches sie von der gestellten Frage ableiten. Zunächst verarbeitet diese Methode die Abfrage vor, um den Antworttyp (Person, Ort oder Zeit) zu ermitteln. Die Genauigkeit der Fragenklassifizierung ist für faktoide Fragen mit benannten Entitäten als erwartete Ausgabe relativ hoch, aber Fragetypen wie Bestätigungsfragen, kausale Fragen, hypothetische Fragen oder komplexe Fragen können viel schwieriger sein, da sie ein tiefes Verständnis der Abfrage erfordern. Anschließend werden Abfragen für die Suche erstellt, um Suchmaschinen abzufragen. Dies beinhaltet das Isolieren von Begriffen aus der Frage, die eine Abfrage bilden, die dann an ein Abrufsystem gestellt werden. Dies beinhaltet gelegentlich das Entfernen von Stoppwörtern und Satzzeichen. Als nächstes müssen die von der Suchmaschine gelieferten Dokumente oder Passagen geordnet werden. Dieses Ordnen der Dokumente kann z.B. mit der Methode \enquote{tf-idf}, einer Relevanzmodellierungsansatz für die Bewertung von Passagen oder Dokumenten ausgeführt werden \citep[S. 467 - 470]{Jurafsky2014SpeechProcessing}.
+    Zuletzt werden potenzielle Zeichenfolgen für die Extraktion bestimmt. Dabei können z.B.: Methoden wie \enquote{pattern extraction} \citep{soubbotin2001patterns} oder \enquote{n-gram} \citep{brill2001data} verwendet werden.
+    \item \textbf{Wissensbasiertes QA}
+    
+    Beliebte Ontologien wie DBpedia \citep{bizer2009dbpedia} oder Freebase \citep{bollacker2008freebase} enthalten Subjekt-Prädikat-Objekt-Tripel, die aus Wikipedia-Infoboxen und den strukturierten Daten aus Wiki-Artikeln extrahiert wurden. 
+    
+    Bei der wissensbasierten QA-Systemen werden Antworten auf Fragen in natürlicher Sprache gegeben, indem sie einer Abfrage über eine Ontologie zugeordnet werden. Welche logische Form auch immer aus der Zuordnung abgeleitet wird, wird zum Abrufen von Fakten aus Datenbanken verwendet. Die Datenquelle kann eine beliebige komplexe Struktur sein, z. B. wissenschaftliche Fakten oder räumliche Messwerte, für die komplexe logische oder SQL-Abfragen erforderlich wären. Es können auch Tripel sein, die in einer Datenbank, Freebase oder DBpedia zusammengesetz wurden \citep[S. 476]{Jurafsky2014SpeechProcessing}. Das Zuordnen einer vom Benutzer gestellten Abfrage zu einer logischen Form wird von semantischen Parsern durchgeführt \citep{hoffner2017survey}. Um die Zuordnung vom Text (Frage in natürlicher Sprache) zu einer logischen Abrage durchzuführen, verwendet die KB-QA-Systeme einige dieser Methoden \citep[S. 477 - 479]{Jurafsky2014SpeechProcessing}: 
+    \begin{itemize}
+        \item \textbf{Regelbasierte Methoden:} Diese Methoden konzentrieren sich auf die Entwicklung manuell erstellter Regeln, um häufig vorkommende Assoziationen aus der Abfrage zu extrahieren \citep{ravichandran2002learning}.
+        \item \textbf{Überwachte Methoden:} Dazu werden Trainingsdaten verwendet, die Fragenpaare und ihre logischen Formen enthalten, und anschließend ein Modell erstellt, welches die Fragen seiner logischen Form zuordnet \citep{tirpude2015closed}.
+        \item \textbf{Semi-Überwachte Methoden:} 
+        Es gibt noch keine Datensätze, die alle möglichen Fragenformen, die in den Abfragen vorliegen können, beinhalten. Aus diesem Grund wird die Textredundanz von den meisten Methoden genutzt, um Abfragen zu Beziehungen oder anderen Wissensstrukturen zuzuordnen. Diese Methode wird von IBM Watson \citep{high2012era} und den meisten hybriden QA-Systemen. 
+    \end{itemize}
+    \item \textbf{Hybrides QA}
+    Dies beinhaltet die Verwendung strukturierter Wissensdatenbanken und Textdatensätze in hybrider Form. Das DeepQA-System \citep{ferrucci2010building} ist ein hybrides QA-System, das nicht nur auf einer Informationsquelle basiert. Dieses System extrahiert eine Vielzahl von Quellen, benannte Entitäten, Analysen, Beziehungen, ontologische Informationen und ruft dann  Wissensdatenbanken für Kandidatenantworten ab. Die Bewertung wird dann für jede Kandidatenantwort unter Verwendung einer Reihe von Wissensdatenbanken wie zeitliches Denken, Geodatenbanken und taxonomische Klassifizierung durchgeführt \citep[S. 479 - 483]{Jurafsky2014SpeechProcessing}.
+\end{itemize}
 
 
 
-\subsection{Evaluation von Question Answering Systemen}
+\subsection{Bewertungsmethoden für Question Answering Systeme}
+
+Laut \citep{Yao2014FEATURE-DRIVENALIGNMENT} sind die im QA verwendeten Bewertungsmetriken F1 und Genauigkeit. Um diese Maßnahmen zu verstehen, müssen wir eine 2 x 2-Kontingenztabelle berücksichtigen. Für ein bestimmtes Datenelement, das ausgewertet wird, wird es in dieser Tabelle in zwei Klassen geben: ein Bruchteil, das korrekt ausgewählt ist (wahr positiv) oder richtig nicht ausgewählt ist (falsch negativ) und ein Bruchteil, das nicht richtig ausgewählt wurde (falsch positiv) oder falsch nicht ausgewählt wurde (wahr negativ). 
+
+\begin{xequation-} 
+\centering ${Genauigkeit}= \frac{Wahre Positive + Wahre Negative}{Wahre Positive + Falsche Positive + Falsche Negative + Wahre Negative}$
+\caption[Berechnung der Genauigkeit]{Berechnung der Genauigkeit} 
+    \label{eqn:genauigkeit}
+\end{xequation-} 
+
+
+
+
+
 \subsection{Methoden und Algorithmen}
 \subsection{Zukunft des Question Answerings}
 
