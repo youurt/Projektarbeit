@@ -1,4 +1,3 @@
-
 \RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
 \documentclass[
         ngerman,
@@ -163,89 +162,186 @@ Systeme und Wissensmanagement, Universität Siegen
 \pagenumbering{arabic}
 
 
-
-
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %3 Seiten
 \chapter{Einleitung}
 \section{Motivation}
 \section{Forschungsfragen}
 \section{Struktur der Arbeit}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-%8 Seiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 24 Seiten
 \chapter{Theoretische Grundlagen}
-\section{Künstliche Intelligenz}
-\subsection{Arten von Künstlicher Intelligenz}
-\subsection{Geschichte der Künstlichen Intelligenz}
-\subsection{Maschinelles Lernen}
-\subsection{Künstliches neuronales Netz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%8 Seiten
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4 Seiten
 \section{Natural Language Processing}
 \subsection{Natural Language Processing und Natural Language Understanding}
 \subsection{Geschichte des Natural Language Processings}
 \subsection{BERT}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%6 %Information Retrival
+\section{Information Retrival}
+\subsection{Grundlagen und Definitionen}
+\subsection{Klassiche Ansätze}
+\subsection{Probalistische Ansätze}
+\subsection{NLP Ansätze}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%8 Seiten
-\section{Question Answering} %2 Seiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+\section{Question Answering} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO
+%14 Seiten 
+    %2 Definitionen und Begriffe [x]
+    %2 Systemarchitektur [x]
+    %2 Geschichte [x]
+    %3 Klassifizierung [x]
+    %2 Evaluation []
+    %2 Methoden und Algorithmen []
+    %2 Zukunft des Question Answerings []
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    
 Mit Suchmaschinen wird es den Benutzern immer leichter an gewünschte Informationen heranzukommen. Da Benutzer Schwierigkeiten haben, sich in der Fülle an Informationen der jetzt verfügbaren Online-Informationen zurechtzufinden, wird die Notwendigkeit automatisierter Systeme zur Beantwortung von Fragen immer dringlicher. Wir brauchen Systeme, mit denen ein Benutzer eine Frage in der Alltagssprache stellen und schnell und präzise eine Antwort erhalten kann, mit ausreichendem Kontext. in der Vergangenheit konnten Suchmaschinen noch nicht wirklich Fragen beantworten, sonder lieferten Ranglisten von Dokumenten zurück. Diese liefern dem Benutzer jedoch nicht immer die gewünschten Antworten \citep[S. 275]{Hirschman2001NaturalHere}. In Abbildung \ref{fig:google} ist zu sehen, wie moderne Suchmaschinen Question Answering anbieten.
 
 \begin{figure}[H]
     \centering\includegraphics[width=1\linewidth]{images/google.png}
-    \caption[Systemarchitektur]{Question Answering mit Google}
+    \caption[Question Answering mit Google]{Question Answering mit Google}
     \label{fig:google}
 \end{figure}
 
-In diesem Kapitel wird das Question Answering in seine einzelnen Elemente zerlegt. Zunächst werden grundlegende Verständnisfragen beantwortet. Was ist Question Answering und Warum gibt es Question Answering?
+In diesem Kapitel wird das Question Answering in seine einzelnen Elemente zerlegt. Zunächst werden grundlegende Verständnisfragen beantwortet. Was ist Question Answering und warum gibt es Question Answering?
 Es wird eine exemplarische Systemarchitektur vorgestellt, welches alle Elemente des Question Answerings beinhaltet und welche miteinander zusammenarbeiten. 
 In den letzten Abschnitten dieses Kapitels wird über die Geschichte, den verschiedenen Paradigmen des Question Answerings und den aktuellen Stand der Forschung berichtet. Dieser Kapitel wird beendet, indem über die Zukunft des Question Answerings und das weitere Potenzial dokumentiert wird.
 \subsection{Definitionen der Begriffe}
-Um das Question Answering zu verstehen, werden zunächst zunächst
-die zugehörigen Begriffe definiert. 
+Um das Question Answering zu verstehen, werden zunächst zunächst die zugehörigen Begriffe definiert. Um eine Frage zu beantworten, muss ein Question Answering System die Frage analysieren, möglicherweise im Zusammenhang mit einer laufenden Interaktion. Es muss eine oder mehrere Antworten finden, indem es Online-Ressourcen konsultiert und es muss dem Benutzer die Antwort in einer geeigneten Form präsentieren, möglicherweise verbunden mit Begründung oder unterstützendem Material \citep[S. 276]{Hirschman2001NaturalHere}. 
 
-Um eine Frage zu beantworten, muss ein Question Answering System die Frage analysieren, möglicherweise im Zusammenhang mit einer laufenden Interaktion. Es muss eine oder mehrere Antworten finden, indem es Online-Ressourcen konsultiert und es muss dem Benutzer die Antwort in einer geeigneten Form präsentieren, möglicherweise verbunden mit Begründung oder unterstützendem Material \citep[S. 276]{Hirschman2001NaturalHere}. Question Answering Systeme sind Sytsteme, die duch Informationsabruf automatisch Antworten zur gestellten Frage generieren, die Menschen in ihrer natürlichen Sprache stellen. Entweder mithilfe einer vorstrukturierten Datenbank oder einer Sammlung von Dokumenten in natürlicher Sprache \citep{Chali2011ImprovingKernels}\citep{Dwivedi2013ResearchSystem}\citep{Ansari2016IntelligentNetwork}\citep{Lende2016QuestionTechniques}. Es wird dabei abgegrenzt, zwischen \enquote{Fragensatz}, also der gestellten Frage und dem \enquote{Fragentyp}, welches den Zweck einer Kategorisierung der Frage ausweist. In der Literatur bezieht sich der Begriff \enquote{Antworttyp} auf eine Klasse von Objekten, nach denen die Frage sucht. \enquote{Fragenfokus} ist die Eigenschaft oder Entität, nach der die Frage sucht. \enquote{Fragethema} ist das Objekt oder Ereignis, um das es in der Frage geht \citep[S. 2]{CalijorneSoares2018ASystems}. Eine Textpassage welches ein Kandidat für eine Frage ist, wird \enquote{Kandidatenantwort} genannt und ist der Text, der nach seiner Eignung als Antwort eingestuft wird \citep{RetrievalOpen-DomainQuestion-Answering}.
+\textbf{Question Answering Systeme} sind Sytsteme, die duch Informationsabruf automatisch Antworten zur gestellten Frage generieren, die Menschen in ihrer natürlichen Sprache stellen. Entweder mithilfe einer vorstrukturierten Datenbank oder einer Sammlung von Dokumenten in natürlicher Sprache \citep{Chali2011ImprovingKernels}\citep{Dwivedi2013ResearchSystem}\citep{Ansari2016IntelligentNetwork}\citep{Lende2016QuestionTechniques}. Es wird dabei abgegrenzt, zwischen \textbf{Fragensatz}, also der gestellten Frage und dem \textbf{Fragentyp}, welches den Zweck einer Kategorisierung der Frage ausweist. In der Literatur bezieht sich der Begriff \textbf{Antworttyp} auf eine Klasse von Objekten, nach denen die Frage sucht. \textbf{Fragenfokus} ist die Eigenschaft oder Entität, nach der die Frage sucht. \textbf{Fragethema} ist das Objekt oder Ereignis, um das es in der Frage geht \citep[S. 2]{CalijorneSoares2018ASystems}. Eine Textpassage welches ein Kandidat für eine Frage ist, wird \textbf{Kandidatenantwort} genannt und ist der Text, der nach seiner Eignung als Antwort eingestuft wird \citep{RetrievalOpen-DomainQuestion-Answering}.
 
-Fragen können nach Antworttyp unterscheiden werden: sachliche Antworten vs. Meinung vs. Zusammenfassung. Obwohl das Verständnis beispielsweise häufig andere Arten von Fragen enthält (Worum geht es in dieser Geschichte? Oder Wie steht der Autor zur Hauptfigur in dieser Geschichte?) konzentriert sich das Question Answering meistens auf Fragen mit sachlichen Antworten. Als nächstes können Fragen nach ihren verschiedene Arten unterscheiden werden: Ja / Nein-Fragen, \enquote{w-Fragen} (Wer war der erste Präsident? Wie viel wiegt ein Wal?), indirekte Abfragen (Liste alle ... auf!) und Befehle (Nennen Sie alle Präsidenten ...). Einige Arten von Fragen sind schwieriger als andere zu beantworten. Zum Beispiel, Warum- und Wie-Fragen, weil sie das Verständnis von Kausalität oder Beziehungen erfordern und diese typischerweise als separate Nebensätze ausgedrückt werden. Die Antworten können lang oder kurz sein, sie können Listen oder Erzählungen sein. Sie können je nach Verwendungszweck variieren. Wenn ein Benutzer beispielsweise eine Begründung wünscht, erfordert dies eine längere Antwort. Es gibt auch verschiedene Methoden zum Erstellen einer Antwort: durch Extrahieren also das Ausschneiden und Einfügen von Ausschnitten aus den Originaldokumenten, die die Antwort enthalten, oder durch Generieren von neuem Text \citep [S. 277-278]{Hirschman2001NaturalHere}. 
+Fragen können nach \textbf{Antworttyp} unterscheiden werden: sachliche Antworten vs. Meinung vs. Zusammenfassung. Obwohl das Verständnis beispielsweise häufig andere Arten von Fragen enthält (Worum geht es in dieser Geschichte? Oder Wie steht der Autor zur Hauptfigur in dieser Geschichte?) konzentriert sich das Question Answering meistens auf Fragen mit sachlichen Antworten. Als nächstes können Fragen nach der \textbf{Fragenart} unterscheiden werden: \enquote{Ja / Nein-Fragen}, \enquote{w-Fragen} (Wer war der erste Präsident? Wie viel wiegt ein Wal?), \enquote{indirekte Abfragen} (Liste alle ... auf!) und \enquote{Befehle} (Nennen Sie alle Präsidenten ...). Einige Arten von Fragen sind schwieriger als andere zu beantworten. Zum Beispiel, \enquote{Warum- und Wie-Fragen}, weil sie das Verständnis von Kausalität oder Beziehungen erfordern und diese typischerweise als separate Nebensätze ausgedrückt werden. Die Antworten können lang oder kurz sein, sie können Listen oder Erzählungen sein. Sie können je nach Verwendungszweck variieren. Wenn ein Benutzer beispielsweise eine Begründung wünscht, erfordert dies eine längere Antwort. Es gibt auch verschiedene Methoden zum Erstellen einer Antwort: durch Extrahieren also das Ausschneiden und Einfügen von Ausschnitten aus den Originaldokumenten, die die Antwort enthalten, oder durch Generieren von neuem Text \citep [S. 277-278]{Hirschman2001NaturalHere}. 
 
-Grundsätzlich wird zwischen Faktoiden-, Listen-, Definitions- und komplexe Fragen unterschieden \citep{Kolomiyets2011APerspective}. Faktoide Fragen sind diejenigen, die nach einer einfachen Tatsache fragen und mit wenigen Worten beantwortet werden können, (zum Beispiel: Wie weit ist es von der Erde zum Mars?). Liste Frage fordert als Antwort eine Reihe von Entitäten, die ein bestimmtes Kriterium erfüllen (zum Beispiel: Wann hat Brasilien Fußball Weltmeisterschaften gewonnen? \citep{Heie2012QuestionModelling}. Definitionsfragen erwarten im Gegenzug eine Zusammenfassung oder eine kurze Passage (zum Beispiel: Wie funktioniert die Mitose einer Zelle?) \citep{Neves2015QuestionBiology}. Im Gegensatz dazu handelt es sich bei der komplexen Frage um Informationen in einem Kontext. Normalerweise ist die Antwort eine Zusammenführung von abgerufenen Passagen. Diese Zusammenführung wird mithilfe von Algorithmen implementiert, wie z. B.: Normalisierte Rohbewertung, logistische Regression, Round-Robin, Raw Scoring und 2-Step RSV \citep{Garcia-CumbrerasArchitectureSystem}.
+Grundsätzlich wird zwischen Faktoiden-, Listen-, Definitions- und komplexe Fragen unterschieden \citep{Kolomiyets2011APerspective}. \textbf{Faktoide Fragen} sind diejenigen, die nach einer einfachen Tatsache fragen und mit wenigen Worten beantwortet werden können, (zum Beispiel: Wie weit ist es von der Erde zum Mars?). \textbf{Liste Fragen} fordern als Antwort eine Reihe von Entitäten, die ein bestimmtes Kriterium erfüllen (zum Beispiel: Wann hat Brasilien Fußball Weltmeisterschaften gewonnen? \citep{Heie2012QuestionModelling}. \textbf{Definitionsfragen} erwarten im Gegenzug eine Zusammenfassung oder eine kurze Passage (zum Beispiel: Wie funktioniert die Mitose einer Zelle?) \citep{Neves2015QuestionBiology}. Im Gegensatz dazu handelt es sich bei den \textbf{komplexen Fragen} um Informationen in einem Kontext. Normalerweise ist die Antwort eine Zusammenführung von abgerufenen Passagen.
 
 
 \subsection{Systemarchitektur des Question Answerings} %2 Seiten
-Allgemein lässt sich ein Question Answering System in 3 Module unterteilen:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+% TODO
+%    %write more []
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+
+Allgemein lässt sich ein Question Answering System in 3 Module unterteilen (siehe Abbildung \ref{fig:architektur}):
 \begin{itemize}
-    \item Analyse der Frage
-    \item Auswahl geeigneter Dokumente
-    \item Verarbeitung der Antwort
+    \item \textbf{Analyse der Frage}
+    \item \textbf{Auswahl geeigneter Dokumente}
+    \item \textbf{Verarbeitung der Antwort} 
 \end{itemize}
 
-Der Prozess des Question Answerings geht vom Benutzer aus und das System erhält vom Benutzer eine Eingabe, eine Frage, welches in natürlicher Sprache gestellt wird. Das System soll diese Frage verstehen und dafür findet eine \textit{Analyse der Frage} statt. Die Analyse besteht darin, die Art der Frage herauszufinden, also den Schwerpunkt der Frage oder die Intention zu verstehen \citep{Malik2013DomainSystem}. Die Analyse der vom Nutzer gestellten Fragen wird in zwei Verfahren unterteilt. Das erste Verfahren beschäftigt sich mit der Struktur der Frage, das zweite Verfahren ist es, die Frage so zu transformieren, das Sie mit der QA-Domäne kompatibel ist \citep{Hamed2016AClassification}.
+Der Prozess des Question Answerings geht vom Benutzer aus und das System erhält vom Benutzer eine Eingabe, eine Frage, welches in natürlicher Sprache gestellt wird. Das System soll diese Frage verstehen und dafür findet eine \textbf{Analyse der Frage} statt. Die Analyse besteht darin, die Art der Frage herauszufinden, also den Schwerpunkt der Frage oder die Intention zu verstehen \citep{Malik2013DomainSystem}. Die Analyse der vom Nutzer gestellten Fragen wird in zwei Verfahren unterteilt. Das erste Verfahren beschäftigt sich mit der Struktur der Frage, das zweite Verfahren ist es, die Frage so zu transformieren, das Sie mit der QA-Domäne kompatibel ist \citep{Hamed2016AClassification}.
 
-Anders als bei der Analyse der gestellten Frage, wird bei der \textit{Auswahl geeigneter Dokumente} eine Reihe relevanter Dokumente selektiert. Diese dienen als Mögliche Kandidaten für die beantwortung der Frage \cite{Malik2013DomainSystem}. Die abgerufenen Daten können nach ihrer Relevanz für die Frage eingestuft werden \citep{Neves2015QuestionBiology}. 
+Anders als bei der Analyse der gestellten Frage, wird bei der \textbf{Auswahl geeigneter Dokumente} eine Reihe relevanter Dokumente selektiert. Diese dienen als Mögliche Kandidaten für die beantwortung der Frage \cite{Malik2013DomainSystem}. Die abgerufenen Daten können nach ihrer Relevanz für die Frage eingestuft werden \citep{Neves2015QuestionBiology}. 
 
-Die \textit{Verarbeitung der Antwort} ist die schwierigste Aufgabe beim Question Answering. Dieses Modul verwendet Extraktionstechniken. Diese Techniken sollen aus den Dokumenten, die als Kandidaten dienen, eine Antwort presentieren \citep{Bhoir2014QuestionApproach}. Die Antwort muss eine einfache Antwort auf die Frage sein, es kann jedoch erforderlich sein, Informationen aus verschiedenen Quellen zusammenzuführen.
+Die \textbf{Verarbeitung der Antwort} ist die schwierigste Aufgabe beim Question Answering. Dieses Modul verwendet Extraktionstechniken. Diese Techniken sollen aus den Dokumenten, die als Kandidaten dienen, eine Antwort presentieren \citep{Bhoir2014QuestionApproach}. Die Antwort muss eine einfache Antwort auf die Frage sein, es kann jedoch erforderlich sein, Informationen aus verschiedenen Quellen zusammenzuführen.
 
 \begin{figure}[H]
     \centering\includegraphics[width=1\linewidth]{images/arch.png}
-    \caption[Systemarchitektur]{Allgemeine Systemarchitektur mit 3 Hauptmodulen \cite [S. 3]{CalijorneSoares2018ASystems}}
+    \caption[Allgemeine Systemarchitektur mit 3 Hauptmodulen]{Allgemeine Systemarchitektur mit 3 Hauptmodulen \cite [S. 3]{CalijorneSoares2018ASystems}}
     \label{fig:architektur}
 \end{figure}
 \subsection{Geschichte des Question Answerings}
-\subsection{Paradigmen des Question Answerings}
-\subsection{Stand der Forschung im Question Answering}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+% TODO
+%    %graphs []
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+
+Tatsächlich geht die Geschichte des Question Answering bis in die 60'er Jahre zuruck. Mit \citep{Simmons1964IndexingQuestions} wurde im Jahr 1965 versucht, englische Fragen mittels eines Computers zu beantworten. Mit \textbf{BASEBALL} \citep{Green1961Baseball:Question-answerer} wurden bereits im Jahr 1961 Baseball-Spiele analysiert. Während BASEBALL selbst nach aktuellen Maßstäben im Umgang mit der Syntax und Semantik von Fragen relativ hoch entwickelt war, war es in Bezug auf seine Domäne - nur Baseball - und durch die Tatsache, dass es in erster Linie als Schnittstelle zu einer strukturierten Datenbank gedacht war, begrenzt und nicht als Schnittstelle zu einer großen Textsammlung gedacht. In dieser Hinsicht war BASEBALL als „Frontends für Datenbanken in natürlicher Sprache“ konzipiert wurden. Anstatt Benutzer dazu zu zwingen, die Struktur einer Datenbank und eine spezielle Sprache für deren Abfrage zu lernen, bestand das Ziel darin, die Kommunikation in ihrer eigenen Sprache mit einer Schnittstelle zu ermöglichen. Das Frontend konnte dann die Sprache verstehen und diese in eine Datenbankabfrage umwandeln \citep[S. 279-280]{Hirschman2001NaturalHere}.
+
+Das bekannteste andere frühe Werk in dieser Tradition ist das \textbf{LUNAR}-System. LUNAR wurde entwickelt, \enquote{um einem Mondgeologen einen bequemen Zugriff auf die chemischen Analysedaten zur Mondgesteins- und Bodenzusammensetzung zu ermöglichen, diese zu vergleichen und auszuwerten, die sich infolge der Apollo-Mondmission angesammelt haben} \citep{4-8ProgressGeology} . LUNAR könnte Fragen beantworten wie \enquote{Wie hoch ist die durchschnittliche Aluminiumkonzentration in Gesteinen mit hohem Alkaligehalt?} oder \enquote{Wie viele Brescias enthalten Olivin?}. Es war mehr als ein Spielzeug und wurde 1971 auf einer Mondwissenschaftskonvention demonstriert und konnte 90\% der von arbeitenden Geologen gestellten Fragen ohne vorherige Anweisung zur Formulierung beantworten \citep[S. 280]{Hirschman2001NaturalHere}. 
+
+
+In den 1980er und 1990er Jahren wurden Wissensbasierte Systeme, die normalerweise nur für beschränkte Anwendungsbereiche entwickelt wurden, sehr beliebt. Wissensbasierte Systeme  eignen sich gut für ein Framework zur Beantwortung von Fragen, bei dem der Benutzer mit einem bestimmten Problem konfrontiert wird. Der Zugriff auf die Wissensdatenbank erfolgt normalerweise über Menüs oder eine Schnittstelle in natürlicher Sprache. Das System selbst stellt dem Benutzer interaktiv zusätzliche Fragen, um die Absicht des Benutzers besser zu verstehen. Um das Problem zu lösen, verwendet das System das in der Wissensdatenbank verfügbare Wissen und die vom Benutzer bereitgestellten zusätzlichen Informationen \citep [S. 5415]{Kolomiyets2011APerspective}. Bekannte Beispiele sind das \textbf{MYCIN-System} \citep{edward1976shortliffe}, welches als Enzyklopädie fpr medizinische Konzepte Antworten geben sollte und das \textbf{SHRDLU-System} \citep{winograd1971procedures} welches durch sein Sprachverständnis Roboter steurte und somit Spielzeugblöcke bewegen konnte.
+
+Die Ära des zeitgenössischen Question Answerings begann 1999 mit der aufnahme des Question Answerings in das Wettbewerbspfad von \textbf{TREC-9} (\enquote{The ninth Text REtrieval Conference}), welches eine  Konferez ist, die die Forschung für das Information Retrieval fördern soll. In dieser Konforenz wurde eine Herausforderung für das Question Answering definiert, welches darin bestand, angesichts einer großen Sammlung von Textdokumenten eine präzise Antwort auf eine Frage in natürlicher Sprache zu geben \citep{VoorheesReportTREC-9}. TREC hatte einen großen Einfluss auf das Interesse am Question Answering und auf die Entwicklung von Bewertungsmaßnahmen, mit denen die Leistung von Systemen verglichen wird \citep{voorhees2005trec}. 
+
+
+
+\subsection{Klassifizierung von QA-Systemen nach ihrer Domäne}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+% TODO
+%   % Tabelle mit den Arten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+Im Allgemeinen kann das Question Answering in Open-Domain Question Answering und Closed-Domain Question Answering unterteilt werden. Die Beantwortung von Fragen zu geschlossenen Domänen befasst sich mit Fragen unter einer bestimmten Domäne und kann als einfachere Aufgabe angesehen werden, da NLP-Systeme domänenspezifisches Wissen nutzen können, das häufig in Ontologien formalisiert wird. Alternativ kann sich eine geschlossene Domäne auf eine Situation beziehen, in der nur eine begrenzte Art von Fragen akzeptiert wird, z. B. Fragen, die eher beschreibende als prozedurale Informationen erfordern. Die Beantwortung von Fragen in offenen Domänen behandelt Fragen zu fast allem und kann sich nur auf allgemeine Ontologien wie \enquote{DBpedia} stützen \citep{Mervin2013AnSystem}. Einen Vergleich der Systeme kann aus der Tabelle \ref{tab:tab1} entnommen werden.
+
+\textbf{Open Domain Question Answering} Systeme sind nicht auf eine bestimmte Domain beschränkt und bieten eine kurze Antwort auf eine Frage in natürlicher Sprache. Das Web ist die beste Quelle, um Informationen zu erhalten, da das Internet in großem Umfang genutzt wird, und die meisten webbasierten Systeme zur Beantwortung von Fragen funktionieren für offene Domänen \citep{yogish2016survey}. Das Open-Domain-QS-System hängt von Informationen wie dem World Wide Web und der universellen Ontologie ab und kann fast alles mit beantworten \citep{SreelakshmiOPENLABELING}. Open Domain QA-Systeme wenden ein allgemeines Vokabular an und erfordern kein domänenspezifisches Vokabular. Benutzer benötigen keine domänenspezifischen Kenntnisse, um Fragen vorzubereiten. Open Domain QA-Systeme bestehen aus einem großen \enquote{Repository} von Fragen und suchen im Allgemeinen nach Antworten in einer großen Dokumentensammlung. In Open Domain QA-Systemen kann Wikipedia als Informationsquelle verwendet werden. In Open-Domain QA-Systemen ist die Qualität der Antworten, die von Benutzern generiert werden, gering. Open Domain QA-Systeme sind domänenunabhängig und hängen von Weltdaten und der grundlegenden Ontologie ab \citep{biswas2014framework}. Im Open Domain QA-System gibt es keine Einschränkung der Domain. Open-Domain QA-Systeme eignen sich eher für eine große Anzahl von Gelegenheitsbenutzern \citep[S. 20]{ChandraASystem}.
+
+In \textbf{Closed Domain Question Answering} Systemen gibt es eine Einschränkung der Domäne, die beantwortung der Fragen ist verbunden an eine bestimmte Domäne. Das System besteht aus einem begrenzten \enquote{Repository} domänenspezifischer Fragen und kann eine begrenzte Anzahl von Fragen beantworten. Daher ist in QA-Systemen mit geschlossenen Domänen die Qualität der Antworten hoch. QA-Systeme für geschlossene Domänen beantworten domänenspezifische Fragen, und Antworten werden in domänenspezifischen Dokumentensammlungen gesucht. QA-Systeme mit geschlossenen Domänen sind so konzipiert, dass sie Antworten aus strukturierten Daten (z. B. Datenbanken), unstrukturierten Daten (Freitexte) und halbstrukturierten Daten (z. B. XML-kommentierten Texten) erhalten. QA-Systeme für geschlossene Domänen verwenden domänenspezifische Terminologie und Ontologie. In der Literatur wurden verschiedene QA-Systeme für geschlossene Domänen entwickelt, z Domänen-QA-Systeme. QA-Systeme mit geschlossener Domäne mit begrenzter Arbeitsdomäne sind nützlicher für Benutzer mit Domänenexperten, die spezielle Antworten benötigen \citep[S. 20]{ChandraASystem}.
+
+\begin{table}[H]
+{\small
+    \begin{tabularx}{\textwidth}{X|X|X} 
+    
+                  &\textbf{Open Domain QA}  & \textbf{Closed Domain QA}  \\ 
+\hline    
+    \textbf{Domäne}      & unbeschränkt        & beschränkt         \\ 
+    \textbf{Quelle}   & Web        & Datenbanken          \\ 
+    \textbf{Qualität} & gering        & gut           \\ 
+    \textbf{Nutzer} & Gelegenheitsnutzer        & Domänenexperten           \\ 
+    \end{tabularx}
+\caption{Vergleich des Open-Domain und Closed-Domain Question Answerings}
+    \label{tab:tab1}
+}
+\end{table}
+
+\subsection{Klassifizierung von QA-Systemen nach dem Fragetyp}
+
+Neben der Domäne, werdem Question Answering Systeme nach Fragetypen klassifiziert. Diese Fragentypen sind \citep[S. 20-21]{ChandraASystem}:
+
+\begin{itemize}
+    \item \textbf{Faktoide Fragen} 
+    Die faktoiden Fragen beginnen gewöhnlich mit einem W-Wort (\enquote{Was?}, \enquote{Wann?}, \enquote{Wer?}, \enquote{Wie?}). Diese Fragen sind einfach zu beantworten und basieren auf Fakten. Sie müssen in einem einzigen Satz oder einer kurzen Phrase beantwortet werden. Zum Beispiel die faktoide Frage \enquote{Was ist die Hauptstadt von Indien?} fragt nach einem Städtenamen und es ist einfach. Die Antworttypen für faktoide Fragen werden im Allgemeinen als Entitäten bezeichnet \citep{khillare2014comparative}. Fragen vom Typ Faktoid ergeben eine zufriedenstellende Antwortleistung. Im Allgemeinen sind Fragen vom Typ Faktoid ein großes Repository von Fragen. Fragen vom Typ Faktoid erfordern keine komplexe Verarbeitung natürlicher Sprache, um Antworten zu erhalten. Die Identifizierung von Fragen vom Typ Faktoid und ihre Unterklassifizierung ist eines der Forschungsprobleme im Fragebeantwortungssystem. Fragen vom Typ Faktoid können mit kurzen Sätzen wie Organisationen, Personen, Daten und Orten beantwortet werden.
+    \item \textbf{Listen Fragen}
+    Die Fragen nach Listen benötigen eine Liste von Fakten oder Entitäten als Antworten, z.B, listen sie die Namen der Filme im Jahr 2017 auf. Bei diesen Fragen werden die Antworttypen als Entitäten bezeichnet. Daher können die Antworten auf Listenfragen eine gute Genauigkeit ergeben. QA-Systeme die solche Fragen beantworten benötigen keine tiefgreifende Verarbeitung natürlicher Sprache, um Antworten abzurufen. Die Techniken, die bei Fragen vom Typ Faktoid angewendet werden, eignen sich gut für Fragen vom Listentyp \citep{wu2015leveraging}.
+    
+    \item \textbf{Bestätigungsfragen} 
+    Bestätigungsfragen benötigen Antworten in Form von \enquote{Ja} oder \enquote{Nein}. Zum Beispiel die Bestätigungsfrage "Ist Jesus Christus Gott und Mensch?", fragt nach der Antwort Ja oder Nein. Zur Beantwortung von Bestätigungsfragen sind Weltwissen, Inferenzmechanismen und logisches Denken erforderlich. Einer der Vorteile von Fragen vom Typ Bestätigung, die in QA-Systemen gestellt werden, besteht darin, dass einige erfahrene Benutzer möglicherweise nach Informationen suchen möchten, die für neues Wissen logisches Denken und Weltwissen erfordern \citep{tanwar2014effective}. Die Nachteile von Bestätigungsfragen, die in QA-Systemen gestellt werden, bestehen darin, dass sie ein höheres Maß an Techniken zum Erwerb und Abrufen von Wissen benötigen. Abgesehen von den oben genannten Fragen zum Bestätigungstyp können Meinungsfragen erforderlich sein. QA-Systeme verwenden Social Web- und Opinion Mining-Techniken, um Antworten auf die Fragen vom Typ \enquote{Meinung} zu erhalten. Die Vorteile von Meinungsfragen sind, dass Meinungsdatenquellen öffentliche Meinungen enthalten, die den Benutzern bei der Beurteilung der Produkte helfen können. Die Nachteile von Fragen vom Typ Meinung sind die Erkennung von Spam oder gefälschten Inhalten in Textsystemen, was zu Problemen beim echten Argument-Mining des Textes führt.
+    \item \textbf{Kausale Fragen} 
+    Die Antworten auf kausale Fragen werden \enquote{nicht als faktoide Fragen} bezeichnet. Kausale Fragen benötigen Antworten auf Beschreibungen einer Entität und können mit \enquote{Warum?} oder \enquote{Wie?} beantwortet werden. Kausale Fragen werden von Benutzern gestellt, die Antworten als Gründe, Erklärungen, Ausarbeitungen usw. in Bezug auf bestimmte Objekte oder Ereignisse wünschen.
+    z. B. Warum hält Professor Y eine Rede im Auditorium?
+    \item \textbf{Hypothetische Fragen}
+    Bei hypothetischen Fragen werden Informationen angefordert, die sich auf ein hypothetisches Ereignis beziehen und nicht spezifisch sind. Hypothetische Fragen beginnen normalerweise mit \enquote{Was würde passieren, wenn?}. Die Zuverlässigkeit und Genauigkeit dieser Fragen ist gering und hängt von den Benutzern und dem Kontext ab.
+    \item \textbf{Komplexe Fragen}
+    Um komplexe Fragen wie \enquote{Was sind die Gründe für Luftverschmutzung?} beantworten zu können, müssen oft Informationen aus mehreren Dokumenten ableiten und synthetisieren werden. Zur Beantwortung komplexer Fragen sind komplexe Verfahren erforderlich. Komplexe Fragen erfordern mehrere unterschiedliche Arten von Informationen, und es ist schwierig, Antworten zu finden. Nach \citep{basuki2016statistical} besteht eine komplexe Frage aus mehreren unabhängigen Fragen, und jede Frage sucht nach einer Antwort aus mehreren Dokumenten.
+    
+\end{itemize}
+
+
+
+
+
+\subsection{Evaluation von Question Answering Systemen}
+\subsection{Methoden und Algorithmen}
 \subsection{Zukunft des Question Answerings}
 
-%4 Seiten
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Technologien und Werkzeuge}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4 Seiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Die im folgenden Kapitel beschriebenen Technologien und Tools werden für die Entwicklung des QA-Chatbot-Prototyps verwendet. Die Beschreibung ist nur oberflächlich. Detaillierte Informationen zur verwendeten Software, zur Systemumgebung und zu den einzelnen installierten Paketen befinden sich in den Anhängen 4 und 5. %todo where
 \section{Python}
 Python ist eine von der Python Software Foundation weiterentwickelte und veröffentlichte Programmiersprache, die sowohl als objektorientierte Programmiersprache als auch als Skriptsprache angesehen werden kann. Python benötigt relativ wenige Schlüsselwörter, zeichnet sich durch seine Einfachheit, Klarheit und Erweiterbarkeit aus und verfügt über eine große Anzahl wissenschaftlicher Programmbibliotheken auf dem Gebiet Data-Science und wird daher immer mehr zum zentralen Werkzeug. 
@@ -310,11 +406,6 @@ Im Listing 3.3 ist zu sehen, wie durch den Wikipedia-Wrapper, der Inhalt bzw. di
 \end{lstlisting}
 
 
-
-
-
-
-
 \section{Telegram-Wrapper}
 Telegram ist eine Messaging-App mit Fokus auf Geschwindigkeit und Sicherheit. Telegram-Bots sind wie kleine Programme, die direkt in Telegram ausgeführt werden. Sie werden von Drittentwicklern mithilfe der Telegram Bot-API erstellt.
 Bots sind einfach Telegram-Konten, die von einer Software betrieben werden - nicht von Personen. Sie haben oft KI-Funktionen. Sie können alles tun - lehren, spielen, suchen, senden, erinnern, verbinden, in andere Dienste integrieren oder sogar Befehle an das Internet der Dinge übergeben. Telegram stellt seine API offen für Entwickler zur Verfügung. Telegramm-Bots sind spezielle Konten, für deren Einrichtung keine zusätzliche Telefonnummer erforderlich ist. Diese Konten dienen als Schnittstelle für Code, der auf einem anderen Server ausgeführt wird. Der Vermittlungsserver von Telegram übernimmt für  die gesamte Verschlüsselung und Kommunikation mit der Telegramm-API. Der Nutzer  kommunizieren mit diesem Server über eine einfache HTTPS-Schnittstelle, die eine vereinfachte Version der Telegramm-API bietet \citep{TelegramFAQ}\citep{TelegramAPIs}.
@@ -339,9 +430,6 @@ $ env FLASK_APP=hello.py flask run
 # * Serving Flask app "hello.py"
 # * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 \end{lstlisting}
-
-
-
 
 %6 Seiten
 \chapter{Entwicklung und Implementierung}
@@ -390,56 +478,13 @@ Somit ist die Entwicklungsumgebung bereit für die Entwicklung.
 
 
 
-%3 Seiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Ergebnisse}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-
-
-
-
-
-
-%\subfile{Grundlagen/Einleitung}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3 Seiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
