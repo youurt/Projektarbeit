@@ -195,7 +195,7 @@ Systeme und Wissensmanagement, Universität Siegen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-\section{Question Answering} 
+\chapter{Question Answering - Eine Literaturstudie} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,7 +210,7 @@ Systeme und Wissensmanagement, Universität Siegen
     %2 Zukunft des Question Answerings []
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
     
-Mit Suchmaschinen wird es den Benutzern immer leichter an gewünschte Informationen heranzukommen. Da Benutzer Schwierigkeiten haben, sich in der Fülle an Informationen der jetzt verfügbaren Online-Informationen zurechtzufinden, wird die Notwendigkeit automatisierter Systeme zur Beantwortung von Fragen immer dringlicher. Wir brauchen Systeme, mit denen ein Benutzer eine Frage in der Alltagssprache stellen und schnell und präzise eine Antwort erhalten kann, mit ausreichendem Kontext. in der Vergangenheit konnten Suchmaschinen noch nicht wirklich Fragen beantworten, sonder lieferten Ranglisten von Dokumenten zurück. Diese liefern dem Benutzer jedoch nicht immer die gewünschten Antworten \citep[S. 275]{Hirschman2001NaturalHere}. In Abbildung \ref{fig:google} ist zu sehen, wie moderne Suchmaschinen Question Answering anbieten.
+Mit Suchmaschinen wird es den Benutzern immer leichter an gewünschte Informationen heranzukommen. Da Benutzer Schwierigkeiten haben, sich in der Fülle an Informationen der jetzt verfügbaren Online-Informationen zurechtzufinden, wird die Notwendigkeit automatisierter Systeme zur Beantwortung von Fragen immer dringlicher. Wir brauchen Systeme, mit denen ein Benutzer eine Frage in der Alltagssprache stellen und schnell und präzise eine Antwort erhalten kann, mit ausreichendem Kontext. In der Vergangenheit konnten Suchmaschinen noch nicht wirklich Fragen beantworten, sonder lieferten Ranglisten von Dokumenten zurück. Diese liefern dem Benutzer jedoch nicht immer die gewünschten Antworten \citep[S. 275]{Hirschman2001NaturalHere}. In Abbildung \ref{fig:google} ist zu sehen, wie moderne Suchmaschinen Question Answering anbieten.
 
 \begin{figure}[H]
     \centering\includegraphics[width=1\linewidth]{images/google.png}
@@ -221,17 +221,17 @@ Mit Suchmaschinen wird es den Benutzern immer leichter an gewünschte Informatio
 In diesem Kapitel wird das Question Answering in seine einzelnen Elemente zerlegt. Zunächst werden grundlegende Verständnisfragen beantwortet. Was ist Question Answering und warum gibt es Question Answering?
 Es wird eine exemplarische Systemarchitektur vorgestellt, welches alle Elemente des Question Answerings beinhaltet und welche miteinander zusammenarbeiten. 
 In den letzten Abschnitten dieses Kapitels wird über die Geschichte, den verschiedenen Paradigmen des Question Answerings und den aktuellen Stand der Forschung berichtet. Dieser Kapitel wird beendet, indem über die Zukunft des Question Answerings und das weitere Potenzial dokumentiert wird.
-\subsection{Definitionen der Begriffe}
-Um das Question Answering zu verstehen, werden zunächst zunächst die zugehörigen Begriffe definiert. Um eine Frage zu beantworten, muss ein Question Answering System die Frage analysieren, möglicherweise im Zusammenhang mit einer laufenden Interaktion. Es muss eine oder mehrere Antworten finden, indem es Online-Ressourcen konsultiert und es muss dem Benutzer die Antwort in einer geeigneten Form präsentieren, möglicherweise verbunden mit Begründung oder unterstützendem Material \citep[S. 276]{Hirschman2001NaturalHere}. 
+\section{Definitionen der Begriffe}
+Um das Question Answering zu verstehen, werden zunächst die zugehörigen Begriffe definiert. Um eine Frage zu beantworten, muss ein Question Answering System die Frage analysieren, möglicherweise im Zusammenhang mit einer laufenden Interaktion. Es muss eine oder mehrere Antworten finden, indem es Online-Ressourcen konsultiert und es muss dem Benutzer die Antwort in einer geeigneten Form präsentieren, möglicherweise verbunden mit Begründung oder unterstützendem Material \citep[S. 276]{Hirschman2001NaturalHere}. 
 
 \textbf{Question Answering Systeme} sind Sytsteme, die duch Informationsabruf automatisch Antworten zur gestellten Frage generieren, die Menschen in ihrer natürlichen Sprache stellen. Entweder mithilfe einer vorstrukturierten Datenbank oder einer Sammlung von Dokumenten in natürlicher Sprache \citep{Chali2011ImprovingKernels}\citep{Dwivedi2013ResearchSystem}\citep{Ansari2016IntelligentNetwork}\citep{Lende2016QuestionTechniques}. Es wird dabei abgegrenzt, zwischen \textbf{Fragensatz}, also der gestellten Frage und dem \textbf{Fragentyp}, welches den Zweck einer Kategorisierung der Frage ausweist. In der Literatur bezieht sich der Begriff \textbf{Antworttyp} auf eine Klasse von Objekten, nach denen die Frage sucht. \textbf{Fragenfokus} ist die Eigenschaft oder Entität, nach der die Frage sucht. \textbf{Fragethema} ist das Objekt oder Ereignis, um das es in der Frage geht \citep[S. 2]{CalijorneSoares2018ASystems}. Eine Textpassage welches ein Kandidat für eine Frage ist, wird \textbf{Kandidatenantwort} genannt und ist der Text, der nach seiner Eignung als Antwort eingestuft wird \citep{RetrievalOpen-DomainQuestion-Answering}.
 
-Fragen können nach \textbf{Antworttyp} unterscheiden werden: sachliche Antworten vs. Meinung vs. Zusammenfassung. Obwohl das Verständnis beispielsweise häufig andere Arten von Fragen enthält (Worum geht es in dieser Geschichte? Oder Wie steht der Autor zur Hauptfigur in dieser Geschichte?) konzentriert sich das Question Answering meistens auf Fragen mit sachlichen Antworten. Als nächstes können Fragen nach der \textbf{Fragenart} unterscheiden werden: \enquote{Ja / Nein-Fragen}, \enquote{w-Fragen} (Wer war der erste Präsident? Wie viel wiegt ein Wal?), \enquote{indirekte Abfragen} (Liste alle ... auf!) und \enquote{Befehle} (Nennen Sie alle Präsidenten ...). Einige Arten von Fragen sind schwieriger als andere zu beantworten. Zum Beispiel, \enquote{Warum- und Wie-Fragen}, weil sie das Verständnis von Kausalität oder Beziehungen erfordern und diese typischerweise als separate Nebensätze ausgedrückt werden. Die Antworten können lang oder kurz sein, sie können Listen oder Erzählungen sein. Sie können je nach Verwendungszweck variieren. Wenn ein Benutzer beispielsweise eine Begründung wünscht, erfordert dies eine längere Antwort. Es gibt auch verschiedene Methoden zum Erstellen einer Antwort: durch Extrahieren also das Ausschneiden und Einfügen von Ausschnitten aus den Originaldokumenten, die die Antwort enthalten, oder durch Generieren von neuem Text \citep [S. 277-278]{Hirschman2001NaturalHere}. 
+Fragen können nach \textbf{Antworttyp} unterscheiden werden: sachliche Antworten vs. Meinung vs. Zusammenfassung. Obwohl das Verständnis beispielsweise häufig andere Arten von Fragen enthält (\enquote{Worum geht es in dieser Geschichte?} oder \enquote{Wie steht der Autor zur Hauptfigur in dieser Geschichte?}) konzentriert sich das Question Answering meistens auf Fragen mit sachlichen Antworten. Als nächstes können Fragen nach der \textbf{Fragenart} unterscheiden werden: \enquote{Ja / Nein-Fragen}, \enquote{w-Fragen} (Wer war der erste Präsident? Wie viel wiegt ein Wal?), \enquote{indirekte Abfragen} (Liste alle ... auf!) und \enquote{Befehle} (Nennen Sie alle Präsidenten ...). Einige Arten von Fragen sind schwieriger als andere zu beantworten. Zum Beispiel, \enquote{Warum- und Wie-Fragen}, weil sie das Verständnis von Kausalität oder Beziehungen erfordern und diese typischerweise als separate Nebensätze ausgedrückt werden. Die Antworten können lang oder kurz sein, sie können Listen oder Erzählungen sein. Sie können je nach Verwendungszweck variieren. Wenn ein Benutzer beispielsweise eine Begründung wünscht, erfordert dies eine längere Antwort. Es gibt auch verschiedene Methoden zum Erstellen einer Antwort: durch Extrahieren also das Ausschneiden und Einfügen von Ausschnitten aus den Originaldokumenten, die die Antwort enthalten, oder durch Generieren von neuem Text \citep [S. 277-278]{Hirschman2001NaturalHere}. 
 
 Grundsätzlich wird zwischen Faktoiden-, Listen-, Definitions- und komplexe Fragen unterschieden \citep{Kolomiyets2011APerspective}. \textbf{Faktoide Fragen} sind diejenigen, die nach einer einfachen Tatsache fragen und mit wenigen Worten beantwortet werden können, (zum Beispiel: Wie weit ist es von der Erde zum Mars?). \textbf{Liste Fragen} fordern als Antwort eine Reihe von Entitäten, die ein bestimmtes Kriterium erfüllen (zum Beispiel: Wann hat Brasilien Fußball Weltmeisterschaften gewonnen? \citep{Heie2012QuestionModelling}. \textbf{Definitionsfragen} erwarten im Gegenzug eine Zusammenfassung oder eine kurze Passage (zum Beispiel: Wie funktioniert die Mitose einer Zelle?) \citep{Neves2015QuestionBiology}. Im Gegensatz dazu handelt es sich bei den \textbf{komplexen Fragen} um Informationen in einem Kontext. Normalerweise ist die Antwort eine Zusammenführung von abgerufenen Passagen.
 
 
-\subsection{Systemarchitektur des Question Answerings} %2 Seiten
+\section{Systemarchitektur des Question Answerings} %2 Seiten
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 % TODO
@@ -257,7 +257,7 @@ Die \textbf{Verarbeitung der Antwort} ist die schwierigste Aufgabe beim Question
     \caption[Allgemeine Systemarchitektur mit 3 Hauptmodulen]{Allgemeine Systemarchitektur mit 3 Hauptmodulen \cite [S. 3]{CalijorneSoares2018ASystems}}
     \label{fig:architektur}
 \end{figure}
-\subsection{Geschichte des Question Answerings}
+\section{Geschichte des Question Answerings}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 % TODO
@@ -275,8 +275,8 @@ In den 1980er und 1990er Jahren wurden Wissensbasierte Systeme, die normalerweis
 Die Ära des zeitgenössischen Question Answerings begann 1999 mit der aufnahme des Question Answerings in das Wettbewerbspfad von \textbf{TREC-9} (\enquote{The ninth Text REtrieval Conference}), welches eine  Konferez ist, die die Forschung für das Information Retrieval fördern soll. In dieser Konforenz wurde eine Herausforderung für das Question Answering definiert, welches darin bestand, angesichts einer großen Sammlung von Textdokumenten eine präzise Antwort auf eine Frage in natürlicher Sprache zu geben \citep{VoorheesReportTREC-9}. TREC hatte einen großen Einfluss auf das Interesse am Question Answering und auf die Entwicklung von Bewertungsmaßnahmen, mit denen die Leistung von Systemen verglichen wird \citep{voorhees2005trec}. 
 
 
-\subsection{Klassifizierung der QA-Systeme}
-\subsubsection{Klassifizierung nach der Domäne}
+\section{Klassifizierung der QA-Systeme}
+\subsection{Klassifizierung nach der Domäne}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 % TODO
 %   % Tabelle mit den Arten
@@ -304,7 +304,7 @@ In \textbf{Closed Domain Question Answering} Systemen gibt es eine Einschränkun
 \end{table}
 
 
-\subsubsection{Klassifizierung nach dem Fragetyp}
+\subsection{Klassifizierung nach dem Fragetyp}
 
 Neben der Domäne, werdem Question Answering Systeme nach Fragetypen klassifiziert. Diese Fragentypen sind \citep[S. 20-21]{ChandraASystem}:
 
@@ -326,7 +326,7 @@ Neben der Domäne, werdem Question Answering Systeme nach Fragetypen klassifizie
 \end{itemize}
 
 
-\subsubsection{Klassifizierung nach der Datenquelle}
+\subsection{Klassifizierung nach der Datenquelle}
 Neben der Hauptarchitektur können QA-Systeme nach der herkunft Ihrer Daten klassifiziert werden. In \citep{Jurafsky2014SpeechProcessing} wird das QA unterteilt in Information Retrieval QA,  wissensbasiertes QA und hybrides QA \citep{Ojokoh2019ASystems}:
 
 
@@ -335,11 +335,9 @@ Neben der Hauptarchitektur können QA-Systeme nach der herkunft Ihrer Daten klas
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{itemize}
-    \item \textbf{Information Retrieval QA} basiert auf einer sehr großen Menge von Informationen, die im Web als Text oder in Ontologien vorhanden sind. Diese Art von QA bietet eine Antwort auf die Fragen des Benutzers indem es Textausschnitten aus dem Web oder Korpora abruft. Eine faktoide Abfrage lautet z.B.: \enquote{Wer ist der Präsident von Nigeria?}. Die Antwort lautet \enquote{Präsident Buhari im Urlaub in London}. IR-Methoden extrahieren Passagen direkt aus den passenden Dokumenten, welches sie von der gestellten Frage ableiten. Zunächst verarbeitet diese Methode die Abfrage vor, um den Antworttyp (Person, Ort oder Zeit) zu ermitteln. Die Genauigkeit der Fragenklassifizierung ist für faktoide Fragen mit benannten Entitäten als erwartete Ausgabe relativ hoch, aber Fragetypen wie Bestätigungsfragen, kausale Fragen, hypothetische Fragen oder komplexe Fragen können viel schwieriger sein, da sie ein tiefes Verständnis der Abfrage erfordern. Anschließend werden Abfragen für die Suche erstellt, um Suchmaschinen abzufragen. Dies beinhaltet das Isolieren von Begriffen aus der Frage, die eine Abfrage bilden, die dann an ein Abrufsystem gestellt werden. Dies beinhaltet gelegentlich das Entfernen von Stoppwörtern und Satzzeichen. Als nächstes müssen die von der Suchmaschine gelieferten Dokumente oder Passagen geordnet werden. Dieses Ordnen der Dokumente kann z.B. mit der Methode \enquote{tf-idf}, einer Relevanzmodellierungsansatz für die Bewertung von Passagen oder Dokumenten ausgeführt werden \citep[S. 467 - 470]{Jurafsky2014SpeechProcessing}.
+    \item \textbf{Information Retrieval QA} Basiert auf einer sehr großen Menge von Informationen, die im Web als Text oder in Ontologien vorhanden sind. Diese Art von QA bietet eine Antwort auf die Fragen des Benutzers indem es Textausschnitten aus dem Web oder Korpora abruft. Eine faktoide Abfrage lautet z.B.: \enquote{Wer ist der Präsident von Nigeria?}. Die Antwort lautet \enquote{Präsident Buhari im Urlaub in London}. IR-Methoden extrahieren Passagen direkt aus den passenden Dokumenten, welches sie von der gestellten Frage ableiten. Zunächst verarbeitet diese Methode die Abfrage vor, um den Antworttyp (Person, Ort oder Zeit) zu ermitteln. Die Genauigkeit der Fragenklassifizierung ist für faktoide Fragen mit benannten Entitäten als erwartete Ausgabe relativ hoch, aber Fragetypen wie Bestätigungsfragen, kausale Fragen, hypothetische Fragen oder komplexe Fragen können viel schwieriger sein, da sie ein tiefes Verständnis der Abfrage erfordern. Anschließend werden Abfragen für die Suche erstellt, um Suchmaschinen abzufragen. Dies beinhaltet das Isolieren von Begriffen aus der Frage, die eine Abfrage bilden, die dann an ein Abrufsystem gestellt werden. Dies beinhaltet gelegentlich das Entfernen von Stoppwörtern und Satzzeichen. Als nächstes müssen die von der Suchmaschine gelieferten Dokumente oder Passagen geordnet werden. Dieses Ordnen der Dokumente kann z.B. mit der Methode \enquote{tf-idf}, einer Relevanzmodellierungsansatz für die Bewertung von Passagen oder Dokumenten ausgeführt werden \citep[S. 467 - 470]{Jurafsky2014SpeechProcessing}.
     Zuletzt werden potenzielle Zeichenfolgen für die Extraktion bestimmt. Dabei können z.B.: Methoden wie \enquote{pattern extraction} \citep{soubbotin2001patterns} oder \enquote{n-gram} \citep{brill2001data} verwendet werden.
-    \item \textbf{Wissensbasiertes QA}
-    
-    Beliebte Ontologien wie DBpedia \citep{bizer2009dbpedia} oder Freebase \citep{bollacker2008freebase} enthalten Subjekt-Prädikat-Objekt-Tripel, die aus Wikipedia-Infoboxen und den strukturierten Daten aus Wiki-Artikeln extrahiert wurden. 
+    \item \textbf{Wissensbasiertes QA} Beliebte Ontologien wie DBpedia \citep{bizer2009dbpedia} oder Freebase \citep{bollacker2008freebase} enthalten Subjekt-Prädikat-Objekt-Tripel, die aus Wikipedia-Infoboxen und den strukturierten Daten aus Wiki-Artikeln extrahiert wurden. 
     
     Bei der wissensbasierten QA-Systemen werden Antworten auf Fragen in natürlicher Sprache gegeben, indem sie einer Abfrage über eine Ontologie zugeordnet werden. Welche logische Form auch immer aus der Zuordnung abgeleitet wird, wird zum Abrufen von Fakten aus Datenbanken verwendet. Die Datenquelle kann eine beliebige komplexe Struktur sein, z. B. wissenschaftliche Fakten oder räumliche Messwerte, für die komplexe logische oder SQL-Abfragen erforderlich wären. Es können auch Tripel sein, die in einer Datenbank, Freebase oder DBpedia zusammengesetz wurden \citep[S. 476]{Jurafsky2014SpeechProcessing}. Das Zuordnen einer vom Benutzer gestellten Abfrage zu einer logischen Form wird von semantischen Parsern durchgeführt \citep{hoffner2017survey}. Um die Zuordnung vom Text (Frage in natürlicher Sprache) zu einer logischen Abrage durchzuführen, verwendet die KB-QA-Systeme einige dieser Methoden \citep[S. 477 - 479]{Jurafsky2014SpeechProcessing}: 
     \begin{itemize}
@@ -348,28 +346,40 @@ Neben der Hauptarchitektur können QA-Systeme nach der herkunft Ihrer Daten klas
         \item \textbf{Semi-Überwachte Methoden:} 
         Es gibt noch keine Datensätze, die alle möglichen Fragenformen, die in den Abfragen vorliegen können, beinhalten. Aus diesem Grund wird die Textredundanz von den meisten Methoden genutzt, um Abfragen zu Beziehungen oder anderen Wissensstrukturen zuzuordnen. Diese Methode wird von IBM Watson \citep{high2012era} und den meisten hybriden QA-Systemen. 
     \end{itemize}
-    \item \textbf{Hybrides QA}
-    Dies beinhaltet die Verwendung strukturierter Wissensdatenbanken und Textdatensätze in hybrider Form. Das DeepQA-System \citep{ferrucci2010building} ist ein hybrides QA-System, das nicht nur auf einer Informationsquelle basiert. Dieses System extrahiert eine Vielzahl von Quellen, benannte Entitäten, Analysen, Beziehungen, ontologische Informationen und ruft dann  Wissensdatenbanken für Kandidatenantworten ab. Die Bewertung wird dann für jede Kandidatenantwort unter Verwendung einer Reihe von Wissensdatenbanken wie zeitliches Denken, Geodatenbanken und taxonomische Klassifizierung durchgeführt \citep[S. 479 - 483]{Jurafsky2014SpeechProcessing}.
+    \item \textbf{Hybrides QA}  Beinhaltet die Verwendung strukturierter Wissensdatenbanken und Textdatensätze in hybrider Form. Das DeepQA-System \citep{ferrucci2010building} ist ein hybrides QA-System, das nicht nur auf einer Informationsquelle basiert. Dieses System extrahiert eine Vielzahl von Quellen, benannte Entitäten, Analysen, Beziehungen, ontologische Informationen und ruft dann  Wissensdatenbanken für Kandidatenantworten ab. Die Bewertung wird dann für jede Kandidatenantwort unter Verwendung einer Reihe von Wissensdatenbanken wie zeitliches Denken, Geodatenbanken und taxonomische Klassifizierung durchgeführt \citep[S. 479 - 483]{Jurafsky2014SpeechProcessing}.
 \end{itemize}
 
 
 
-\subsection{Bewertungsmethoden für Question Answering Systeme}
+\section{Bewertung von faktoiden Question Answering Systemen}
 
-Laut \citep{Yao2014FEATURE-DRIVENALIGNMENT} sind die im QA verwendeten Bewertungsmetriken F1 und Genauigkeit. Um diese Maßnahmen zu verstehen, müssen wir eine 2 x 2-Kontingenztabelle berücksichtigen. Für ein bestimmtes Datenelement, das ausgewertet wird, wird es in dieser Tabelle in zwei Klassen geben: ein Bruchteil, das korrekt ausgewählt ist (wahr positiv) oder richtig nicht ausgewählt ist (falsch negativ) und ein Bruchteil, das nicht richtig ausgewählt wurde (falsch positiv) oder falsch nicht ausgewählt wurde (wahr negativ). 
+Eine übliche Bewertungsmetrik für die Beantwortung faktoider Fragen, ist der \enquote{Mean Reciprocal Rank} (MRR), welches 1999 in den TREC \citep{voorhees1999proceedings} aufgenommen wurde. MRR setzt einen Testsatz von MRR-Fragen voraus, die mit korrekten Antworten vom Menschen gelabelt wurden. MRR geht auch davon aus, dass Systeme eine kurze Liste von Antworten oder Passagen zurückgeben, welches die Antworten enthalten. Jede Frage wird dann nach dem Kehrwert des Ranges der ersten richtigen Antwort bewertet. Wenn das System beispielsweise fünf Antworten zurück gibt, die ersten drei jedoch falsch sind und daher die am höchsten eingestufte richtige Antwort an vierter Stelle steht, beträgt die gegenseitige Rangbewertung für diese Frage 1/4. Fragen die keine korrekten Antworten enthalten, werden mit Null bewertet. Die Punktzahl eines Systems ist dann der Durchschnitt der Punktzahl für jede Frage im bewerteten Satz. Die Bewertung eines Systems mit MRR, dass einen Satz von Antworten für einen Testsatz zurückgibt und welches aus N Fragen besteht, wird folgendermaßen definiert \citep [S. 483]{Jurafsky2014SpeechProcessing}:
 
 \begin{xequation-} 
-\centering ${Genauigkeit}= \frac{Wahre Positive + Wahre Negative}{Wahre Positive + Falsche Positive + Falsche Negative + Wahre Negative}$
-\caption[Berechnung der Genauigkeit]{Berechnung der Genauigkeit} 
-    \label{eqn:genauigkeit}
+\centering ${MRR}= \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\text{rank}_i}$
+\caption[Mean Reciprocal Rank (MRR)]{Mean Reciprocal Rank (MRR)} 
+    \label{eqn:MRR}
 \end{xequation-} 
 
+Angenommen dem Question Answering werden 3 Fragen gestellt. Das QA-System gibt hat nun 3 Vorschläge als Antwort dieser Frage abgegeben. Die erste Frage wurde beim dritten Versuch richtig beantwortet. Somit beträgt der \enquote{Reciprocal Rank} für diese Frage 1/3. Wenn diese Frage beim ersten Treffer beantwortet wurde, würde der \enquote{Reciprocal Rank} 1 ergeben. Der MRR ist also der Mittelwert der ermittelten \enquote{Reciprocal Ranks}.
 
 
 
 
-\subsection{Methoden und Algorithmen}
-\subsection{Zukunft des Question Answerings}
+
+\section{Methoden und Algorithmen}
+In \citep [S. 5418 - 5427]{Kolomiyets2011APerspective} werden die wichtigsten Methoden für das Question Answering vorgestellt. Eine Auswahl dieser Methoden, ergibt folgendes Ergebnis:
+
+\begin{itemize}
+    \item \textbf{Bag-of-words}
+    \item \textbf{Morphosyntaktische Analyse von Aussagen in natürlicher Sprache}
+    \item \textbf{Semantische Klassifikation des erwarteten Antworttyps}
+    \item \textbf{Übersetzung in eine strukturierte Sprache}
+\end{itemize}
+
+
+
+\section{Zukunft des Question Answerings}
 
 
 
