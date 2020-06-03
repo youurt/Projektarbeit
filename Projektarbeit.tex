@@ -172,43 +172,65 @@ Systeme und Wissensmanagement, Universität Siegen
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 24 Seiten
-\chapter{Theoretische Grundlagen}
+\chapter{Theoretischer Hintergrund}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Dieses Kapitel bietet das grundlegende Hintergrundwissen für die folgenden Kapitel. Die Grundlegenden ML-Konzepte werden in diesem Kapitel eingeführt. Neuronale Netze, sind spezielle Typen von ML-Modellen und verdienen hiermit am meisten Konentration. Schließlich werden das BERT-Modell und die Transfer-Lerntechnik vollständig überprüft, um die sich daraus ergebende Methodik zu verstehen. Dem Leser werden die neuesten in BERT integrierten Deep-Learning-Methoden wie \enquote{transformers} und \enquote{self-attention Mechanismisen} vorgestellt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Machine Learning}
+\subsection{Verlustfunktion}
+\subsection{Optimierungsalgorithmen}
+\section{Deep Learning}
+\subsection{Neurale Netze}
+\subsection{Backpropagation}
+\subsection{Convolutional Neural Networks}
+\subsection{Recurrent Neural Networks}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%4 Seiten
 \section{Natural Language Processing}
-\subsection{Natural Language Processing und Natural Language Understanding}
-\subsection{Geschichte des Natural Language Processings}
-\subsection{BERT}
+
+Verarbeitung natürlicher Sprache, das Natutal Language Processing (NLP), ist eine theoretisch motivierte Reihe von Computertechniken, für die automatische Analyse und Darstellung der menschlichen Sprache \citep[S. 48]{cambria2014jumping}.
+
+
+\subsection{Language Modeling}
+\subsection{Encoder-Decoder Model}
+\subsection{Word Embeddings}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%6 %Information Retrival
-\section{Information Retrival}
-\subsection{Grundlagen und Definitionen}
-\subsection{Klassiche Ansätze}
-\subsection{Probalistische Ansätze}
-\subsection{NLP Ansätze}
+\section{Transfer Learning}
+\subsection{Fine-tuning}
+\subsection{Doiam Adaptation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{BERT}
+\subsection{Attention}
+\subsection{Transformers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 \chapter{Question Answering - Literaturstudie} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO
-%14 Seiten 
-    %2 Definitionen und Begriffe [x]
-    %2 Systemarchitektur [x]
-    %2 Geschichte [x]
-    %3 Klassifizierung [x]
-    %2 Evaluation []
-    %2 Methoden und Algorithmen []
-    %2 Zukunft des Question Answerings []
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+
     
 Mit Suchmaschinen wird es den Benutzern immer leichter an gewünschte Informationen heranzukommen. Da Benutzer Schwierigkeiten haben, sich in der Fülle an Informationen der jetzt verfügbaren Online-Informationen zurechtzufinden, wird die Notwendigkeit automatisierter Systeme zur Beantwortung von Fragen immer dringlicher. Wir brauchen Systeme, mit denen ein Benutzer eine Frage in der Alltagssprache stellen und schnell und präzise eine Antwort erhalten kann, mit ausreichendem Kontext. In der Vergangenheit konnten Suchmaschinen noch nicht wirklich Fragen beantworten, sonder lieferten Ranglisten von Dokumenten zurück. Diese liefern dem Benutzer jedoch nicht immer die gewünschten Antworten \citep[S. 275]{Hirschman2001NaturalHere}. In Abbildung \ref{fig:google} ist zu sehen, wie moderne Suchmaschinen Question Answering anbieten.
 
@@ -423,7 +445,6 @@ Die bekannteste Taxonomie für erwartete Antworttypen in Bezug auf faktoide Frag
 In jüngerer Zeit wurden überwachte Techniken des maschinellen Lernens populär, die ein Klassifizierungsmodell anhand von Beispielen trainieren. Diese Modelle werden manuell kommentiert (Fragen mit den entsprechenden Antworttypen). Das Erstellen eines Trainingssets ist ein zeitaufwändiger Prozess, erfordert jedoch keine Regeln, die festgelegt werden müssen. Die Klassifizierung einer neuen Frage basiert einfach auf den Mustern, die aus dem Trainingssatz gelernt wurden. Es kann zwischen einer großen Anzahl von Techniken ausgewählt werden, um Fragen zu Klassifizieren \citep[S. 5421]{Kolomiyets2011APerspective}. In \citep{zhang2003question} wird das SVM-Verfahren angewendet und es wird gezeigt, dass das SVM die anderen Methoden des machinellen Lernens zur Fragenklassifizierung übertroffen hat.
 
 Das Ermitteln des erwarteten Antworttyps hängt stark mit realen Fragen zusammen, während Fragen in natürlicher Sprache häufig in anderen Formen gestellt werden. Die Abfrage \enquote{Zeige mir ein Kind mit braunen Haaren, das einen gelben Pullover mit Blue Jeans trägt} ist eine komplexe (Ab)-frage oder Abfrageanweisungen. Solche Abfragen   haben häufig viele zusätzliche Einschränkungen, die einen feineren Informationsbedarf ausweisen. Welche Art von Informationen wichtiger ist als andere, kann somit nicht vollständig ermittelt werden \citep[S. 5422]{Kolomiyets2011APerspective}. 
-\subsection{BERT-basiertes Question Answering}
 
 
 \section{Bewertung von Question Answering Systemen}
@@ -460,7 +481,7 @@ Eine übliche Bewertungsmetrik für die Beantwortung faktoider Fragen, ist der \
 
 Angenommen dem Question Answering werden 3 Fragen gestellt. Das QA-System gibt hat nun 3 Vorschläge als Antwort dieser Frage abgegeben. Die erste Frage wurde beim dritten Versuch richtig beantwortet. Somit beträgt der \enquote{Reciprocal Rank} für diese Frage 1/3. Wenn diese Frage beim ersten Treffer beantwortet wurde, würde der \enquote{Reciprocal Rank} 1 ergeben. Der MRR ist also der Mittelwert der ermittelten \enquote{Reciprocal Ranks}.
 
-
+%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%%%%DONE%
 
 
 
