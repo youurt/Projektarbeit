@@ -195,7 +195,7 @@ Systeme und Wissensmanagement, Universität Siegen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-\chapter{Question Answering - Eine Literaturstudie} 
+\chapter{Question Answering - Literaturstudie} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -228,7 +228,7 @@ Um das Question Answering zu verstehen, werden zunächst die zugehörigen Begrif
 
 Fragen können nach \textbf{Antworttyp} unterscheiden werden: sachliche Antworten vs. Meinung vs. Zusammenfassung. Obwohl das Verständnis beispielsweise häufig andere Arten von Fragen enthält (\enquote{Worum geht es in dieser Geschichte?} oder \enquote{Wie steht der Autor zur Hauptfigur in dieser Geschichte?}) konzentriert sich das Question Answering meistens auf Fragen mit sachlichen Antworten. Als nächstes können Fragen nach der \textbf{Fragenart} unterscheiden werden: \enquote{Ja / Nein-Fragen}, \enquote{w-Fragen} (Wer war der erste Präsident? Wie viel wiegt ein Wal?), \enquote{indirekte Abfragen} (Liste alle ... auf!) und \enquote{Befehle} (Nennen Sie alle Präsidenten ...). Einige Arten von Fragen sind schwieriger als andere zu beantworten. Zum Beispiel, \enquote{Warum- und Wie-Fragen}, weil sie das Verständnis von Kausalität oder Beziehungen erfordern und diese typischerweise als separate Nebensätze ausgedrückt werden. Die Antworten können lang oder kurz sein, sie können Listen oder Erzählungen sein. Sie können je nach Verwendungszweck variieren. Wenn ein Benutzer beispielsweise eine Begründung wünscht, erfordert dies eine längere Antwort. Es gibt auch verschiedene Methoden zum Erstellen einer Antwort: durch Extrahieren also das Ausschneiden und Einfügen von Ausschnitten aus den Originaldokumenten, die die Antwort enthalten, oder durch Generieren von neuem Text \citep [S. 277-278]{Hirschman2001NaturalHere}. 
 
-Grundsätzlich wird zwischen Faktoiden-, Listen-, Definitions- und komplexe Fragen unterschieden \citep{Kolomiyets2011APerspective}. \textbf{Faktoide Fragen} sind diejenigen, die nach einer einfachen Tatsache fragen und mit wenigen Worten beantwortet werden können, (zum Beispiel: Wie weit ist es von der Erde zum Mars?). \textbf{Liste Fragen} fordern als Antwort eine Reihe von Entitäten, die ein bestimmtes Kriterium erfüllen (zum Beispiel: Wann hat Brasilien Fußball Weltmeisterschaften gewonnen? \citep{Heie2012QuestionModelling}. \textbf{Definitionsfragen} erwarten im Gegenzug eine Zusammenfassung oder eine kurze Passage (zum Beispiel: Wie funktioniert die Mitose einer Zelle?) \citep{Neves2015QuestionBiology}. Im Gegensatz dazu handelt es sich bei den \textbf{komplexen Fragen} um Informationen in einem Kontext. Normalerweise ist die Antwort eine Zusammenführung von abgerufenen Passagen.
+Grundsätzlich wird zwischen Faktoiden-, Listen-, Definitions- und komplexe Fragen unterschieden \citep{Kolomiyets2011APerspective}. \textbf{Faktoide Fragen} sind diejenigen, die nach einer einfachen Tatsache fragen und mit wenigen Worten beantwortet werden können, (zum Beispiel: Wie weit ist es von der Erde zum Mars?). \textbf{Liste Fragen} fordern als Antwort eine Reihe von Entitäten, die ein bestimmtes Kriterium erfüllen (zum Beispiel: \enquote{Wann hat Brasilien Fußball Weltmeisterschaften gewonnen?} \citep{Heie2012QuestionModelling}. \textbf{Definitionsfragen} erwarten im Gegenzug eine Zusammenfassung oder eine kurze Passage (zum Beispiel: \enquote{Wie funktioniert die Mitose einer Zelle?}) \citep{Neves2015QuestionBiology}. Im Gegensatz dazu handelt es sich bei den \textbf{komplexen Fragen} um Informationen in einem Kontext. Normalerweise ist die Antwort eine Zusammenführung von abgerufenen Passagen.
 
 
 \section{Systemarchitektur des Question Answerings} %2 Seiten
@@ -351,9 +351,106 @@ Neben der Hauptarchitektur können QA-Systeme nach der herkunft Ihrer Daten klas
 
 
 
-\section{Bewertung von faktoiden Question Answering Systemen}
 
-Eine übliche Bewertungsmetrik für die Beantwortung faktoider Fragen, ist der \enquote{Mean Reciprocal Rank} (MRR), welches 1999 in den TREC \citep{voorhees1999proceedings} aufgenommen wurde. MRR setzt einen Testsatz von MRR-Fragen voraus, die mit korrekten Antworten vom Menschen gelabelt wurden. MRR geht auch davon aus, dass Systeme eine kurze Liste von Antworten oder Passagen zurückgeben, welches die Antworten enthalten. Jede Frage wird dann nach dem Kehrwert des Ranges der ersten richtigen Antwort bewertet. Wenn das System beispielsweise fünf Antworten zurück gibt, die ersten drei jedoch falsch sind und daher die am höchsten eingestufte richtige Antwort an vierter Stelle steht, beträgt die gegenseitige Rangbewertung für diese Frage 1/4. Fragen die keine korrekten Antworten enthalten, werden mit Null bewertet. Die Punktzahl eines Systems ist dann der Durchschnitt der Punktzahl für jede Frage im bewerteten Satz. Die Bewertung eines Systems mit MRR, dass einen Satz von Antworten für einen Testsatz zurückgibt und welches aus N Fragen besteht, wird folgendermaßen definiert \citep [S. 483]{Jurafsky2014SpeechProcessing}:
+
+
+
+
+\section{Methoden und Algorithmen}
+In \citep [S. 5418 - 5427]{Kolomiyets2011APerspective} werden die wichtigsten Methoden für das Question Answering vorgestellt. Eine Auswahl dieser Methoden wird in diesem Abschnitt beschrieben:
+\subsection{Bag-of-words}
+
+    
+Ein Textdokument wird so dargestellt, als wäre es eine Wortsammlung, d.h. eine ungeordnete Reihe von Wörtern, deren Position ignoriert wird, wobei nur ihre Häufigkeit im Dokument relevant ist \citep [S. 58]{Jurafsky2014SpeechProcessing}. 
+Bag-of words ist der einfachste Fall, wenn Abfragen und in einem \enquote{Wortbeutel} dargestellt werden.
+Es wird das sog. Boolesches Modell verwendet, bei dem der aus der Abfrage erstellte Boolesche Ausdruck mit der Dokumentdarstellung übereinstimmen muss. Beim BoW werden die Sätze in ihre Tokens zerlegt und nach ihrer Häufigkeit im Satz gezählt. Im folgenden Beispiel gibt es eine Abfrage und ein Dokument, welches als Kandidat für die Antwort gelten soll. Das BoW-Verfahren, kann dafür benutzt werden, einen Abgleich der Wörter zwischen der Abfrage und dem Dokument zu machen. Es ist zu sehen, wenn man die Stoppwörter \enquote{ist} und \enquote{die} herausnimmt, dass Paris mit einer Häufigkeit von 2 im Kandidaten Dokument auftaucht und somit als Antwort angenommen werden kann:
+
+\begin{verbatim}
+Abfrage = ["Was ist die Hauptstadt von Frankreich?"]
+
+Dokument = ["Paris ist die Hauptstadt und als Agglomeration 
+mit dem Gemeindeverband Métropole du Grand Paris und den 
+umliegenden Gebieten der  Region Île-de-France..."]
+
+BoW = {'ist': 2, 'die': 2, 'hauptstadt': 2, 'paris': 2, 'und': 2, 
+'was': 1, 'von': 1, 'frankreich': 1, 'als': 1, 'agglomeration': 1, 
+'mit': 1, 'dem': 1, 'gemeindeverband': 1, 'métropole': 1, 'du': 1, 
+'grand': 1, 'den': 1, 'umliegenden': 1, 'gebieten': 1, 'der': 1, 
+'region': 1, 'île': 1, 'de': 1, 'france': 1}
+\end{verbatim}
+
+Das BoW kann dafür benutzt werden, die Abfrage, eine Frage die in das QA-System gestellt wird, mit einem Dokument oder einer Passage zu matchen, wie in Abbildung \ref{fig:bow} zu sehen ist: 
+
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.3\linewidth]{images/bow.png}
+\caption[Übereinstimmung von Abfrage und Dokumenten mit BoW]{Übereinstimmung von Abfrage und Dokumenten mit BoW \cite [S. 5419]{Kolomiyets2011APerspective}}
+\label{fig:bow}
+\end{figure}
+
+Bei der Analyse der Frage und auch bei der Analyse von Dokumenten und Sätzen, ist der BoW-Ansatz ein sehr einfacher Ansatz, welches die strukturellen Beziehungen zwischen Wörtern ignoriert. Die abgerufenen Informationen sind möglicherweise nicht sehr genau. Beispiel: Für die Abfrage \enquote{Ein Kind mit braunen Haaren, das einen gelben Pullover mit Blue Jeans trägt}, wird möglicherweise ein ein Abruf gemacht, welches ein Mädchen mit gelben Hosen und einem blauen Pullover zeigt, da nur die Häufigkeit der Wörter und nicht die Struktur berücksichtigt wird \citep [S. 5419]{Kolomiyets2011APerspective}. Obwohl diese Modelle in der Information Retrival und Suchtechnologie sehr beliebt sind, fehlt ihnen typischerweise die Präzision, die für die Beantwortung von Fragen erforderlich ist, selbst für die Beantwortung einfacher Sachfragen, die das Abrufen einer Entität erfordern (z. B. Name der Person, Datum) \citep{moldovan2003performance}. Beim  herkömmlichen Question Answerring hat sich das BoW jedoch als nützlich für die anfängliche grobe Filterung von Dokumenten und Sätzen erwiesen, die offensichtlich keine Relevanz für die vorliegende Informationsfrage haben. Es hat sich gezeigt, dass korrekte Antworten mit einer begrenzten Anzahl von Zuordnungsregeln zu den Abfragen gefunden werden können, indem die Redundanz der verfügbaren Antworten ausgenutzt wird \citep{brill2001data}.
+
+    
+    
+\subsection{Morphosyntaktische Analyse von Aussagen in natürlicher Sprache}
+
+In einer morphologischen Analyse können Stemming und Lemmatisierung nützlich sein, da sie die Chancen verbessern, eine gute Übereinstimmung der Abfrage mit einem Antwortsatz zu finden. Stemming normalisiert Wörter zu ihrer gemeinsamen Wurzelform. Zum Beispiel beziehen sich Katze und Katzen auf denselben Stamm - Katze. Im Gegensatz dazu identifiziert die Lemmatisierung das Lexem, also die Bedeuting \citep[S. 5419]{Kolomiyets2011APerspective}. Diese Operationen reduzieren jedoch die in einem Begriff enthaltenen Informationen. In vielen Sprachen definieren Flexionsformen von Substantiven und Pronomen, die syntaktische oder semantische Funktion einer Phrase, eines Satzes oder eines Satzbestandteils (z. B. Identifizierung von Subjekt-, Objekt- oder Indizien) \citep{nivre2006maltparser}. Der einfachste Ansatz zur Erkennung der Satzstruktur ist duch der Ansatz mit dem n-Gramm Verfahren \citep{brill2002analysis}, jedoch gibt es für eine Syntaktische Analyse einer Abfrage viele verschiedene NLP Methoden, wie das \enquote{part-of-speech} (POS) Verfahren, um die Nomen von den Verben zu unterscheiden und das \enquote{phrase chunking} um Idiomatische Ausdrücke zu finden \citep[S. 5419]{Kolomiyets2011APerspective}. Zusätzlich kann durch das Aufteilen eines Satzes in seine Bestandteile und das finden der Abhängigkeiten ein Abhängigkeitsbaum erstellt werden \citep{cui2005question}.  
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.9\linewidth]{images/dep.png}
+\caption[Dependenzstruktur einer Frage]{Dependenzstruktur einer Abfrage}
+\label{fig:dep}
+\end{figure}
+
+In Abbildung \ref{fig:dep} wird ein Beispiel für eine Analyse einer Abfrage, nach den Abhängigkeiten der einzelnen Elemente der Abfrage untereinander abgebildet. Der Token \enquote{Hauptstadt} hat zum Token \enquote{die} und \enquote{von} eine Abhängigkeit. Ebenso ist eine Abhängigkeit zwischen den Tokens \enquote{ist} und \enquote{Hauptstadt} festzustellen.
+
+Die morphosyntaktische Analyse natürlicher Sprachausdrücke führt zu einer besseren Erfassung der strukturellen Beziehungen zwischen
+Wörtern in einem Satz oder einer Frage, was zu einer angereicherten Bedeutungsdarstellung führt \citep[S. 5420]{Kolomiyets2011APerspective}. Die Abhängigkeit von morphosyntaktischen Mustern wurde erfolgreich für die automatische Generierung von Multiple-Choice-Fragen aus Texten nachgewiesen \citep{mitkov2006computer}, ihr Potenzial kann jedoch auf die allgemeine Beantwortung von Fragen ausgeweitet werden \citep[S. 5420]{Kolomiyets2011APerspective}.
+
+\subsection{Semantische Klassifikation des erwarteten Antworttyps}
+In Abbildung \ref{fig:lir} ist die Verteilung von 1.000 TREC-Fragen auf die Fragenhierarchie abgebildet. \enquote{Grobe Klassen} sind fett gedruckt und werden von ihren Verfeinerungen in feine Klassen gefolgt. \enquote{\#} ist die Anzahl der Fragen in jeder Klasse. Die Fragen wurden von \citep{li2006learning} manuell klassifiziert.
+\begin{figure}[H]
+\centering\includegraphics[width=0.7\linewidth]{images/lir.png}
+\caption[Klassifikation von faktoiden Fragen]{Klassifikation von faktoiden Fragen \citep{li2006learning}}
+\label{fig:lir}
+\end{figure}
+
+
+
+Eine Frage oder Anweisung in natürlicher Sprache gibt zusätzliche Informationen über die Art der Informationen, die als Antwort erwartet wird. Zum Beispiel ist die Suche möglicherweise nach einer Person, dem Namen eines Unternehmens, dem Ort, dem Datum oder sogar einem Bild einer Person in einem Video von Interesse. Bei der Beantwortung von Fragen ist es üblich geworden, die semantische Klasse der erwarteten Antwort in der Frage und die entsprechende semantische Klasse des Antwortkandidaten in der Informationsquelle automatisch zu identifizieren. Bei faktoiden Fragen entsprechen die Fragetypklassen einem erwarteten Antworttyp, die in Taxonomien oder Frage-Ontologien gespeichert werden \citep[S. 5420]{Kolomiyets2011APerspective}. 
+Die bekannteste Taxonomie für erwartete Antworttypen in Bezug auf faktoide Fragen ist die von \citep{li2006learning}, welches aus sechs Kategorien und fünfzig feinen Kategorien (z. B. Abkürzung, Beschreibung, Entität, Mensch, Ort und Numerisch, Farbe, Stadt usw.) besteht.
+
+In jüngerer Zeit wurden überwachte Techniken des maschinellen Lernens populär, die ein Klassifizierungsmodell anhand von Beispielen trainieren. Diese Modelle werden manuell kommentiert (Fragen mit den entsprechenden Antworttypen). Das Erstellen eines Trainingssets ist ein zeitaufwändiger Prozess, erfordert jedoch keine Regeln, die festgelegt werden müssen. Die Klassifizierung einer neuen Frage basiert einfach auf den Mustern, die aus dem Trainingssatz gelernt wurden. Es kann zwischen einer großen Anzahl von Techniken ausgewählt werden, um Fragen zu Klassifizieren \citep[S. 5421]{Kolomiyets2011APerspective}. In \citep{zhang2003question} wird das SVM-Verfahren angewendet und es wird gezeigt, dass das SVM die anderen Methoden des machinellen Lernens zur Fragenklassifizierung übertroffen hat.
+
+Das Ermitteln des erwarteten Antworttyps hängt stark mit realen Fragen zusammen, während Fragen in natürlicher Sprache häufig in anderen Formen gestellt werden. Die Abfrage \enquote{Zeige mir ein Kind mit braunen Haaren, das einen gelben Pullover mit Blue Jeans trägt} ist eine komplexe (Ab)-frage oder Abfrageanweisungen. Solche Abfragen   haben häufig viele zusätzliche Einschränkungen, die einen feineren Informationsbedarf ausweisen. Welche Art von Informationen wichtiger ist als andere, kann somit nicht vollständig ermittelt werden \citep[S. 5422]{Kolomiyets2011APerspective}. 
+\subsection{BERT-basiertes Question Answering}
+
+
+\section{Bewertung von Question Answering Systemen}
+\textbf{\enquote{Precision}} und \textbf{\enquote{Recall}} sind die traditionellen Maße, die für das Information Retrievalals Metrik verwendet werden, während das \textbf{\enquote{F-Maß}} das harmonische Mittel für Precision und Recall ist. Diese drei Metriken sind gegeben durch:
+
+\begin{xequation-} 
+\centering ${Precision}= \frac{\text{Anzahl der richtigen Antworten}}{\text{Anzahl der beantworteten Fragen}}$
+\caption[Precision]{Precision} 
+    \label{eqn:PRE}
+\end{xequation-} 
+
+\begin{xequation-} 
+\centering ${Recall}= \frac{\text{Anzahl der richtigen Antworten}}{\text{Anzahl der zu beantwortenden Fragen}}$
+\caption[Recall]{Recall} 
+    \label{eqn:REC}
+\end{xequation-} 
+
+\begin{xequation-} 
+\centering ${F_1}= 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$
+\caption[F-Maß]{F-Maß} 
+    \label{eqn:FME}
+\end{xequation-} 
+
+
+
+
+Eine übliche Bewertungsmetrik für die Beantwortung faktoider Fragen, ist der \textbf{\enquote{Mean Reciprocal Rank} (MRR)}, welches 1999 in den TREC \citep{voorhees1999proceedings} aufgenommen wurde. MRR setzt einen Testsatz von MRR-Fragen voraus, die mit korrekten Antworten vom Menschen gelabelt wurden. MRR geht auch davon aus, dass Systeme eine kurze Liste von Antworten oder Passagen zurückgeben, welches die Antworten enthalten. Jede Frage wird dann nach dem Kehrwert des Ranges der ersten richtigen Antwort bewertet. Wenn das System beispielsweise fünf Antworten zurück gibt, die ersten drei jedoch falsch sind und daher die am höchsten eingestufte richtige Antwort an vierter Stelle steht, beträgt die gegenseitige Rangbewertung für diese Frage 1/4. Fragen die keine korrekten Antworten enthalten, werden mit Null bewertet. Die Punktzahl eines Systems ist dann der Durchschnitt der Punktzahl für jede Frage im bewerteten Satz. Die Bewertung eines Systems mit MRR, dass einen Satz von Antworten für einen Testsatz zurückgibt und welches aus N Fragen besteht, wird folgendermaßen definiert \citep [S. 483]{Jurafsky2014SpeechProcessing}:
 
 \begin{xequation-} 
 \centering ${MRR}= \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\text{rank}_i}$
@@ -366,20 +463,6 @@ Angenommen dem Question Answering werden 3 Fragen gestellt. Das QA-System gibt h
 
 
 
-
-\section{Methoden und Algorithmen}
-In \citep [S. 5418 - 5427]{Kolomiyets2011APerspective} werden die wichtigsten Methoden für das Question Answering vorgestellt. Eine Auswahl dieser Methoden, ergibt folgendes Ergebnis:
-
-\begin{itemize}
-    \item \textbf{Bag-of-words}
-    \item \textbf{Morphosyntaktische Analyse von Aussagen in natürlicher Sprache}
-    \item \textbf{Semantische Klassifikation des erwarteten Antworttyps}
-    \item \textbf{Übersetzung in eine strukturierte Sprache}
-\end{itemize}
-
-
-
-\section{Zukunft des Question Answerings}
 
 
 
