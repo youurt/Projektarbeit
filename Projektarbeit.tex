@@ -62,6 +62,7 @@
 \usepackage[printonlyused]{acronym}
 \usepackage{subfiles} 
 
+
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \fancyhf{}
@@ -174,50 +175,136 @@ Systeme und Wissensmanagement, Universität Siegen
 % 24 Seiten
 \chapter{Theoretischer Hintergrund}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Dieses Kapitel bietet das grundlegende Hintergrundwissen für die folgenden Kapitel. Die Grundlegenden ML-Konzepte werden in diesem Kapitel eingeführt. Neuronale Netze, sind spezielle Typen von ML-Modellen und verdienen hiermit am meisten Konentration. Schließlich werden das BERT-Modell und die Transfer-Lerntechnik vollständig überprüft, um die sich daraus ergebende Methodik zu verstehen. Dem Leser werden die neuesten in BERT integrierten Deep-Learning-Methoden wie \enquote{transformers} und \enquote{self-attention Mechanismisen} vorgestellt.
+Dieses Kapitel bietet das grundlegende Hintergrundwissen für die folgenden Kapitel welches die Grundlegenden Konzepte abbildet.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Machine Learning}
-\subsection{Verlustfunktion}
-\subsection{Optimierungsalgorithmen}
 \section{Deep Learning}
-\subsection{Neurale Netze}
-\subsection{Backpropagation}
-\subsection{Convolutional Neural Networks}
+Wie in vielen Teilbereichen der Informatik hat Deep Learning bei vielen NLP-Aufgaben das Feature-Engeneering (den Prozess der Umwandlung von Domänenwissen zum Extrahieren von Features) übernommen. In den letzten Jahren waren neuronale Netze die leistungsstärksten NLP-Systeme \citep{young2018recent}. Dieser Abschnitt bietet einen grundlegenden Überblick über die wichtigsten Modellarchitekturen für NLP.
+%\subsection{Vanishing gradient Problem}
+%Das Vanishing gradient Problem wurde von \citep{hochreiter2001gradient} ist eines der Hauptprobleme beim Training neuronaler Netze. 
 \subsection{Recurrent Neural Networks}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Natural Language Processing}
 
-Verarbeitung natürlicher Sprache, das Natutal Language Processing (NLP), ist eine theoretisch motivierte Reihe von Computertechniken, für die automatische Analyse und Darstellung der menschlichen Sprache \citep[S. 48]{cambria2014jumping}.
+Verarbeitung natürlicher Sprache, das Natutal Language Processing (NLP), ist eine theoretisch motivierte Reihe von Computertechniken, für die automatische Analyse und Darstellung der menschlichen Sprache \citep[S. 48]{cambria2014jumping}. Die Verarbeitung natürlicher Sprache (NLP) zielt darauf ab, Text zu lesen oder der Sprache zu hören und daraus aussagekräftige Informationen zu extrahieren. Eine andere Definition ist die Erzeugung natürlicher Sprache, bei der Text erzeugt wird. Das Feld wird oft mit künstlicher Intelligenz (KI) assoziiert. KI ist definiert als die Fähigkeit eines Systems, externe Daten korrekt zu interpretieren, aus diesen Daten zu lernen und diese Erkenntnisse zu nutzen, um bestimmte Ziele und Aufgaben durch flexible Anpassung zu erreichen.
+
+\subsection{Sprachmodelle}
+Ein Sprachmodell \citep{goodman2001bit} bildet die Beziehungen der Wörter durch die Eigenschaften der Sprache aus. Anstatt sie mit Regeln zu beschreiben, was zu komplex wäre, nutzt ein Sprachmodell die Wahrscheinlichkeitsen. Dadurch ist es in der Lage, das Wort vorherzusagen, das bei einer bestimmten Folge von Wörtern folgen wird. In ausgebauten Modellen wird mehr der Kontext berücksichtigt, von Sequenzen vorheriger Wörter bis hin zu Sätzen, Absätzen oder ganzen Dokumenten. Man kann ein Sprachmodell verwenden, um den Fortgang eines Satzes vorherzusagen, aber auch um neue Sätze zu erzeugen.
+
+\paragraph{N-Gram Modelle}$\;$\\
+Ein Beispiel für ein Sprachmodell ist das N-Gram-Modell. Ein N-Gramm ist ein N-Zeichen-Slice eines längeren Zeichenfolge \citep{cavnar1994n}. N-Gram-Sprachmodelle sind einfache Modelle, die durch Wortfolgen der Länge N definiert sind. Wenn N = 1 ist, wird es als \enquote{Unigram} bezeichnet, wenn N = 2 als \enquote{Bigram}. Es wird jedes Wort als Einheit genommen und seine Wahrscheinlichkeit berechnet. Dies geschieht, indem sein Auftreten im Dokument gezählt und durch die Gesamtzahl der Wörter dividiert wird. 
+
+\begin{verbatim}
+    bi-grams: _T, TE, EX, XT, T_
+    tri-grams: _TE, TEX, EXT, XT_, T_ _
+    quad-grams: _TEX, TEXT, EXT_, XT_ _, T_ _ _
+\end{verbatim}
+
+\subsection{Encoder-Decoder Modell}
+Neuronale Netze können bei einer Reihe von Aufgaben des NLP erfolgreich eingesetzt werden und das Encoder-Decoder Modell \citep{cho2014learning} ist eines dieser Netze. Dieses Modell besteht aus zwei Blöcken. Der Codierer ist für das Codieren einer Eingabesequenz in einen festen dimensionalen Darstellungsvektor verantwortlich. Dieser Vektor wird auch \enquote{Kontextvektor} genannt. Zu den Vorteilen des Encoder-Decoder Modells gehört die Fähigkeit, Sequenzen beliebiger Länge zu einer festen Vektordarstellung zu verarbeiten. Codierer können mit verschiedenen Decodierern zum Training verbunden werden, indem die dazwischen eine codierte \textit{Darstellung} an den Decoder übergeben wird.
+\begin{figure}[H]
+    \centering\includegraphics[width=1\linewidth]{images/dem.png}
+    \caption[Encoder-Decoder Modell]{Encoder-Decoder Modell aus \citep[S. 194]{Jurafsky2014SpeechProcessing}}
+    \label{fig:dem}
+\end{figure}
+
+Die Elemente des Netzwerks auf der linken Seite verarbeiten die Eingabesequenz und sind somit für das encoden verantwortlich. Der gesamte Zweck des Encoders besteht darin, eine kontextualisierte Darstellung der Eingabe zu erzeugen. Diese Darstellung wird beim letzten verborgenen Zustand $h_{n$} verkörpert.
+Das Decoder Netzwerk auf der rechten Seite nimmt diesen Zustand von $h_{n$} an und erzeugt autoregressiv eine Folge von Ausgängen. 
 
 
-\subsection{Language Modeling}
-\subsection{Encoder-Decoder Model}
-\subsection{Word Embeddings}
+\subsection{Vektoren zur Darstellung der Bedeutung von Wörtern}
+Wörter, die in ähnlichen Kontexten vorkommen, haben tendenziell ähnliche Bedeutungen. Nach Ludwig Wittgenstein ist die Bedeutung eines Wortes, seine Nutzung in der Sprache \citep{wittgenstein2009philosophical}. Wörter können als Vektoren dargetsellt und somit die Bedeutung im Allgemeinen auf einer Koexistenzmatrix, dargestellt werden. Sprachmodelle sind statistische Modelle, sie erfordern daher quantifizierbare und kontinuierliche Darstellungen. Aber Wörter sind andererseits diskrete Einheiten. Ein einfacher Ansatz, um sie auf quantifizierbare Weise darzustellen, besteht darin, die Merkmale mit einem Vektor zu codieren und für jedes Wortmerkmal seine Position auf binäre Weise zu identifizieren. Dieses wird als \textit{One-Hot-Vektor} bezeichnet. Die Einfachheit wird durch die hohe Dimension dieser Vektoren und die damit verbundene Komplexität überschattet. Um dieser Einschränkung zu entgehen, kommt das Encoder-Decoder-Modell ins Spiel und wird verwendet, um eine Darstellung mit reduzierter Dimensionalität zu codieren. Ein Textkorpus kann dann in numerische Vektoren codiert werden, die auch als \textit{word embeddings} oder auf Deutsch \textit{Worteinbettungen} bekannt sind. Sobald Wörter codiert sind, entsteht ein sog. \textit{Vektor Raum Modell (VSM)}. Dadurch kann einfache lineare Algebra angewendet werden, welches die Berechnung der Beziehung zwischen Wörtern ermöglicht.
+
+Folgendes Beispiel aus \citep[S. 105]{Jurafsky2014SpeechProcessing} soll darstellen wie so eine Vektorisierung der Wörter und somit der Gewinn an Bedeutung erfolgt:
+
+\begin{verbatim}
+is traditionally followed by CHERRY pie, a traditonal desert 
+often mixed, such as STRAWBERRY rhubarb pie. Apple pie
+computer peripherals and personal DIGITAL assistants. These devices usually
+a computer. This includes INFORMATION available on the internet
+\end{verbatim}
+
+\begin{figure}[H]
+    \centering\includegraphics[width=0.6\linewidth]{images/mat.png}
+    \caption[Wort-Wort-Matrix]{Wort-Wort-Matrix aus \citep[S. 105]{Jurafsky2014SpeechProcessing}}
+    \label{fig:mat}
+\end{figure}
+
+\begin{figure}[H]
+    \centering\includegraphics[width=0.5\linewidth]{images/vec.png}
+    \caption[Visualisierung von Wortvektoren]{Visualisierung von Wortvektoren aus \citep[S. 105]{Jurafsky2014SpeechProcessing}}
+    \label{fig:vec}
+\end{figure}
+
+
+
+In Abbildung \ref{fig:mat} ist zu sehen, wie sich aus dem vorherigen Beispiel eine Wort-Wort-Matrix bildet. Diese Matrix gibt den vorhanden Wörtern des darzustellenden Fensters untereinander eine Bedeutung. Diese Bedeutung wird in der Abbildung \ref{fig:vec} dargestellt.
+
+\subsection{Kosinus-Ähnlichkeit}
+Um die Ähnlichkeit zwischen zwei Vektoren V und W, welchen zwei Wörter darstellen zu definieren, benötigen wir ein Maß um die Vektorähnlichkeit anzugeben. Solch ein Maß ist die Kosinus-Ähnlichkeit welches in \ref{eqn:KSA} definiert wird.
+
+\begin{xequation-} 
+\centering \cos(v, w) = {\mathbf{v} \cdot \mathbf{w} \over \|\mathbf{v}\| \|\mathbf{w}\|} = \frac{ \sum_{i=1}^{n}{v_i \cdot w_i} }{ \sqrt{\sum_{i=1}^{n}{(v_i)^2}} \cdot \sqrt{\sum_{i=1}^{n}{(w_i)^2}} }
+\caption[Kosinus-Ähnlichkeit]{Kosinus-Ähnlichkeit} 
+    \label{eqn:KSA}
+\end{xequation-} 
+
+Mit den 4 Wörtern \enquote{pie}, \enquote{data}, \enquote{computer} und \enquote{information} kann druch die Kosinus-Ähnlichkeit bestimmt werden, welches der Wörter eine Ähnlichkeit untereinander aufweist. Das Wort \enquote{cherry} hat weniger mit \enquote{information} gemeinsam, als \enquote{digital} mit \enquote{information}. Da diese Wörter in einem geringeren Kontext auftauchen \citep[S. 105]{Jurafsky2014SpeechProcessing}.
+
+\begin{table}[H]
+{\small
+    \begin{tabularx}{\textwidth}{X X X X} 
+\hline     
+                  &\textbf{pie}  & \textbf{data} & \textbf{computer}  \\ 
+\hline    
+    \textbf{cherry}      & 442        & 8 & 2         \\ 
+    \textbf{digital}   & 5        & 1683 & 1670          \\ 
+    \textbf{information} & 5        & 3982 & 3325           \\ 
+    \end{tabularx}
+\caption{Wort-Wort-Matrix}
+    \label{tab:cos}
+}
+\end{table}
+
+
+
+Das Fenster aus der Tabelle \ref{tab:cos} wird angewendet auf die Formel \ref{eqn:KSA} und dadurch ergibt sich das Ergebnis welches zeigt, dass die beiden Wörter \enquote{digital} und \enquote{information} eine relativ ähnliche Bedeutung haben und die Wörter \enquote{cherry} und \enquote{information} eine niedrige. 
+
+
+\begin{xequation-} 
+\centering cos(cherry, information) = $\frac{442\ast 5+8\ast3982+2\ast3325}{\sqrt{442^{2} +8^{2} +2^{2}}\ast \sqrt{5^{2} +3982^{2} +3325^{2}}}$ = 0.17
+\newline
+\newline
+\centering cos(digital, information) = $\frac{5\ast 5+1683\ast3982+1670\ast3325}{\sqrt{5^{2} +1683^{2} +1670^{2}}\ast \sqrt{5^{2} +3982^{2} +3325^{2}}}$ = 0.996 
+\end{xequation-} 
+
+
+
+
+\subsection{Word2Vec}
+In \citep{mikolov2013efficient} wird das Word2vec dargestellt, welches zwei neuartige Modellarchitekturen zur Berechnung kontinuierlicher Vektordarstellungen von Wörtern aus sehr großen Datenmengen darsellt. Diese Architekturen sind die  CBOW-Architektur und die Skip-Gramm Architektur. Die CBOW-Architektur sagt das aktuelle Wort, basierend auf dem Kontext, voraus. Das DBOW-verfahren beruht wie der Name es sagt, auf dem Bag of Words Verfahren. Das Skip-Gram dagegen sagt umgebende Wörter voraus, wenn das aktuelle Wort gegeben ist. Anstatt zu zählen, wie oft jedes Wort w in der Nähe von einem anderen Wort vorkommt, wird ein Klassifikator für das Vorhersagen trainiert. 
+
+
+Die Worteinbettungsmodelle weisen zahlreiche Einschränkungen hinsichtlich der Länge des verwendeten Korpus, der Reihenfolge und Unabhängigkeit von Wörtern auf. Aber der größte Nachteil des Vektoransatzes ist die Unfähigkeit, mehrere Bedeutungen eines Wortes darzustellen. Dies ist auf die Zuordnung einer einzelnen Darstellung pro Wort zurückzuführen. Wenn ein Wort gleichzeitig in verschiedenen Kontexten vorkommt, kann Word2Vec seine semantische oder syntaktische Natur nicht genau lernen.
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Transfer Learning}
-\subsection{Fine-tuning}
-\subsection{Doiam Adaptation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Stand der Forschung}
 \section{BERT}
-\subsection{Attention}
-\subsection{Transformers}
+\section{Attention}
+\section{Transformers}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -416,7 +503,7 @@ Bei der Analyse der Frage und auch bei der Analyse von Dokumenten und Sätzen, i
     
 \subsection{Morphosyntaktische Analyse von Aussagen in natürlicher Sprache}
 
-In einer morphologischen Analyse können Stemming und Lemmatisierung nützlich sein, da sie die Chancen verbessern, eine gute Übereinstimmung der Abfrage mit einem Antwortsatz zu finden. Stemming normalisiert Wörter zu ihrer gemeinsamen Wurzelform. Zum Beispiel beziehen sich Katze und Katzen auf denselben Stamm - Katze. Im Gegensatz dazu identifiziert die Lemmatisierung das Lexem, also die Bedeuting \citep[S. 5419]{Kolomiyets2011APerspective}. Diese Operationen reduzieren jedoch die in einem Begriff enthaltenen Informationen. In vielen Sprachen definieren Flexionsformen von Substantiven und Pronomen, die syntaktische oder semantische Funktion einer Phrase, eines Satzes oder eines Satzbestandteils (z. B. Identifizierung von Subjekt-, Objekt- oder Indizien) \citep{nivre2006maltparser}. Der einfachste Ansatz zur Erkennung der Satzstruktur ist duch der Ansatz mit dem n-Gramm Verfahren \citep{brill2002analysis}, jedoch gibt es für eine Syntaktische Analyse einer Abfrage viele verschiedene NLP Methoden, wie das \enquote{part-of-speech} (POS) Verfahren, um die Nomen von den Verben zu unterscheiden und das \enquote{phrase chunking} um Idiomatische Ausdrücke zu finden \citep[S. 5419]{Kolomiyets2011APerspective}. Zusätzlich kann durch das Aufteilen eines Satzes in seine Bestandteile und das finden der Abhängigkeiten ein Abhängigkeitsbaum erstellt werden \citep{cui2005question}.  
+In einer morphologischen Analyse können Stemming und Lemmatisierung nützlich sein, da sie die Chancen verbessern, eine gute Übereinstimmung der Abfrage mit einem Antwortsatz zu finden. Stemming normalisiert Wörter zu ihrer gemeinsamen Wurzelform. Zum Beispiel beziehen sich Katze und Katzen auf denselben Stamm - Katze. Im Gegensatz dazu identifiziert die Lemmatisierung das Lexem, also die Bedeuting \citep[S. 5419]{Kolomiyets2011APerspective}. Diese Operationen reduzieren jedoch die in einem Begriff enthaltenen Informationen. In vielen Sprachen definieren Flexionsformen von Substantiven und Pronomen, die syntaktische oder semantische Funktion einer Phrase, eines Satzes oder eines Satzbestandteils (z. B. Identifizierung von Subjekt-, Objekt- oder Indizien) \citep{nivre2006maltparser}. Der einfachste Ansatz zur Erkennung der Satzstruktur ist duch der Ansatz mit dem n-gram Verfahren \citep{brill2002analysis}, jedoch gibt es für eine Syntaktische Analyse einer Abfrage viele verschiedene NLP Methoden, wie das \enquote{part-of-speech} (POS) Verfahren, um die Nomen von den Verben zu unterscheiden und das \enquote{phrase chunking} um Idiomatische Ausdrücke zu finden \citep[S. 5419]{Kolomiyets2011APerspective}. Zusätzlich kann durch das Aufteilen eines Satzes in seine Bestandteile und das finden der Abhängigkeiten ein Abhängigkeitsbaum erstellt werden \citep{cui2005question}.  
 
 \begin{figure}[H]
 \centering\includegraphics[width=0.9\linewidth]{images/dep.png}
@@ -448,7 +535,7 @@ Das Ermitteln des erwarteten Antworttyps hängt stark mit realen Fragen zusammen
 
 
 \section{Bewertung von Question Answering Systemen}
-\textbf{\enquote{Precision}} und \textbf{\enquote{Recall}} sind die traditionellen Maße, die für das Information Retrievalals Metrik verwendet werden, während das \textbf{\enquote{F-Maß}} das harmonische Mittel für Precision und Recall ist. Diese drei Metriken sind gegeben durch:
+\textbf{\enquote{Precision}} und \textbf{\enquote{Recall}} sind die traditionellen Maße, die für das Information Retrievalals Metrik verwendet werden, während das \textbf{\enquote{F-1}} das harmonische Mittel für Precision und Recall ist. Diese drei Metriken sind gegeben durch:
 
 \begin{xequation-} 
 \centering ${Precision}= \frac{\text{Anzahl der richtigen Antworten}}{\text{Anzahl der beantworteten Fragen}}$
@@ -464,7 +551,7 @@ Das Ermitteln des erwarteten Antworttyps hängt stark mit realen Fragen zusammen
 
 \begin{xequation-} 
 \centering ${F_1}= 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$
-\caption[F-Maß]{F-Maß} 
+\caption[F-1]{F-1} 
     \label{eqn:FME}
 \end{xequation-} 
 
